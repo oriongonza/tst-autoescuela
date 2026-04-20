@@ -1,0 +1,44 @@
+name: Epic
+description: Track a milestone-level capability or cross-cutting roadmap stream.
+title: "Epic: "
+labels:
+  - "type: epic"
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What capability or milestone outcome this epic owns.
+      placeholder: Describe the epic in one or two short paragraphs.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: The included work and deliberate exclusions.
+      placeholder: |
+        - Included:
+        - Excluded:
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Clear exit criteria for closing the epic.
+      placeholder: |
+        - Criterion 1
+        - Criterion 2
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Upstream issues, milestones, or contracts that must exist first.
+      placeholder: |
+        - Depends on:
+        - Blocks:
+    validations:
+      required: false

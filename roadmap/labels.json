@@ -1,0 +1,87 @@
+[
+  {
+    "name": "type: epic",
+    "color": "FB8500",
+    "description": "Milestone or cross-cutting roadmap epic."
+  },
+  {
+    "name": "type: task",
+    "color": "8ECAE6",
+    "description": "Concrete deliverable or implementation task."
+  },
+  {
+    "name": "area: product",
+    "color": "264653",
+    "description": "Product doctrine, roadmap, or release planning."
+  },
+  {
+    "name": "area: content",
+    "color": "E76F51",
+    "description": "Curriculum, question annotation, and content authoring."
+  },
+  {
+    "name": "area: domain",
+    "color": "2A9D8F",
+    "description": "Core types, schemas, contracts, and state models."
+  },
+  {
+    "name": "area: map",
+    "color": "219EBC",
+    "description": "Graph, map rendering, navigation, and spatial memory."
+  },
+  {
+    "name": "area: combat",
+    "color": "D62828",
+    "description": "Combat loop, bosses, damage, and retries."
+  },
+  {
+    "name": "area: pacing",
+    "color": "F4A261",
+    "description": "Difficulty rhythm, tension, and recovery systems."
+  },
+  {
+    "name": "area: memory",
+    "color": "6D597A",
+    "description": "Flashbacks, reclaim loops, and known-ground slips."
+  },
+  {
+    "name": "area: narrative",
+    "color": "6A994E",
+    "description": "Story framing, mentor voice, and chapter progression."
+  },
+  {
+    "name": "area: telemetry",
+    "color": "577590",
+    "description": "Events, analytics, dashboards, and balancing data."
+  },
+  {
+    "name": "area: audio",
+    "color": "003049",
+    "description": "Audio cues, stings, and music integration."
+  },
+  {
+    "name": "area: qa",
+    "color": "495057",
+    "description": "Balancing, QA, validation, and hardening."
+  },
+  {
+    "name": "area: release",
+    "color": "A44A3F",
+    "description": "Launch gates, repo setup, and release management."
+  },
+  {
+    "name": "priority: p0",
+    "color": "B00020",
+    "description": "Highest priority. Required to prove the core thesis."
+  },
+  {
+    "name": "priority: p1",
+    "color": "E76F51",
+    "description": "Important but not on the immediate critical path."
+  },
+  {
+    "name": "priority: p2",
+    "color": "FCBF49",
+    "description": "Later roadmap work or supporting structure."
+  }
+]

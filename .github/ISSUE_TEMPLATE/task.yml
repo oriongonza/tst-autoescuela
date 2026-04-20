@@ -1,0 +1,44 @@
+name: Task
+description: Track a concrete deliverable within a roadmap milestone.
+title: ""
+labels:
+  - "type: task"
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What this task will deliver.
+      placeholder: Describe the task in one or two short paragraphs.
+    validations:
+      required: true
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Deliverables
+      description: The outputs expected from this task.
+      placeholder: |
+        - Deliverable 1
+        - Deliverable 2
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: How completion will be judged.
+      placeholder: |
+        - Criterion 1
+        - Criterion 2
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: What this task depends on or unblocks.
+      placeholder: |
+        - Depends on:
+        - Unblocks:
+    validations:
+      required: false

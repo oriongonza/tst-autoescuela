@@ -1,0 +1,82 @@
+[
+  {
+    "title": "0.0.0 Foundations",
+    "description": "Doctrine, ontology, graph grammar, narrative bible, and instrumentation schema."
+  },
+  {
+    "title": "0.0.1 Content Annotation Prototype",
+    "description": "Manual annotation flow for transforming raw driving questions into internal game content."
+  },
+  {
+    "title": "0.0.2 Pure Combat Prototype",
+    "description": "Question-as-attack combat loop with HP, damage, tension, and retries."
+  },
+  {
+    "title": "0.0.3 Pacing Prototype",
+    "description": "Deterministic pacing state machine for flow, pressure, danger, recovery, clutch, and repair."
+  },
+  {
+    "title": "0.0.4 Memory Palace Prototype",
+    "description": "First map region, place-linked concepts, flashbacks, and reclaim flow."
+  },
+  {
+    "title": "0.0.5 Narrative Vertical Slice",
+    "description": "Road Master framing, mentor voice, first region identity, and boss ritual."
+  },
+  {
+    "title": "0.0.6 Integrated Vertical Slice",
+    "description": "One playable region that integrates map, combat, pacing, flashback, and narrative."
+  },
+  {
+    "title": "0.0.7 Telemetry And Balancing",
+    "description": "Telemetry, dashboards or queries, and evidence-based balancing of the vertical slice."
+  },
+  {
+    "title": "0.0.8 Content Production Pass",
+    "description": "Reusable workflow, templates, and QA rules for manual content scaling."
+  },
+  {
+    "title": "0.0.9 MVP Hardening",
+    "description": "Onboarding, persistence, first-time-user path, and MVP feature freeze."
+  },
+  {
+    "title": "0.1.0 MVP",
+    "description": "Road Master: Crossing Fields Chapter I as a polished public or beta thesis proof."
+  },
+  {
+    "title": "0.2.0 More Content",
+    "description": "Expand breadth with more regions, bosses, concepts, and trap families."
+  },
+  {
+    "title": "0.3.0 Combat Depth",
+    "description": "Richer game loop with shields, mini-bosses, parry, combo, and reconquest."
+  },
+  {
+    "title": "0.4.0 Pedagogy Depth",
+    "description": "Smarter repair systems, better explanations, and anti-trap learning without softening the loop."
+  },
+  {
+    "title": "0.5.0 Memory Palace Expansion",
+    "description": "Recursive submaps, stronger landmarks, route memory cues, and cross-region callbacks."
+  },
+  {
+    "title": "0.6.0 Personalization",
+    "description": "Player-type adaptation, route estimation, and pacing tuned per user without losing fairness."
+  },
+  {
+    "title": "0.7.0 Social Layer",
+    "description": "Selective social and shareable features that strengthen identity without distorting the core loop."
+  },
+  {
+    "title": "0.8.0 Predictive And B2B",
+    "description": "Readiness scoring, fail-risk modeling, cohort analytics, and an institutional wedge."
+  },
+  {
+    "title": "0.9.0 Product Hardening",
+    "description": "Performance, onboarding optimization, monetization, tuning, QA, and consistency passes."
+  },
+  {
+    "title": "1.0.0 Full Product",
+    "description": "Coherent full product with durable loops, broad curriculum coverage, and institution-ready analytics."
+  }
+]
