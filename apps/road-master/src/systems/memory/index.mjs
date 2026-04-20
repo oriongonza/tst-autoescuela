@@ -1,20 +1,5 @@
-import {
-  applyKnownGroundRecoveryToProgress,
-  KNOWN_GROUND_RECLAIM_BASE_DELAY_MS,
-  KNOWN_GROUND_STABILITY_THRESHOLD,
-  applyKnownGroundSlipToProgress,
-  buildFlashbackCue,
-  buildReclaimSchedule,
-  classifyKnownGroundSeverity,
-  collectKnownGroundProgress,
-  enqueueReclaim,
-  evaluateKnownGroundSlip,
-  hasFragileOrCorruptedProgress,
-  isKnownGroundProgress,
-  isKnownGroundSlipTrigger,
-} from "./known-ground.mjs";
-
-import {
+export {
+  applyRecoveryToConceptProgress,
   applySlipToConceptProgress,
   createConceptProgress,
   isCorruptedConceptProgress,
@@ -32,23 +17,17 @@ export {
   KNOWN_GROUND_STABILITY_THRESHOLD,
   applyKnownGroundRecoveryToProgress,
   applyKnownGroundSlipToProgress,
-  applySlipToConceptProgress,
   buildFlashbackCue,
   buildReclaimSchedule,
   classifyKnownGroundSeverity,
   collectKnownGroundProgress,
-  createConceptProgress,
   enqueueReclaim,
   evaluateKnownGroundSlip,
   hasFragileOrCorruptedProgress,
-  isCorruptedConceptProgress,
-  isFragileConceptProgress,
   isKnownGroundProgress,
   isKnownGroundSlipTrigger,
-  isLearnedOrBetterConceptProgress,
-  isMasteredConceptProgress,
-  normalizeConceptProgress,
-  repairConceptProgress,
-  toCorruptedConceptProgress,
-  toFragileConceptProgress,
-};
+} from "./known-ground.mjs";
+
+export {
+  deriveMemoryProgressionCue,
+} from "./cues.mjs";

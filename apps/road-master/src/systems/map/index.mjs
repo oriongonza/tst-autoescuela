@@ -37,3 +37,7 @@ export {
   deriveRouteTail,
   deriveScopeState,
 } from "./node-states.mjs";
+
+export {
+  deriveMapProgressionCue,
+} from "./progression.mjs";
