@@ -79,7 +79,7 @@ The overseer owns planning, lane boundaries, PR orchestration, CI watching, and 
 
 ## Lane Rules
 
-- Each Spark agent works in an isolated worktree and branch.
+- Each Spark agent works in an isolated worktree or branch.
 - Branch names use `lane/spark-<N>-<slug>`.
 - Each PR must carry exactly one `lane:spark-<N>` label.
 - A lane may only edit files it owns. Cross-lane edits are rejected by auto-review.
