@@ -4,15 +4,9 @@ This repo follows a seam-first, five-lane workflow modeled on `~/repos/muxon`.
 
 One overseer owns planning, lane boundaries, PR orchestration, CI watching, and failure recovery. Five Spark agents execute disjoint lanes in parallel. No human review sits inside the normal loop.
 
-## Lane Map
+### Overseer
 
-- Spark 1 - roadmap model: owns `roadmap/`
-- Spark 2 - bootstrap scripts: owns `scripts/common.sh`, `scripts/create_*.sh`, `scripts/validate_manifest.sh`, and `scripts/bootstrap_all.sh`
-- Spark 3 - CI lane: owns `.github/workflows/ci.yml`, `scripts/ci.sh`, and `scripts/check_repo_structure.sh`
-- Spark 4 - review and merge automation: owns `.github/workflows/auto-review.yml`, `scripts/auto_review.sh`, `scripts/open_agent_pr.sh`, and `scripts/configure_repo_flow.sh`
-- Spark 5 - governance and templates: owns `AGENTS.md`, `README.md`, `.github/pull_request_template.md`, and `.github/ISSUE_TEMPLATE/`
-
-## Overseer Runbook
+The overseer owns planning, lane boundaries, PR orchestration, CI watching, and failure recovery.
 
 1. Lock the seam.
    - Freeze the lane split before implementation starts.
@@ -57,6 +51,31 @@ One overseer owns planning, lane boundaries, PR orchestration, CI watching, and 
    - Remove the worktree.
    - Delete the lane branch if it no longer has outstanding work.
    - Start the next lane if one is queued.
+
+### Spark 1 — Roadmap model
+
+- Owns `roadmap/`
+- May change labels, milestones, issue manifests, and roadmap invariants
+
+### Spark 2 — Bootstrap scripts
+
+- Owns `scripts/common.sh`, `scripts/create_*.sh`, `scripts/validate_manifest.sh`, and `scripts/bootstrap_all.sh`
+- May change repo bootstrap behavior, manifest generation, and validation logic
+
+### Spark 3 — CI lane
+
+- Owns `.github/workflows/ci.yml`, `scripts/ci.sh`, and `scripts/check_repo_structure.sh`
+- May change required checks and local CI parity
+
+### Spark 4 — Review and merge automation
+
+- Owns `.github/workflows/auto-review.yml`, `scripts/auto_review.sh`, `scripts/open_agent_pr.sh`, and `scripts/configure_repo_flow.sh`
+- May change auto-review policy, PR bootstrap, and branch protection bootstrap
+
+### Spark 5 — Governance and templates
+
+- Owns `AGENTS.md`, `README.md`, `.github/pull_request_template.md`, and `.github/ISSUE_TEMPLATE/`
+- May change workflow docs, templates, and operator guidance
 
 ## Lane Rules
 

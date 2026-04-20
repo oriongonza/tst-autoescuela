@@ -25,6 +25,8 @@ The manifests in this directory were derived from the local `chatgpt_conv.md` so
 
 ### Worktree Creation
 
+If `scripts/create_worktrees.sh` is available, use it for the standard five-lane bootstrap. Otherwise create the worktrees directly:
+
 ```bash
 ROOT=/home/ardi/repos/tst_autoescuela/app
 git -C "$ROOT" fetch origin main
