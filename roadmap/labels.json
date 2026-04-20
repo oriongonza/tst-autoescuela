@@ -110,6 +110,11 @@
     "description": "Spark lane 5: governance and template ownership."
   },
   {
+    "name": "lane:overseer",
+    "color": "6C757D",
+    "description": "Overseer-owned cross-lane integration or recovery work."
+  },
+  {
     "name": "bot:overseer",
     "color": "6C757D",
     "description": "Applied to overseer-owned coordination work."

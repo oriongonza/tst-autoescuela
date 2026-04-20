@@ -1,10 +1,21 @@
 import { createNarrativeOracle } from "../systems/narrative/index.js";
 import { createAudioDirector } from "../systems/audio/index.js";
 import {
+  buildDashboardSnapshot,
+  deriveReadinessDiagnostics,
+} from "../systems/analytics/index.mjs";
+import {
   advancePacingState,
   createPacingState,
   decidePacing,
 } from "../systems/pacing/index.mjs";
+import {
+  applySessionEvent,
+  createSessionRecord,
+  markOnboardingComplete,
+  updateProfileRecord,
+  touchSessionRecord,
+} from "../systems/persistence/index.mjs";
 import {
   applyKnownGroundRecoveryToProgress,
   applyKnownGroundSlipToProgress,
@@ -22,8 +33,17 @@ import {
   resolveCombatTurn,
 } from "../systems/combat/index.mjs";
 import { buildMapView, createMapState } from "../systems/map/index.mjs";
+import { loadContentCatalog } from "../content/index.mjs";
 import { TELEMETRY_EVENT_BY_NAME } from "../systems/telemetry/catalog.mjs";
-import { loadChapter1Runtime } from "./chapter1.js";
+import { DEFAULT_PACK_ID, loadRoadMasterRuntime } from "./chapter1.js";
+import {
+  buildCohortBaseline,
+  buildRunMetrics,
+  createExperienceRecords,
+  deriveStageFromState,
+  loadBrowserExperience,
+  saveBrowserExperience,
+} from "./experience.js";
 import { renderRoadMasterApp } from "../ui/shell.js";
 
 const root = document.getElementById("app");
@@ -116,11 +136,20 @@ function appendTelemetryEvent(name, payload = {}) {
   }
 
   const definition = TELEMETRY_EVENT_BY_NAME[name];
+  const atMs = Date.now();
   const event = {
     name,
     group: definition?.group ?? "unknown",
     ...payload,
   };
+  const sessionRecord = state.sessionRecord
+    ? applySessionEvent(state.sessionRecord, {
+        name,
+        atMs,
+        ...payload,
+        payload,
+      })
+    : null;
 
   state = {
     ...state,
@@ -128,6 +157,7 @@ function appendTelemetryEvent(name, payload = {}) {
       ...state.telemetry,
       events: [...state.telemetry.events, event].slice(-MAX_TELEMETRY_EVENTS),
     },
+    sessionRecord: sessionRecord ?? state.sessionRecord,
   };
 
   return event;
@@ -300,6 +330,96 @@ function syncDerivedTelemetry(previousState = null) {
   }
 }
 
+function persistExperience() {
+  if (!state?.profile || !state?.sessionRecord) {
+    return;
+  }
+
+  saveBrowserExperience({
+    selectedPackId: state.selectedPackId,
+    profile: state.profile,
+    session: state.sessionRecord,
+  });
+}
+
+function refreshExperienceState() {
+  if (!runtime || !state?.profile || !state?.sessionRecord) {
+    return;
+  }
+
+  const diagnostics = deriveReadinessDiagnostics({
+    session: state.sessionRecord,
+    profile: state.profile,
+    mapDefinition: runtime.mapDefinition,
+    conceptProgressById: state.conceptProgressById,
+    events: state.telemetry?.events ?? [],
+  });
+  const nextProfile = updateProfileRecord(state.profile, {
+    lastSessionId: state.sessionRecord.sessionId,
+    lastRegionId: runtime.mapDefinition.region.id,
+    lastSubmapId: state.currentQuestion?.submapId ?? null,
+    lastNodeId: state.currentRouteNode?.id ?? null,
+    weakRegionIds: diagnostics.weakScopeIds,
+    readinessScore: diagnostics.readinessScore,
+    failRiskScore: diagnostics.failRiskScore,
+    masteredRegionIds:
+      state.phase === "victory"
+        ? [...(state.profile.masteredRegionIds ?? []), runtime.mapDefinition.region.id]
+        : state.profile.masteredRegionIds,
+    now: Date.now(),
+  });
+  const nextSession = touchSessionRecord(state.sessionRecord, {
+    currentStage: deriveStageFromState(state),
+    activeRegionId: runtime.mapDefinition.region.id,
+    activeSubmapId: state.currentQuestion?.submapId ?? null,
+    activeNodeId: state.currentRouteNode?.id ?? null,
+    checkpointNodeId: state.checkpointNodeId ?? null,
+    weakRegionIds: diagnostics.weakScopeIds,
+    readinessScore: diagnostics.readinessScore,
+    failRiskScore: diagnostics.failRiskScore,
+    now: Date.now(),
+  });
+  const runMetrics = buildRunMetrics(
+    {
+      ...state,
+      profile: nextProfile,
+      sessionRecord: nextSession,
+    },
+    runtime,
+  );
+  const social = {
+    shareCard: narrative.shareCard(runMetrics),
+    ghostRun: narrative.ghostRun(runMetrics),
+    cohortComparison: narrative.cohortComparison(
+      runMetrics,
+      buildCohortBaseline(runMetrics, diagnostics),
+      { cohortLabel: "Road Master cohort" },
+    ),
+  };
+  const dashboard = buildDashboardSnapshot({
+    sessions: [nextSession],
+    profiles: [nextProfile],
+    events: state.telemetry?.events ?? [],
+    mapDefinition: runtime.mapDefinition,
+    conceptProgressById: state.conceptProgressById,
+  });
+
+  state = {
+    ...state,
+    profile: nextProfile,
+    sessionRecord: nextSession,
+    diagnostics,
+    dashboard,
+    social,
+    onboarding: {
+      pending: !nextProfile.onboardingComplete,
+      step: nextProfile.onboardingStep,
+    },
+  };
+
+  persistExperience();
+}
+
 function createStoryNode(chapter, question, routeNode) {
   const conceptId = Array.isArray(question.conceptIds) ? question.conceptIds[0] : null;
 
@@ -341,7 +461,7 @@ function buildPromptFeedback(chapter, question) {
   };
 }
 
-function createInitialState(chapter) {
+function createInitialState(chapter, options = {}) {
   const encounter = createCombatEncounter(chapter.encounterConfig);
   const progressById = cloneProgressMap(chapter.seedConceptProgressById);
 
@@ -395,7 +515,7 @@ function createInitialState(chapter) {
     feedback: {
       tone: "neutral",
       title: "Chapter loaded",
-      detail: "Enter Chapter I to begin the campaign.",
+      detail: `Enter ${chapter.chapter ?? "the chapter"} to begin the campaign.`,
     },
     flashback: null,
     feed: narrative.intro(),
@@ -418,6 +538,17 @@ function createInitialState(chapter) {
     currentPhaseIndex: 0,
     currentPhaseName: "gate",
     telemetry: createTelemetryState(),
+    packCatalog: options.packCatalog ?? [],
+    selectedPackId: options.selectedPackId ?? DEFAULT_PACK_ID,
+    profile: options.profile ?? null,
+    sessionRecord: options.sessionRecord ?? null,
+    diagnostics: null,
+    dashboard: null,
+    social: null,
+    onboarding: {
+      pending: !(options.profile?.onboardingComplete ?? false),
+      step: options.profile?.onboardingStep ?? "welcome",
+    },
   };
 }
 
@@ -558,6 +689,7 @@ function refreshDerivedState() {
   };
 
   syncDerivedTelemetry(previousState);
+  refreshExperienceState();
 }
 
 function promoteQuestionConcepts(question, now) {
@@ -636,6 +768,10 @@ function saveCheckpoint(questionIndex) {
 function enterChapter() {
   if (state.phase !== "title") {
     return;
+  }
+
+  if (state.onboarding?.pending) {
+    completeOnboarding();
   }
 
   state = {
@@ -796,6 +932,71 @@ function toggleAudio() {
   sync();
 }
 
+function completeOnboarding() {
+  if (!state?.profile || state.profile.onboardingComplete) {
+    return;
+  }
+
+  const now = Date.now();
+  state = {
+    ...state,
+    profile: markOnboardingComplete(state.profile, {
+      lastSessionId: state.sessionRecord?.sessionId ?? null,
+      lastRegionId: runtime.mapDefinition.region.id,
+      now,
+    }),
+  };
+  appendTelemetryEvent("onboarding_completed", {
+    sessionId: state.sessionRecord?.sessionId ?? state.telemetry?.sessionId ?? null,
+    profileId: state.profile.profileId,
+    completedAt: new Date(now).toISOString(),
+  });
+  refreshExperienceState();
+  sync();
+}
+
+async function switchPack(packId) {
+  const targetPackId = typeof packId === "string" && packId.length > 0 ? packId : DEFAULT_PACK_ID;
+  const previousProfile = state?.profile ?? null;
+  const previousCatalog = state?.packCatalog ?? [];
+  const audioEnabled = state?.audioEnabled ?? false;
+
+  root.innerHTML = createLoadingMarkup(
+    "Switching chapter",
+    "Loading the selected content pack, map projection, and runtime contracts.",
+  );
+
+  const nextRuntime = await loadRoadMasterRuntime(targetPackId);
+  runtime = nextRuntime;
+  narrative = createNarrativeOracle(runtime);
+
+  const sessionRecord = createSessionRecord({
+    profileId: previousProfile?.profileId ?? null,
+    userId: previousProfile?.userId ?? DEFAULT_PLAYER_ID,
+    appVersion: runtime.foundation?.product?.version ?? "0.1.0",
+    activeRegionId: runtime.mapDefinition.region.id,
+    currentStage: "boot",
+    now: Date.now(),
+  });
+
+  state = createInitialState(runtime, {
+    packCatalog: previousCatalog,
+    selectedPackId: targetPackId,
+    profile: previousProfile,
+    sessionRecord,
+  });
+  state.audioEnabled = audioEnabled;
+  state.audioStatus = audio.getStatus();
+
+  if (audioEnabled) {
+    audio.toggleMute(false);
+  }
+
+  recordSessionStarted();
+  refreshDerivedState();
+  sync();
+}
+
 function focusNode(nodeId) {
   const node = runtime.mapIndex.main.nodesById.get(nodeId);
   if (!node) {
@@ -824,7 +1025,9 @@ function focusNode(nodeId) {
 }
 
 function shareVictory() {
-  const text = `${runtime.shareCard} (${state.mistakes} mistakes, ${state.encounter.hp} HP left, ${state.cues.length} cues).`;
+  const text =
+    state.social?.shareCard?.shareText ??
+    `${runtime.shareCard} (${state.mistakes} mistakes, ${state.encounter.hp} HP left, ${state.cues.length} cues).`;
   if (navigator.clipboard?.writeText) {
     void navigator.clipboard.writeText(text);
   }
@@ -1113,7 +1316,19 @@ function reclaimGround() {
 
 function restartChapter() {
   const audioEnabled = state?.audioEnabled ?? false;
-  state = createInitialState(runtime);
+  state = createInitialState(runtime, {
+    packCatalog: state?.packCatalog ?? [],
+    selectedPackId: state?.selectedPackId ?? DEFAULT_PACK_ID,
+    profile: state?.profile ?? null,
+    sessionRecord: createSessionRecord({
+      profileId: state?.profile?.profileId ?? null,
+      userId: state?.profile?.userId ?? DEFAULT_PLAYER_ID,
+      appVersion: runtime.foundation?.product?.version ?? "0.1.0",
+      activeRegionId: runtime.mapDefinition.region.id,
+      currentStage: "boot",
+      now: Date.now(),
+    }),
+  });
   state.audioEnabled = audioEnabled;
   state.audioStatus = audio.getStatus();
   updateSceneAudio("title");
@@ -1134,6 +1349,12 @@ function handleAction(action, payload) {
     case "toggle-audio":
       toggleAudio();
       break;
+    case "complete-onboarding":
+      completeOnboarding();
+      break;
+    case "select-pack":
+      void switchPack(payload.packId);
+      return;
     case "focus-node":
       focusNode(payload.nodeId);
       break;
@@ -1193,6 +1414,7 @@ root.addEventListener("click", (event) => {
 
   const payload = {
     nodeId: button.dataset.nodeId,
+    packId: button.dataset.packId,
     choiceIndex:
       button.dataset.choiceIndex !== undefined ? Number(button.dataset.choiceIndex) : undefined,
     cue: button.dataset.cue,
@@ -1211,20 +1433,40 @@ document.addEventListener("keydown", (event) => {
 async function boot() {
   try {
     root.innerHTML = createLoadingMarkup(
-      "Loading Chapter I",
-      "Opening the content pack, contracts, map graph, and combat loop.",
+      "Loading Road Master",
+      "Opening the content catalog, contracts, map graph, and combat loop.",
     );
-    runtime = await loadChapter1Runtime();
+    const browserExperience = loadBrowserExperience();
+    const catalog = await loadContentCatalog();
+    const selectedPackId = browserExperience?.selectedPackId ?? DEFAULT_PACK_ID;
+    const experience = createExperienceRecords({
+      savedProfile: browserExperience?.profile,
+      savedSession: browserExperience?.session,
+      selectedPackId,
+      now: Date.now(),
+    });
+
+    runtime = await loadRoadMasterRuntime(selectedPackId);
     narrative = createNarrativeOracle(runtime);
-    state = createInitialState(runtime);
+    state = createInitialState(runtime, {
+      packCatalog: catalog.packs ?? [],
+      selectedPackId,
+      profile: experience.profile,
+      sessionRecord: createSessionRecord({
+        ...experience.session,
+        activeRegionId: runtime.mapDefinition.region.id,
+        currentStage: "boot",
+        now: Date.now(),
+      }),
+    });
     recordSessionStarted();
     refreshDerivedState();
     sync();
   } catch (error) {
     console.error(error?.stack || error);
     root.innerHTML = createLoadingMarkup(
-      "Failed to load Chapter I",
-      "The browser runner could not start the static slice. Check the console for details.",
+      "Failed to load Road Master",
+      "The browser runner could not start the selected chapter. Check the console for details.",
     );
   }
 }

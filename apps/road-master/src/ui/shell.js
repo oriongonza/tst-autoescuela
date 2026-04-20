@@ -219,7 +219,7 @@ function renderBattle(state, chapter) {
         ${
           question
             ? `<div class="choices">${renderChoices(state, question)}</div>`
-            : `<p class="prompt-card__question">Enter Chapter I to start the route.</p>`
+            : `<p class="prompt-card__question">Enter ${escapeHtml(chapter.chapter ?? "the chapter")} to start the route.</p>`
         }
         <div class="prompt-card__explanation prompt-card__explanation--${escapeHtml(state.feedback?.tone ?? "neutral")}">
           <strong>${escapeHtml(state.feedback?.title ?? "Chapter loaded")}</strong>
@@ -231,7 +231,7 @@ function renderBattle(state, chapter) {
               ? `<button class="primary" data-action="continue" type="button">${pendingReclaim ? "Reclaim and continue" : "Continue"}</button>`
               : state.phase === "campaign"
                 ? `<button class="secondary" data-action="retry-checkpoint" type="button">Retry checkpoint</button>`
-                : `<button class="primary" data-action="start-chapter" type="button">Enter Chapter I</button>`
+                : `<button class="primary" data-action="start-chapter" type="button">Enter ${escapeHtml(chapter.chapter ?? "the chapter")}</button>`
           }
           ${
             state.phase === "campaign" && pendingReclaim
@@ -504,8 +504,149 @@ function renderTelemetry(state) {
                   `,
                 )
                 .join("")
-            : `<article class="feed-entry feed-entry--neutral"><div class="feed-entry__speaker">session_started</div><p>The slice is armed and waiting for Chapter I.</p></article>`
+            : `<article class="feed-entry feed-entry--neutral"><div class="feed-entry__speaker">session_started</div><p>The slice is armed and waiting for ${escapeHtml(chapter.chapter ?? "the chapter")}.</p></article>`
         }
+      </div>
+    </article>
+  `;
+}
+
+function renderCommandDeck(state, chapter) {
+  const packs = state.packCatalog ?? [];
+
+  return `
+    <article class="card intro-card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Command deck</p>
+          <h2>Onboarding, packs, and route control</h2>
+        </div>
+        <span class="pill">${escapeHtml(state.onboarding?.pending ? "briefing pending" : "briefing complete")}</span>
+      </div>
+      <p>
+        The shell now reads from the catalog, keeps a local profile/session record, and can rotate between the
+        available chapters without leaving the runtime.
+      </p>
+      <div class="battle-stats">
+        ${metric("Profile", state.profile?.displayName ?? "Road Cadet", "teal")}
+        ${metric("Voice", state.profile?.mentorVoiceMode ?? "stern", "amber")}
+        ${metric("Pack", chapter.chapter ?? "Chapter I", "mint")}
+        ${metric("Stage", state.onboarding?.step ?? "welcome", "neutral")}
+      </div>
+      <div class="cue-grid">
+        ${
+          state.onboarding?.pending
+            ? `<button class="cue-button" data-action="complete-onboarding" type="button">Complete briefing</button>`
+            : `<button class="cue-button" data-action="start-chapter" type="button">Enter ${escapeHtml(chapter.chapter ?? "chapter")}</button>`
+        }
+        ${packs
+          .map(
+            (pack) => `
+              <button
+                class="cue-button"
+                data-action="select-pack"
+                data-pack-id="${escapeHtml(pack.id)}"
+                type="button"
+              >
+                ${escapeHtml(pack.title)}${pack.id === state.selectedPackId ? " · live" : ""}
+              </button>
+            `,
+          )
+          .join("")}
+      </div>
+    </article>
+  `;
+}
+
+function renderProfileCard(state) {
+  const diagnostics = state.diagnostics ?? {};
+  const dashboard = state.dashboard ?? {};
+  const weakScopes = diagnostics.weakScopeIds ?? [];
+
+  return `
+    <article class="card narrative">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Progression model</p>
+          <h2>Profile, readiness, and weak scope map</h2>
+        </div>
+        <span class="pill">${escapeHtml(state.profile?.onboardingComplete ? "persisted" : "new profile")}</span>
+      </div>
+
+      <div class="battle-stats">
+        ${metric("Readiness", `${escapeHtml(String(diagnostics.readinessScore ?? 0))}%`, "mint")}
+        ${metric("Fail risk", `${escapeHtml(String(diagnostics.failRiskScore ?? 0))}%`, "danger")}
+        ${metric("Profiles", escapeHtml(String(dashboard.profileCount ?? 1)), "teal")}
+        ${metric("Sessions", escapeHtml(String(dashboard.sessionCount ?? 1)), "amber")}
+      </div>
+
+      <div class="cue-log">
+        <h3>Weak scopes</h3>
+        <div class="cue-list">
+          ${
+            weakScopes.length
+              ? weakScopes
+                  .map(
+                    (scopeId) => `
+                      <span class="cue-pill cue-pill--memory">${escapeHtml(scopeId)}</span>
+                    `,
+                  )
+                  .join("")
+              : `<span class="cue-pill cue-pill--correct">No weak scopes flagged</span>`
+          }
+        </div>
+      </div>
+
+      <div class="feed-list">
+        ${(diagnostics.reasons ?? [])
+          .map(
+            (reason) => `
+              <article class="feed-entry feed-entry--warning">
+                <div class="feed-entry__speaker">diagnostic</div>
+                <p>${escapeHtml(reason)}</p>
+              </article>
+            `,
+          )
+          .join("") || `<article class="feed-entry feed-entry--neutral"><div class="feed-entry__speaker">diagnostic</div><p>No repair flags yet.</p></article>`}
+      </div>
+    </article>
+  `;
+}
+
+function renderSocialCard(state) {
+  const shareCard = state.social?.shareCard ?? null;
+  const ghostRun = state.social?.ghostRun ?? null;
+  const cohort = state.social?.cohortComparison ?? null;
+
+  return `
+    <article class="card audio-card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Social layer</p>
+          <h2>Share cards and cohort comparison</h2>
+        </div>
+        <span class="pill">${escapeHtml(shareCard?.rankTitle ?? "Road Cadet")}</span>
+      </div>
+
+      <div class="feed-list">
+        ${(shareCard?.lines ?? [])
+          .slice(0, 4)
+          .map(
+            (line) => `
+              <article class="feed-entry feed-entry--share">
+                <div class="feed-entry__speaker">share card</div>
+                <p>${escapeHtml(line)}</p>
+              </article>
+            `,
+          )
+          .join("") || `<article class="feed-entry feed-entry--neutral"><div class="feed-entry__speaker">share card</div><p>The run card will fill in once the route moves.</p></article>`}
+      </div>
+
+      <div class="battle-stats">
+        ${metric("Ghost", ghostRun?.rankTitle ?? "Memory Chapter", "teal")}
+        ${metric("Cohort", cohort?.verdict ?? "level", "amber")}
+        ${metric("Delta", escapeHtml(String(cohort?.delta?.score ?? 0)), "mint")}
+        ${metric("Pack", state.selectedPackId ?? "chapter-1-crossing-fields", "neutral")}
       </div>
     </article>
   `;
@@ -555,7 +696,7 @@ function renderHero(state, chapter) {
       <div class="hero__actions">
         ${
           state.phase === "title"
-            ? `<button class="primary" data-action="start-chapter" type="button">Enter Chapter I</button>`
+            ? `<button class="primary" data-action="start-chapter" type="button">Enter ${escapeHtml(chapter.chapter ?? "the chapter")}</button>`
             : `<button class="primary" data-action="retry-checkpoint" type="button">Retry checkpoint</button>`
         }
         <button class="secondary" data-action="toggle-audio" type="button">${state.audioEnabled ? "Mute audio" : "Enable audio"}</button>
@@ -578,14 +719,34 @@ function renderOverlay(state, chapter) {
             One region, one route, one boss. The integrated vertical slice is loaded and ready.
           </p>
           <div class="overlay__actions">
-            <button class="primary" data-action="start-chapter" type="button">Enter Chapter I</button>
+            ${
+              state.onboarding?.pending
+                ? `<button class="primary" data-action="complete-onboarding" type="button">Complete briefing</button>`
+                : `<button class="primary" data-action="start-chapter" type="button">Enter ${escapeHtml(chapter.chapter ?? "the chapter")}</button>`
+            }
             <button class="secondary" data-action="toggle-audio" type="button">${state.audioEnabled ? "Mute audio" : "Enable audio"}</button>
+          </div>
+          <div class="cue-grid">
+            ${(state.packCatalog ?? [])
+              .map(
+                (pack) => `
+                  <button
+                    class="cue-button"
+                    data-action="select-pack"
+                    data-pack-id="${escapeHtml(pack.id)}"
+                    type="button"
+                  >
+                    ${escapeHtml(pack.title)}${pack.id === state.selectedPackId ? " · live" : ""}
+                  </button>
+                `,
+              )
+              .join("")}
           </div>
           <div class="overlay__stack">
             <div class="overlay__item">The route comes from the map graph.</div>
             <div class="overlay__item">Questions come from the chapter pack.</div>
             <div class="overlay__item">Combat, pacing, memory, and audio share one runtime.</div>
-            <div class="overlay__item">Victory ends in a share card and reset path.</div>
+            <div class="overlay__item">Victory ends in a share card, ghost run, and reset path.</div>
           </div>
         </section>
       </div>
@@ -603,7 +764,7 @@ function renderOverlay(state, chapter) {
           <div class="overlay__stack">
             <div class="overlay__item">The Beast fell to structure.</div>
             <div class="overlay__item">The map now reads as memory.</div>
-            <div class="overlay__item">The next region silhouette is ready for Chapter II.</div>
+            <div class="overlay__item">The next region silhouette is ready in the catalog.</div>
           </div>
           <div class="overlay__actions">
             <button class="primary" data-action="share-card" type="button">Copy victory card</button>
@@ -677,35 +838,14 @@ export function renderRoadMasterApp(state, chapter) {
           ${renderMap(state, chapter)}
           ${
             state.phase === "title"
-              ? `
-                <article class="card intro-card">
-                  <div class="section-head">
-                    <div>
-                      <p class="eyebrow">Title screen</p>
-                      <h2>Prepare the chapter</h2>
-                    </div>
-                    <span class="pill">Integrated slice</span>
-                  </div>
-                  <p>
-                    The shell is wired to the content pack, the combat/pacing loop, the map route,
-                    the memory reclaim system, and the audio stub. Enter Chapter I to step into Crossing Fields.
-                  </p>
-                  <div class="intro-card__list">
-                    ${chapter.hook
-                      .map(
-                        (item) => `
-                          <div class="intro-chip">${escapeHtml(item)}</div>
-                        `,
-                      )
-                      .join("")}
-                  </div>
-                </article>
-              `
+              ? renderCommandDeck(state, chapter)
               : renderBattle(state, chapter)
           }
           ${renderNarrative(state, chapter)}
           ${renderAudio(state)}
           ${renderTelemetry(state)}
+          ${renderProfileCard(state)}
+          ${renderSocialCard(state)}
         </section>
       </main>
 

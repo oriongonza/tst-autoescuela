@@ -25,6 +25,7 @@ fi
 
 lane_label_for_branch() {
   case "$1" in
+    lane/overseer-*) echo "lane:overseer" ;;
     lane/spark-1*) echo "lane:spark-1" ;;
     lane/spark-2*) echo "lane:spark-2" ;;
     lane/spark-3*) echo "lane:spark-3" ;;
@@ -36,7 +37,7 @@ lane_label_for_branch() {
 
 expected_lane_label="$(lane_label_for_branch "${HEAD_BRANCH}")"
 if [[ -z "${expected_lane_label}" ]]; then
-  echo "HEAD_BRANCH must use lane/spark-<1-5>-* naming." >&2
+  echo "HEAD_BRANCH must use lane/spark-<1-5>-* or lane/overseer-* naming." >&2
   exit 1
 fi
 

@@ -13,8 +13,10 @@ required_files=(
   ".github/workflows/auto-review.yml"
   "scripts/ci.sh"
   "scripts/auto_review.sh"
+  "scripts/overseer_lane_status.sh"
   "scripts/open_agent_pr.sh"
   "scripts/configure_repo_flow.sh"
+  "scripts/create_worktrees.sh"
 )
 
 for file in "${required_files[@]}"; do
@@ -45,6 +47,7 @@ require_label() {
 }
 
 for label in \
+  "lane:overseer" \
   "lane:spark-1" \
   "lane:spark-2" \
   "lane:spark-3" \
@@ -75,8 +78,13 @@ contains_literal "Each Spark agent works in an isolated worktree or branch." "AG
   exit 1
 }
 
-contains_literal "Branch names use \`lane/spark-<N>-<slug>\`." "AGENTS.md" || {
-  echo "AGENTS.md must define lane branch naming" >&2
+contains_literal "Spark branch names use \`lane/spark-<N>-<slug>\`." "AGENTS.md" || {
+  echo "AGENTS.md must define Spark lane branch naming" >&2
+  exit 1
+}
+
+contains_literal "Overseer integration branches use \`lane/overseer-<slug>\`." "AGENTS.md" || {
+  echo "AGENTS.md must define overseer integration branch naming" >&2
   exit 1
 }
 
@@ -107,20 +115,20 @@ contains_literal "scripts/auto_review.sh" ".github/workflows/auto-review.yml" ||
 
 current_branch="$(git branch --show-current)"
 if [[ -n "${current_branch}" && "${current_branch}" == lane/* ]]; then
-  if ! [[ "${current_branch}" =~ ^lane/spark-[1-5]-[a-z0-9][a-z0-9.-]*$ ]]; then
-    echo "Lane branches must follow lane/spark-<N>-<slug>: ${current_branch}" >&2
+  if ! [[ "${current_branch}" =~ ^lane/(spark-[1-5]-[a-z0-9][a-z0-9.-]*|overseer-[a-z0-9][a-z0-9.-]*)$ ]]; then
+    echo "Lane branches must follow lane/spark-<N>-<slug> or lane/overseer-<slug>: ${current_branch}" >&2
     exit 1
   fi
 fi
 
-if [[ -e "scripts/create_lane_worktrees.sh" ]]; then
-  [[ -x "scripts/create_lane_worktrees.sh" ]] || {
-    echo "scripts/create_lane_worktrees.sh must be executable when present" >&2
+if [[ -e "scripts/create_worktrees.sh" ]]; then
+  [[ -x "scripts/create_worktrees.sh" ]] || {
+    echo "scripts/create_worktrees.sh must be executable when present" >&2
     exit 1
   }
 
-  contains_literal "git worktree" "scripts/create_lane_worktrees.sh" || {
-    echo "scripts/create_lane_worktrees.sh should manage worktrees" >&2
+  contains_literal "worktree add" "scripts/create_worktrees.sh" || {
+    echo "scripts/create_worktrees.sh should manage worktrees" >&2
     exit 1
   }
 fi
