@@ -1,0 +1,18 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Road Master crest">
+  <defs>
+    <linearGradient id="road" x1="128" y1="40" x2="128" y2="216" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFD08A"/>
+      <stop offset="1" stop-color="#FF6A6F"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="128" y1="24" x2="128" y2="232" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#86E4D5"/>
+      <stop offset="1" stop-color="#FFB55F"/>
+    </linearGradient>
+  </defs>
+  <circle cx="128" cy="128" r="112" fill="#0E1521" stroke="url(#ring)" stroke-width="8"/>
+  <path d="M66 196L124 68H132L190 196H164L154 172H102L92 196H66Z" fill="url(#road)" opacity="0.96"/>
+  <path d="M111 156L128 118L145 156H111Z" fill="#08111D" opacity="0.95"/>
+  <path d="M124 68L130 68L136 84H118L124 68Z" fill="#FFD08A"/>
+  <path d="M120 156H136V170H120V156Z" fill="#08111D" opacity="0.95"/>
+  <rect x="44" y="214" width="168" height="6" rx="3" fill="#86E4D5" opacity="0.42"/>
+</svg>
