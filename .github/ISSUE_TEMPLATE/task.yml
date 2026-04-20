@@ -42,3 +42,14 @@ body:
         - Unblocks:
     validations:
       required: false
+  - type: textarea
+    id: lane_ownership
+    attributes:
+      label: Lane Ownership
+      description: Which Spark lane should execute this task, if already assigned.
+      placeholder: |
+        - Lane:
+        - Branch:
+        - Worktree:
+    validations:
+      required: false
