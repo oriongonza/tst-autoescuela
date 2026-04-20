@@ -45,6 +45,154 @@
     ]
   },
   {
+    "title": "Epic: five-lane workflow operations",
+    "milestone": "0.0.0 Foundations",
+    "type": "epic",
+    "area": "release",
+    "priority": "p0",
+    "extra_labels": [
+      "workflow: coordination",
+      "bot:overseer"
+    ],
+    "body_lines": [
+      "## Summary",
+      "Define the operating model for one overseer and five Spark lanes so work can proceed in isolated worktrees with deterministic handoff and gates.",
+      "",
+      "## Scope",
+      "- Overseer intake and lane assignment.",
+      "- Worktree isolation and branch discipline.",
+      "- PR flow from lane work to mainline.",
+      "- CI, auto-review, and merge gating.",
+      "",
+      "## Acceptance Criteria",
+      "- A contributor can describe the full lane lifecycle from assignment to merge.",
+      "- The workflow is explicit enough to prevent cross-lane collisions and silent handoff gaps.",
+      "",
+      "## Source",
+      "- `AGENTS.md`: overseer plus five Spark lanes.",
+      "- User instruction: operate the five-lane workflow in worktrees with no human in the loop."
+    ]
+  },
+  {
+    "title": "Define overseer intake, lane assignment, and conflict-resolution rules",
+    "milestone": "0.0.0 Foundations",
+    "type": "task",
+    "area": "release",
+    "priority": "p0",
+    "extra_labels": [
+      "workflow: coordination",
+      "bot:overseer"
+    ],
+    "body_lines": [
+      "## Summary",
+      "Define how the overseer receives work, assigns it to the five Spark lanes, and resolves overlap or drift.",
+      "",
+      "## Deliverables",
+      "- Intake criteria for new work items.",
+      "- Lane assignment rules across Spark 1 through Spark 5.",
+      "- Conflict-resolution and escalation rules when lanes collide or block each other.",
+      "- Drift detection or handoff checklist for stalled work.",
+      "",
+      "## Acceptance Criteria",
+      "- The overseer can route work without ad hoc judgment calls.",
+      "- Lane ownership is unambiguous when issues are created or reassigned.",
+      "",
+      "## Dependencies",
+      "- Blocked by: Epic: five-lane workflow operations",
+      "",
+      "## Source",
+      "- `AGENTS.md`: overseer responsibility and lane ownership rules."
+    ]
+  },
+  {
+    "title": "Standardize worktree setup, branch naming, and lane isolation",
+    "milestone": "0.0.0 Foundations",
+    "type": "task",
+    "area": "release",
+    "priority": "p0",
+    "extra_labels": [
+      "workflow: worktree"
+    ],
+    "body_lines": [
+      "## Summary",
+      "Define the canonical worktree layout and branch naming so each Spark lane stays isolated from the others.",
+      "",
+      "## Deliverables",
+      "- Worktree path convention for each lane.",
+      "- Branch naming convention for lane-scoped work.",
+      "- Rules that prevent one lane from overwriting another lane's files or branch state.",
+      "",
+      "## Acceptance Criteria",
+      "- Each lane can work independently in its own git worktree.",
+      "- The worktree rules are specific enough to be automated later.",
+      "",
+      "## Dependencies",
+      "- Blocked by: Epic: five-lane workflow operations",
+      "",
+      "## Source",
+      "- `AGENTS.md`: worktree isolation requirement."
+    ]
+  },
+  {
+    "title": "Codify PR flow from lane worktree to mainline",
+    "milestone": "0.0.0 Foundations",
+    "type": "task",
+    "area": "release",
+    "priority": "p0",
+    "extra_labels": [
+      "workflow: pr-flow"
+    ],
+    "body_lines": [
+      "## Summary",
+      "Define the path from a lane-local worktree to a reviewable pull request and a clean merge back to mainline.",
+      "",
+      "## Deliverables",
+      "- PR creation checklist.",
+      "- Required PR metadata and summary expectations.",
+      "- Handoff rules from Spark lane completion to overseer review.",
+      "",
+      "## Acceptance Criteria",
+      "- Lane work always reaches mainline through the same documented PR path.",
+      "- PRs make lane ownership and validation status obvious.",
+      "",
+      "## Dependencies",
+      "- Depends on: Standardize worktree setup, branch naming, and lane isolation",
+      "",
+      "## Source",
+      "- `AGENTS.md`: PR flow and merge discipline."
+    ]
+  },
+  {
+    "title": "Codify CI, auto-review, and merge gate behavior",
+    "milestone": "0.0.0 Foundations",
+    "type": "task",
+    "area": "qa",
+    "priority": "p0",
+    "extra_labels": [
+      "workflow: gatekeeping",
+      "bot:auto-review"
+    ],
+    "body_lines": [
+      "## Summary",
+      "Define the automated validation path that decides whether lane work can merge without manual intervention.",
+      "",
+      "## Deliverables",
+      "- CI check requirements.",
+      "- Auto-review criteria and failure handling.",
+      "- Merge-gate rules for passing or rejecting a PR.",
+      "",
+      "## Acceptance Criteria",
+      "- Validation is deterministic and reproducible.",
+      "- Passing work can move through review and merge without a human decision in the normal path.",
+      "",
+      "## Dependencies",
+      "- Depends on: Codify PR flow from lane worktree to mainline",
+      "",
+      "## Source",
+      "- `AGENTS.md`: CI, auto-review, and no-human merge path."
+    ]
+  },
+  {
     "title": "Epic: 0.0.0 foundations",
     "milestone": "0.0.0 Foundations",
     "type": "epic",

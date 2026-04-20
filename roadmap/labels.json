@@ -118,5 +118,25 @@
     "name": "bot:auto-review",
     "color": "495057",
     "description": "Applied when auto-review is the active gate."
+  },
+  {
+    "name": "workflow: coordination",
+    "color": "6C757D",
+    "description": "Overseer intake, lane assignment, and drift correction work."
+  },
+  {
+    "name": "workflow: worktree",
+    "color": "2B9348",
+    "description": "Per-lane worktree setup, isolation, and branch discipline."
+  },
+  {
+    "name": "workflow: pr-flow",
+    "color": "577590",
+    "description": "PR creation, handoff, and lane-to-mainline flow."
+  },
+  {
+    "name": "workflow: gatekeeping",
+    "color": "A44A3F",
+    "description": "CI, auto-review, and merge-gate behavior for lane work."
   }
 ]
