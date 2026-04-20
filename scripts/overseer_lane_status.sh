@@ -69,6 +69,7 @@ cd "${ROOT_DIR}"
 
 lane_from_branch() {
   case "$1" in
+    lane/overseer-*) echo "lane:overseer" ;;
     lane/spark-1*) echo "lane:spark-1" ;;
     lane/spark-2*) echo "lane:spark-2" ;;
     lane/spark-3*) echo "lane:spark-3" ;;
@@ -184,7 +185,12 @@ if [[ -n "${PR_NUMBER}" ]]; then
 elif [[ -n "${FOCUS_BRANCH}" ]]; then
   branches+=("${FOCUS_BRANCH}")
 else
-  mapfile -t branches < <(git for-each-ref --format='%(refname:short)' "refs/heads/lane/spark-*" | sort)
+  mapfile -t branches < <(
+    {
+      git for-each-ref --format='%(refname:short)' "refs/heads/lane/spark-*"
+      git for-each-ref --format='%(refname:short)' "refs/heads/lane/overseer-*"
+    } | sort -u
+  )
 fi
 
 if [[ "${FORMAT}" == "markdown" ]]; then

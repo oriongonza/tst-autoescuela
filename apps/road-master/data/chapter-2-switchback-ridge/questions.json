@@ -1,0 +1,382 @@
+[
+  {
+    "id": "sr-q-001",
+    "prompt": "On a long downhill grade, the safest first move is to...",
+    "choices": [
+      "Reduce speed before the slope carries you.",
+      "Wait until the car gains momentum.",
+      "Brake hard only after the car speeds up.",
+      "Shift to neutral and roll freely."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "ridge-descent-braking",
+      "ridge-grade-awareness"
+    ],
+    "trapId": "ridge-speed-on-descent",
+    "analogyId": "ridge-anchor-descent",
+    "explanationId": "ridge-why-brake-before-drop",
+    "regionId": "switchback-ridge",
+    "submapId": "hairpin-shelf",
+    "bossIds": [
+      "switchback-warden"
+    ],
+    "attackTier": 1,
+    "difficulty": "intro",
+    "arc": "gate",
+    "knownMistake": true
+  },
+  {
+    "id": "sr-q-002",
+    "prompt": "Engine braking helps most when you...",
+    "choices": [
+      "Use a lower gear to manage speed on descents.",
+      "Keep the highest gear and brake late.",
+      "Coast downhill with the clutch pressed in.",
+      "Ignore the slope and watch only the speedometer."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "ridge-engine-braking",
+      "ridge-descent-braking"
+    ],
+    "trapId": "ridge-brake-fade-bait",
+    "analogyId": "ridge-ski-slope-lane",
+    "explanationId": "ridge-why-engine-braking-helps",
+    "regionId": "switchback-ridge",
+    "submapId": "hairpin-shelf",
+    "bossIds": [
+      "switchback-warden"
+    ],
+    "attackTier": 1,
+    "difficulty": "intro",
+    "arc": "gate",
+    "knownMistake": true
+  },
+  {
+    "id": "sr-q-003",
+    "prompt": "Approaching a hairpin curve, you should...",
+    "choices": [
+      "Enter slowly and keep the steering smooth.",
+      "Turn in late and correct at the apex.",
+      "Accelerate so the curve feels shorter.",
+      "Cut the curve wide and trust the shoulder."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "ridge-hairpin-turn",
+      "ridge-apex-control"
+    ],
+    "trapId": "ridge-late-turn-in",
+    "analogyId": "ridge-tight-spiral",
+    "explanationId": "ridge-why-hairpins-demand-early-slowing",
+    "regionId": "switchback-ridge",
+    "submapId": "hairpin-shelf",
+    "bossIds": [
+      "switchback-warden"
+    ],
+    "attackTier": 1,
+    "difficulty": "intro",
+    "arc": "gate",
+    "knownMistake": true
+  },
+  {
+    "id": "sr-q-004",
+    "prompt": "A cambered curve can...",
+    "choices": [
+      "Help or hurt grip depending on direction and speed.",
+      "Only help, never hurt.",
+      "Only hurt, never help.",
+      "Be ignored if the road is dry."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "ridge-camber-grip",
+      "ridge-apex-control"
+    ],
+    "trapId": "ridge-gravel-commitment",
+    "analogyId": "ridge-folded-map",
+    "explanationId": "ridge-why-gravel-reduces-grip",
+    "regionId": "switchback-ridge",
+    "submapId": "hairpin-shelf",
+    "bossIds": [
+      "switchback-warden"
+    ],
+    "attackTier": 2,
+    "difficulty": "steady",
+    "arc": "labyrinth",
+    "knownMistake": false
+  },
+  {
+    "id": "sr-q-005",
+    "prompt": "In fog on a mountain pass, the best default is to...",
+    "choices": [
+      "Slow down and widen the following gap.",
+      "Keep the same speed and trust the lane.",
+      "Brake hard every few seconds.",
+      "Move to the shoulder to see better."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "ridge-fog-line",
+      "ridge-following-gap",
+      "ridge-grade-awareness"
+    ],
+    "trapId": "ridge-fog-overspeed",
+    "analogyId": "ridge-lantern-in-fog",
+    "explanationId": "ridge-why-fog-demands-slower-approach",
+    "regionId": "switchback-ridge",
+    "submapId": "hairpin-shelf",
+    "bossIds": [
+      "switchback-warden"
+    ],
+    "attackTier": 1,
+    "difficulty": "steady",
+    "arc": "labyrinth",
+    "knownMistake": true
+  },
+  {
+    "id": "sr-q-006",
+    "prompt": "If the shoulder is narrow on a cliff road, you should...",
+    "choices": [
+      "Treat it as emergency space, not a place to improvise.",
+      "Use it as a fast lane whenever traffic slows.",
+      "Pull fully onto it without checking the surface.",
+      "Ignore it and keep turning sharply."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "ridge-shoulder-space",
+      "ridge-runoff-lane"
+    ],
+    "trapId": "ridge-shoulder-panic",
+    "analogyId": "ridge-cliff-marker",
+    "explanationId": "ridge-why-shoulder-is-not-a-guess",
+    "regionId": "switchback-ridge",
+    "submapId": "hairpin-shelf",
+    "bossIds": [
+      "switchback-warden"
+    ],
+    "attackTier": 2,
+    "difficulty": "steady",
+    "arc": "labyrinth",
+    "knownMistake": true
+  },
+  {
+    "id": "sr-q-007",
+    "prompt": "A runoff lane is useful when...",
+    "choices": [
+      "Control is slipping and you need a recovery path.",
+      "You want to overtake on a blind bend.",
+      "You need to race into the next curve.",
+      "You want to avoid using the brakes."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "ridge-runoff-lane",
+      "ridge-shoulder-space"
+    ],
+    "trapId": "ridge-shoulder-panic",
+    "analogyId": "ridge-rope-bridge-gap",
+    "explanationId": "ridge-why-shoulder-is-not-a-guess",
+    "regionId": "switchback-ridge",
+    "submapId": "hairpin-shelf",
+    "bossIds": [
+      "switchback-warden"
+    ],
+    "attackTier": 2,
+    "difficulty": "steady",
+    "arc": "labyrinth",
+    "knownMistake": false
+  },
+  {
+    "id": "sr-q-008",
+    "prompt": "On loose gravel, the most reliable driving input is...",
+    "choices": [
+      "Gentle steering and slower speed.",
+      "Sharp braking and fast steering.",
+      "Full throttle to regain momentum.",
+      "Sudden lane changes to find grip."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "ridge-gravel-traction",
+      "ridge-apex-control"
+    ],
+    "trapId": "ridge-gravel-commitment",
+    "analogyId": "ridge-stone-trail",
+    "explanationId": "ridge-why-gravel-reduces-grip",
+    "regionId": "switchback-ridge",
+    "submapId": "hairpin-shelf",
+    "bossIds": [
+      "switchback-warden"
+    ],
+    "attackTier": 2,
+    "difficulty": "steady",
+    "arc": "labyrinth",
+    "knownMistake": true
+  },
+  {
+    "id": "sr-q-009",
+    "prompt": "The following distance on a steep descent should usually...",
+    "choices": [
+      "Increase.",
+      "Stay the same no matter what.",
+      "Shrink so you can react faster.",
+      "Disappear if the road is empty."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "ridge-following-gap",
+      "ridge-descent-braking"
+    ],
+    "trapId": "ridge-brake-fade-bait",
+    "analogyId": "ridge-rope-bridge-gap",
+    "explanationId": "ridge-why-following-distance-buys-recovery",
+    "regionId": "switchback-ridge",
+    "submapId": "hairpin-shelf",
+    "bossIds": [
+      "switchback-warden"
+    ],
+    "attackTier": 1,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": true
+  },
+  {
+    "id": "sr-q-010",
+    "prompt": "Guardrails mean...",
+    "choices": [
+      "The edge is protected, not that the road is wide enough to rush.",
+      "You can ignore lane position near the drop.",
+      "You should speed up because the edge is safe.",
+      "You do not need to scan the road anymore."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "ridge-guardrail-zone",
+      "ridge-fog-line"
+    ],
+    "trapId": "ridge-speed-on-descent",
+    "analogyId": "ridge-cliff-marker",
+    "explanationId": "ridge-why-brake-before-drop",
+    "regionId": "switchback-ridge",
+    "submapId": "hairpin-shelf",
+    "bossIds": [
+      "switchback-warden"
+    ],
+    "attackTier": 2,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": false
+  },
+  {
+    "id": "sr-q-011",
+    "prompt": "The apex of a curve is best thought of as...",
+    "choices": [
+      "A chosen point in the turn, not the place to attack speed.",
+      "The moment to brake as hard as possible.",
+      "The only place where steering matters.",
+      "A point you should reach by guessing."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "ridge-apex-control",
+      "ridge-hairpin-turn"
+    ],
+    "trapId": "ridge-late-turn-in",
+    "analogyId": "ridge-tight-spiral",
+    "explanationId": "ridge-why-apex-is-a-choice",
+    "regionId": "switchback-ridge",
+    "submapId": "hairpin-shelf",
+    "bossIds": [
+      "switchback-warden"
+    ],
+    "attackTier": 2,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": true
+  },
+  {
+    "id": "sr-q-012",
+    "prompt": "Brake fade is a risk when you...",
+    "choices": [
+      "Ride the brakes too long on a downhill.",
+      "Use engine braking and stay calm.",
+      "Slow early before the descent gets steep.",
+      "Leave enough space behind the vehicle ahead."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "ridge-descent-braking",
+      "ridge-engine-braking",
+      "ridge-grade-awareness"
+    ],
+    "trapId": "ridge-brake-fade-bait",
+    "analogyId": "ridge-anchor-descent",
+    "explanationId": "ridge-why-engine-braking-helps",
+    "regionId": "switchback-ridge",
+    "submapId": "hairpin-shelf",
+    "bossIds": [
+      "switchback-warden"
+    ],
+    "attackTier": 3,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": true
+  },
+  {
+    "id": "sr-q-013",
+    "prompt": "If the front tires start to slide on gravel, you should...",
+    "choices": [
+      "Ease the inputs and restore grip.",
+      "Add more steering and brake harder.",
+      "Accelerate sharply to force traction.",
+      "Throw the car toward the shoulder."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "ridge-gravel-traction",
+      "ridge-apex-control"
+    ],
+    "trapId": "ridge-gravel-commitment",
+    "analogyId": "ridge-stone-trail",
+    "explanationId": "ridge-why-gravel-reduces-grip",
+    "regionId": "switchback-ridge",
+    "submapId": "hairpin-shelf",
+    "bossIds": [
+      "switchback-warden"
+    ],
+    "attackTier": 3,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": true
+  },
+  {
+    "id": "sr-q-014",
+    "prompt": "Fog-line markers are important because they...",
+    "choices": [
+      "Help you keep orientation when visibility drops.",
+      "Mean the shoulder is safe at full speed.",
+      "Tell you to ignore the road surface.",
+      "Replace the need for any scanning."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "ridge-fog-line",
+      "ridge-grade-awareness"
+    ],
+    "trapId": "ridge-fog-overspeed",
+    "analogyId": "ridge-lantern-in-fog",
+    "explanationId": "ridge-why-fog-demands-slower-approach",
+    "regionId": "switchback-ridge",
+    "submapId": "hairpin-shelf",
+    "bossIds": [
+      "switchback-warden"
+    ],
+    "attackTier": 2,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": false
+  }
+]

@@ -19,10 +19,17 @@ export function runCombatPacingSimulation({
 
     const after = getCombatSnapshot(encounter);
     const pacingEvent = {
-      kind: attempt.correct ? "correct" : "wrong",
+      kind: resolved.outcome.parried
+        ? "parry"
+        : attempt.correct
+          ? "correct"
+          : "wrong",
       failed: resolved.outcome.failed,
       recovered: resolved.outcome.retried,
       cleared: resolved.outcome.cleared,
+      defused: resolved.outcome.defused,
+      revenge: resolved.outcome.revengeTriggered,
+      lessonKind: resolved.outcome.lessonCue?.lessonType ?? null,
     };
 
     const pacingAdvance = advancePacingState(pacing, pacingEvent, after);
@@ -43,4 +50,3 @@ export function runCombatPacingSimulation({
 
   return { encounter, pacing, trace };
 }
-

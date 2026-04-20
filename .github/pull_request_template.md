@@ -1,5 +1,6 @@
 ## Lane / Worktree
 
+- [ ] `lane:overseer`
 - [ ] `lane:spark-1`
 - [ ] `lane:spark-2`
 - [ ] `lane:spark-3`

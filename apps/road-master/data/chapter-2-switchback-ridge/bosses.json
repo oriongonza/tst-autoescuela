@@ -1,0 +1,75 @@
+[
+  {
+    "id": "switchback-warden",
+    "name": "Switchback Warden",
+    "title": "The Warden of the Folded Road",
+    "arena": {
+      "regionId": "switchback-ridge",
+      "submapId": "hairpin-shelf",
+      "summary": "A cliffside shelf road where the slope, the bend, and the edge all compete for attention."
+    },
+    "weaknessConceptIds": [
+      "ridge-descent-braking",
+      "ridge-engine-braking",
+      "ridge-hairpin-turn",
+      "ridge-fog-line",
+      "ridge-gravel-traction",
+      "ridge-following-gap",
+      "ridge-apex-control"
+    ],
+    "phases": [
+      {
+        "id": "approach",
+        "name": "Steep Approach",
+        "summary": "The road starts to fall away and the Warden dares the player to speed up."
+      },
+      {
+        "id": "pressure",
+        "name": "Hairpin Surge",
+        "summary": "The turns tighten and the Warden tries to force a late entry."
+      },
+      {
+        "id": "reveal",
+        "name": "Fogged Edge",
+        "summary": "Visibility drops and the Warden leans on hesitation and panic alike."
+      },
+      {
+        "id": "collapse",
+        "name": "Quiet Descent",
+        "summary": "The Warden loses power when the player keeps the line calm and controlled."
+      }
+    ],
+    "lines": {
+      "intro": [
+        "The ridge is steep because you made it late.",
+        "The drop is patient. Are you?"
+      ],
+      "phaseShift": [
+        "You braked after the slope woke up.",
+        "You steered too late for the bend."
+      ],
+      "defeat": [
+        "You chose control before the fall.",
+        "The folded road opens for the disciplined."
+      ],
+      "victory": [
+        "The ridge is crossed.",
+        "The Warden falls back into the fog."
+      ]
+    },
+    "attackLines": [
+      {
+        "id": "gravity-pull",
+        "summary": "The road feels like it is pulling the car faster than it should."
+      },
+      {
+        "id": "tightening-bend",
+        "summary": "A hairpin closes the line if the player turns in late."
+      },
+      {
+        "id": "fog-cut",
+        "summary": "A bank of haze hides the lane edge and dares a rushed guess."
+      }
+    ]
+  }
+]

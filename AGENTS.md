@@ -11,7 +11,8 @@ The overseer owns planning, lane boundaries, PR orchestration, CI watching, and 
 1. Lock the seam.
    - Freeze the lane split before implementation starts.
    - Verify every lane has one narrow file boundary.
-   - Keep branch names in the form `lane/spark-<N>-<slug>`.
+   - Keep Spark branch names in the form `lane/spark-<N>-<slug>`.
+   - Use `lane/overseer-<slug>` only for explicit cross-lane integration or recovery work.
 
 2. Seed the five worktrees from `origin/main`.
 
@@ -39,7 +40,7 @@ The overseer owns planning, lane boundaries, PR orchestration, CI watching, and 
 4. Run the lane PR flow.
    - The lane commits locally on its branch.
    - The lane opens the PR with `scripts/open_agent_pr.sh`.
-   - The PR carries exactly one `lane:spark-<N>` label.
+   - The PR carries exactly one ownership label: `lane:spark-<N>` for Spark work or `lane:overseer` for cross-lane integration.
    - Auto-merge is enabled when the PR opens.
    - Overseer watches `gh pr view --json reviewDecision,statusCheckRollup`.
 
@@ -80,10 +81,11 @@ The overseer owns planning, lane boundaries, PR orchestration, CI watching, and 
 ## Lane Rules
 
 - Each Spark agent works in an isolated worktree or branch.
-- Branch names use `lane/spark-<N>-<slug>`.
-- Each PR must carry exactly one `lane:spark-<N>` label.
+- Spark branch names use `lane/spark-<N>-<slug>`.
+- Overseer integration branches use `lane/overseer-<slug>`.
+- Each PR must carry exactly one ownership label: `lane:spark-<N>` or `lane:overseer`.
 - A lane may only edit files it owns. Cross-lane edits are rejected by auto-review.
-- If work spans multiple lanes, the overseer splits it into smaller PRs or takes an integration lane explicitly.
+- If work spans multiple lanes, the overseer splits it into smaller PRs or takes an integration lane explicitly with `lane:overseer`.
 
 ## PR Flow
 
@@ -100,11 +102,11 @@ No human review is part of the normal path.
 
 Auto-review is not a rubber stamp. It rejects PRs that:
 
-- are missing a `lane:spark-*` label
+- are missing a supported ownership label
 - target a branch other than `main`
 - omit the required PR template sections
 - fail local repo CI
-- edit files outside the owning lane
+- edit files outside the owning lane, unless the PR is an explicit overseer integration lane
 
 ## Failure Loop
 

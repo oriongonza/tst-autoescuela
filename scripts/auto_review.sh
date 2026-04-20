@@ -25,6 +25,18 @@ lane_allowlist_ok() {
   local file
 
   case "${lane}" in
+    lane:overseer)
+      for file in "$@"; do
+        [[ "${file}" == AGENTS.md || \
+           "${file}" == README.md || \
+           "${file}" == roadmap/* || \
+           "${file}" == scripts/* || \
+           "${file}" == .github/* || \
+           "${file}" == .github/**/* || \
+           "${file}" == apps/road-master/* || \
+           "${file}" == apps/road-master/**/* ]] || return 1
+      done
+      ;;
     lane:spark-1)
       for file in "$@"; do
         [[ "${file}" == roadmap/* || \
@@ -112,17 +124,25 @@ pr_json="$(gh pr view "${PR_NUMBER}" --repo "${GH_REPO}" --json title,body,baseR
 base_ref="$(jq -r '.baseRefName' <<<"${pr_json}")"
 is_draft="$(jq -r '.isDraft' <<<"${pr_json}")"
 body="$(jq -r '.body // ""' <<<"${pr_json}")"
-mapfile -t lane_labels < <(jq -r '.labels[].name | select(startswith("lane:spark-"))' <<<"${pr_json}")
+mapfile -t lane_labels < <(jq -r '.labels[].name | select(startswith("lane:"))' <<<"${pr_json}")
 
 lane_summary_file="$(mktemp)"
 
 [[ "${base_ref}" == "main" ]] || record_failure "Base branch must be main."
 [[ "${is_draft}" == "false" ]] || record_failure "Draft PRs are not auto-approved."
-[[ "${#lane_labels[@]}" -eq 1 ]] || record_failure "PR must have exactly one lane:spark-* label."
+[[ "${#lane_labels[@]}" -eq 1 ]] || record_failure "PR must have exactly one ownership label."
 
-for section in "## Lane" "## Summary" "## Scope" "## Tests" "## Out Of Scope" "## Source"; do
+for section in "## Lane" "## Summary" "## Scope" "## Source"; do
   grep -Fq "${section}" <<<"${body}" || record_failure "PR body is missing required section: ${section}"
 done
+
+if ! grep -Fq "## Validation" <<<"${body}" && ! grep -Fq "## Tests" <<<"${body}"; then
+  record_failure "PR body is missing required section: ## Validation"
+fi
+
+if ! grep -Fq "## Failure Loop" <<<"${body}" && ! grep -Fq "## Out Of Scope" <<<"${body}"; then
+  record_failure "PR body is missing required section: ## Failure Loop"
+fi
 
 mapfile -t changed_files < <(gh pr diff "${PR_NUMBER}" --repo "${GH_REPO}" --name-only)
 [[ "${#changed_files[@]}" -gt 0 ]] || record_failure "PR has no changed files."

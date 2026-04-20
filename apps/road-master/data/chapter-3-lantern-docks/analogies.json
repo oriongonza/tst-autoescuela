@@ -1,0 +1,82 @@
+[
+  {
+    "id": "harbor-lighthouse-drive",
+    "title": "Lighthouse Drive",
+    "summary": "Low beams guide the car like a lighthouse guides a ship through dark water.",
+    "memoryHook": "Use the light that lets you steer, not the one that blinds you.",
+    "sourceConceptIds": [
+      "harbor-low-beam",
+      "harbor-night-visibility"
+    ]
+  },
+  {
+    "id": "harbor-moon-on-water",
+    "title": "Moon on Water",
+    "summary": "Wet road reflections can look calm while hiding real movement.",
+    "memoryHook": "Shine is not proof of safety.",
+    "sourceConceptIds": [
+      "harbor-reflection-reading",
+      "harbor-wet-surface"
+    ]
+  },
+  {
+    "id": "harbor-dockside-beacon",
+    "title": "Dockside Beacon",
+    "summary": "Signals at night must be a clear beacon, not a late afterthought.",
+    "memoryHook": "Light the turn before you need it.",
+    "sourceConceptIds": [
+      "harbor-signal-timing",
+      "harbor-glare-control"
+    ]
+  },
+  {
+    "id": "harbor-rain-on-glass",
+    "title": "Rain on Glass",
+    "summary": "Wet pavement changes the whole view, the way rain changes a window.",
+    "memoryHook": "When the view turns streaky, slow down and refocus.",
+    "sourceConceptIds": [
+      "harbor-wet-surface",
+      "harbor-stopping-distance"
+    ]
+  },
+  {
+    "id": "harbor-night-watch",
+    "title": "Night Watch",
+    "summary": "Driving tired is like a night watch that starts to drift off.",
+    "memoryHook": "A drifting watch misses the next movement.",
+    "sourceConceptIds": [
+      "harbor-fatigue-scan",
+      "harbor-night-visibility"
+    ]
+  },
+  {
+    "id": "harbor-pier-line",
+    "title": "Pier Line",
+    "summary": "A bike lane at night is a pier line you must keep reading carefully.",
+    "memoryHook": "Stay beside the line, not on top of it.",
+    "sourceConceptIds": [
+      "harbor-bike-lane-night",
+      "harbor-glare-control"
+    ]
+  },
+  {
+    "id": "harbor-fog-bell",
+    "title": "Fog Bell",
+    "summary": "A bus stop at night is a bell that warns of hidden movement nearby.",
+    "memoryHook": "When the bell rings, expect someone to step out.",
+    "sourceConceptIds": [
+      "harbor-bus-stop-caution",
+      "harbor-pedestrian-shadow"
+    ]
+  },
+  {
+    "id": "harbor-curb-shadow",
+    "title": "Curb Shadow",
+    "summary": "A curb at night can hide a person the way a shadow hides depth.",
+    "memoryHook": "Treat the dark edge as occupied until proven otherwise.",
+    "sourceConceptIds": [
+      "harbor-pedestrian-shadow",
+      "harbor-reflection-reading"
+    ]
+  }
+]

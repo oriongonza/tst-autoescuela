@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ridge-descent-braking",
+    "name": "Descent Braking",
+    "summary": "Reducing speed before gravity gains control on a downhill."
+  },
+  {
+    "id": "ridge-engine-braking",
+    "name": "Engine Braking",
+    "summary": "Using a lower gear to help control speed on a slope."
+  },
+  {
+    "id": "ridge-hairpin-turn",
+    "name": "Hairpin Turn",
+    "summary": "A very tight curve that requires a slow, clean entry."
+  },
+  {
+    "id": "ridge-camber-grip",
+    "name": "Camber Grip",
+    "summary": "How the tilt of the road can help or hurt traction in a curve."
+  },
+  {
+    "id": "ridge-following-gap",
+    "name": "Following Gap",
+    "summary": "The buffer kept behind another vehicle when braking distance changes."
+  },
+  {
+    "id": "ridge-shoulder-space",
+    "name": "Shoulder Space",
+    "summary": "The edge space that may be used only with caution and purpose."
+  },
+  {
+    "id": "ridge-runoff-lane",
+    "name": "Runoff Lane",
+    "summary": "A recovery lane or escape area for losing control on a slope."
+  },
+  {
+    "id": "ridge-fog-line",
+    "name": "Fog Line",
+    "summary": "The lane-edge marking that helps you keep orientation in haze."
+  },
+  {
+    "id": "ridge-gravel-traction",
+    "name": "Gravel Traction",
+    "summary": "The reduced grip you get on loose stone or dirt at the edge."
+  },
+  {
+    "id": "ridge-grade-awareness",
+    "name": "Grade Awareness",
+    "summary": "Noticing how steepness changes your speed and stopping needs."
+  },
+  {
+    "id": "ridge-guardrail-zone",
+    "name": "Guardrail Zone",
+    "summary": "A protected edge that still demands careful lane discipline."
+  },
+  {
+    "id": "ridge-apex-control",
+    "name": "Apex Control",
+    "summary": "Choosing the safest point in a curve rather than attacking it."
+  }
+]

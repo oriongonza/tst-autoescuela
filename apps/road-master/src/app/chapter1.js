@@ -1,150 +1,18 @@
-const chapter1 = {
-  id: "chapter-1-crossing-fields",
-  title: "Road Master",
-  chapter: "Chapter I",
-  region: "Crossing Fields",
-  subtitle: "The first campaign chapter: a one-region war story about initiative, signal authority, and reclaimed ground.",
-  mentor: "The Instructor",
-  boss: "The Right-of-Way Beast",
-  submap: "The Four-Way Labyrinth",
-  hook: [
-    "Concept graph as map.",
-    "Map as memory palace.",
-    "Boss battle as test.",
-    "Known-mistake flashbacks.",
-    "Victory as conquest.",
-  ],
-  doctrine: [
-    "The road is a hierarchy. Learn who yields.",
-    "Obvious answers are where traps hide.",
-    "Known ground can slip if you stop defending it.",
-    "Every close call should leave a scar and a lesson.",
-  ],
-  shareCard: "I cleared Crossing Fields in Road Master.",
-  nodes: [
-    {
-      id: "gatehouse",
-      kind: "gate",
-      title: "Gatehouse",
-      subtitle: "Road Master ignition",
-      summary: "The chapter opens. The mentor sets the first law: hierarchy before haste.",
-      badge: "1",
-      color: "amber",
-      prompts: [
-        {
-          id: "gate-1",
-          question: "What does the road reward first?",
-          choices: ["Rule hierarchy", "Fast guessing", "Familiarity"],
-          correctIndex: 0,
-          explanation: "The first chapter teaches hierarchy, not speed.",
-          concept: "initiative",
-        },
-      ],
-    },
-    {
-      id: "signals",
-      kind: "road",
-      title: "Signal Authority",
-      subtitle: "Signs override habit",
-      summary: "The player learns that visible signals command the lane even when intuition resists.",
-      badge: "2",
-      color: "teal",
-      prompts: [
-        {
-          id: "signals-1",
-          question: "When a sign conflicts with habit, what wins?",
-          choices: ["The sign", "The habit", "The faster car"],
-          correctIndex: 0,
-          explanation: "Road authority lives in the signal, not the guess.",
-          concept: "signal hierarchy",
-        },
-        {
-          id: "signals-2",
-          question: "Which mindset is safest under visible ambiguity?",
-          choices: ["Slow down and parse the signal", "Answer instantly", "Trust the most obvious road"],
-          correctIndex: 0,
-          explanation: "The right move is to read the rule hierarchy before committing.",
-          concept: "perceptual discipline",
-        },
-      ],
-    },
-    {
-      id: "labyrinth",
-      kind: "submap",
-      title: "The Four-Way Labyrinth",
-      subtitle: "Recursive confusion",
-      summary: "The chapter folds inward. Conflicting vehicles, exceptions, and visual traps force re-reading.",
-      badge: "3",
-      color: "cyan",
-      prompts: [
-        {
-          id: "labyrinth-1",
-          question: "At a four-way stop, what should you inspect before committing?",
-          choices: ["Arrival order and conflicting signs", "Only the prettiest lane", "The loudest driver"],
-          correctIndex: 0,
-          explanation: "Priority depends on order and signal context, not noise.",
-          concept: "order resolution",
-          flashback: "Known ground slips. Re-enter the Four-Way Labyrinth and reclaim the rule.",
-        },
-        {
-          id: "labyrinth-2",
-          question: "What is the classic trap in this submap?",
-          choices: ["The obvious answer that ignores the override", "Waiting to parse the rule", "Checking the lane hierarchy"],
-          correctIndex: 0,
-          explanation: "The obvious answer often loses to an exception or local override.",
-          concept: "trap literacy",
-          flashback: "The map remembers your mistake. Reclaim the old ground cleanly.",
-        },
-      ],
-    },
-    {
-      id: "beast",
-      kind: "boss",
-      title: "The Right-of-Way Beast",
-      subtitle: "Guardian of initiative",
-      summary: "The boss embodies the chapter: priority, signal authority, exceptions, and the penalty for haste.",
-      badge: "4",
-      color: "danger",
-      prompts: [
-        {
-          id: "boss-1",
-          move: "Crossing Slam",
-          question: "The Beast flashes a crowded intersection. What do you do first?",
-          choices: ["Claim the lane without checking", "Read the priority order", "Pick the fastest-looking path"],
-          correctIndex: 1,
-          explanation: "The Beast punishes the instinct to move before the hierarchy is clear.",
-          concept: "priority reading",
-        },
-        {
-          id: "boss-2",
-          move: "Signal Betrayal",
-          question: "A familiar pattern appears, but a local sign overrides it. What holds?",
-          choices: ["The local sign", "The old habit", "The loudest motion"],
-          correctIndex: 0,
-          explanation: "Overrides beat habits. The Beast thrives on false confidence.",
-          concept: "override detection",
-        },
-        {
-          id: "boss-3",
-          move: "Feint of the Obvious",
-          question: "The obvious answer looks safe, but the scenario contains a tiny exception. What wins?",
-          choices: ["The exception", "The obvious answer", "The quickest response"],
-          correctIndex: 0,
-          explanation: "The chapter rewards the reader who checks for exceptions before committing.",
-          concept: "exception handling",
-        },
-        {
-          id: "boss-4",
-          move: "Final Claim",
-          question: "The Beast is low. What state keeps the victory real?",
-          choices: ["Robust mastery", "Rushed guesswork", "Lucky streaks"],
-          correctIndex: 0,
-          explanation: "A real victory is a stable pattern, not a lucky finish.",
-          concept: "mastery stability",
-        },
-      ],
-    },
-  ],
-};
+export {
+  ARC_ORDER,
+  DEFAULT_PACK_ID,
+  QUESTIONS_PER_NODE,
+  QUESTIONS_PER_PHASE,
+  buildRoadMasterRuntime,
+  loadRoadMasterRuntime,
+} from "./runtime.js";
 
-export { chapter1 };
+import { DEFAULT_PACK_ID, buildRoadMasterRuntime, loadRoadMasterRuntime } from "./runtime.js";
+
+export function buildChapter1Runtime(pack) {
+  return buildRoadMasterRuntime(DEFAULT_PACK_ID, pack);
+}
+
+export async function loadChapter1Runtime(fetchImpl = globalThis.fetch) {
+  return loadRoadMasterRuntime(DEFAULT_PACK_ID, fetchImpl);
+}
