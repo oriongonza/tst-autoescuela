@@ -1,0 +1,75 @@
+[
+  {
+    "id": "right-of-way-beast",
+    "name": "Right-of-Way Beast",
+    "title": "The Beast at the Crossing",
+    "arena": {
+      "regionId": "crossing-fields",
+      "submapId": "four-way-labyrinth",
+      "summary": "A four-way crossing where false confidence and hesitation both get punished."
+    },
+    "weaknessConceptIds": [
+      "right-of-way",
+      "priority",
+      "four-way-stop",
+      "yield-sign",
+      "turn-signal",
+      "mirror-check",
+      "pedestrian-crossing"
+    ],
+    "phases": [
+      {
+        "id": "approach",
+        "name": "False Lead",
+        "summary": "The Beast tries to distract the player with the biggest-looking mover."
+      },
+      {
+        "id": "pressure",
+        "name": "Left-Hand Bluff",
+        "summary": "The Beast raises the pressure by making the wrong choice feel urgent."
+      },
+      {
+        "id": "reveal",
+        "name": "Pedestrian Shade",
+        "summary": "The hidden vulnerable road user appears and forces the player to slow down."
+      },
+      {
+        "id": "collapse",
+        "name": "Open Crossing",
+        "summary": "The Beast loses power when the player obeys the rule cleanly."
+      }
+    ],
+    "lines": {
+      "intro": [
+        "The crossing is mine until you learn the order.",
+        "The loudest engine is not the law."
+      ],
+      "phaseShift": [
+        "You hesitated. I grow on hesitation.",
+        "You guessed. I feed on guesses."
+      ],
+      "defeat": [
+        "You named the rule. The Beast loses shape.",
+        "The crossing opens when priority is obeyed."
+      ],
+      "victory": [
+        "The field is crossed.",
+        "The Beast is pinned to the old mistake."
+      ]
+    },
+    "attackLines": [
+      {
+        "id": "false-priority",
+        "summary": "A big vehicle looks important but does not own the crossing."
+      },
+      {
+        "id": "hidden-crossing",
+        "summary": "A pedestrian or cyclist appears where the player failed to scan."
+      },
+      {
+        "id": "gap-feint",
+        "summary": "The Beast opens a fake gap that closes if the player rushes."
+      }
+    ]
+  }
+]
