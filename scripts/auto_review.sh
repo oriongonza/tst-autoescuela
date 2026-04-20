@@ -27,7 +27,13 @@ lane_allowlist_ok() {
   case "${lane}" in
     lane:spark-1)
       for file in "$@"; do
-        [[ "${file}" == roadmap/* ]] || return 1
+        [[ "${file}" == roadmap/* || \
+           "${file}" == apps/road-master/src/core/* || \
+           "${file}" == apps/road-master/src/core/**/* || \
+           "${file}" == apps/road-master/src/systems/telemetry/* || \
+           "${file}" == apps/road-master/src/systems/telemetry/**/* || \
+           "${file}" == apps/road-master/docs/foundations/* || \
+           "${file}" == apps/road-master/docs/foundations/**/* ]] || return 1
       done
       ;;
     lane:spark-2)
@@ -35,14 +41,26 @@ lane_allowlist_ok() {
         [[ "${file}" == scripts/common.sh || \
            "${file}" == scripts/bootstrap_all.sh || \
            "${file}" == scripts/create_*.sh || \
-           "${file}" == scripts/validate_manifest.sh ]] || return 1
+           "${file}" == scripts/validate_manifest.sh || \
+           "${file}" == apps/road-master/src/content/* || \
+           "${file}" == apps/road-master/src/content/**/* || \
+           "${file}" == apps/road-master/tools/* || \
+           "${file}" == apps/road-master/tools/**/* || \
+           "${file}" == apps/road-master/data/* || \
+           "${file}" == apps/road-master/data/**/* ]] || return 1
       done
       ;;
     lane:spark-3)
       for file in "$@"; do
         [[ "${file}" == .github/workflows/ci.yml || \
            "${file}" == scripts/ci.sh || \
-           "${file}" == scripts/check_repo_structure.sh ]] || return 1
+           "${file}" == scripts/check_repo_structure.sh || \
+           "${file}" == apps/road-master/src/systems/combat/* || \
+           "${file}" == apps/road-master/src/systems/combat/**/* || \
+           "${file}" == apps/road-master/src/systems/pacing/* || \
+           "${file}" == apps/road-master/src/systems/pacing/**/* || \
+           "${file}" == apps/road-master/tests/combat_pacing/* || \
+           "${file}" == apps/road-master/tests/combat_pacing/**/* ]] || return 1
       done
       ;;
     lane:spark-4)
@@ -51,7 +69,13 @@ lane_allowlist_ok() {
            "${file}" == scripts/auto_review.sh || \
            "${file}" == scripts/open_agent_pr.sh || \
            "${file}" == scripts/configure_repo_flow.sh || \
-           "${file}" == scripts/overseer_lane_status.sh ]] || return 1
+           "${file}" == scripts/overseer_lane_status.sh || \
+           "${file}" == apps/road-master/src/systems/map/* || \
+           "${file}" == apps/road-master/src/systems/map/**/* || \
+           "${file}" == apps/road-master/src/systems/memory/* || \
+           "${file}" == apps/road-master/src/systems/memory/**/* || \
+           "${file}" == apps/road-master/tests/map_memory/* || \
+           "${file}" == apps/road-master/tests/map_memory/**/* ]] || return 1
       done
       ;;
     lane:spark-5)
@@ -59,7 +83,21 @@ lane_allowlist_ok() {
         [[ "${file}" == AGENTS.md || \
            "${file}" == README.md || \
            "${file}" == .github/pull_request_template.md || \
-           "${file}" == .github/ISSUE_TEMPLATE/* ]] || return 1
+           "${file}" == .github/ISSUE_TEMPLATE/* || \
+           "${file}" == apps/road-master/index.html || \
+           "${file}" == apps/road-master/README.md || \
+           "${file}" == apps/road-master/src/app/* || \
+           "${file}" == apps/road-master/src/app/**/* || \
+           "${file}" == apps/road-master/src/ui/* || \
+           "${file}" == apps/road-master/src/ui/**/* || \
+           "${file}" == apps/road-master/src/systems/narrative/* || \
+           "${file}" == apps/road-master/src/systems/narrative/**/* || \
+           "${file}" == apps/road-master/src/systems/audio/* || \
+           "${file}" == apps/road-master/src/systems/audio/**/* || \
+           "${file}" == apps/road-master/styles/* || \
+           "${file}" == apps/road-master/styles/**/* || \
+           "${file}" == apps/road-master/assets/* || \
+           "${file}" == apps/road-master/assets/**/* ]] || return 1
       done
       ;;
     *)
@@ -109,9 +147,26 @@ cleanup() {
 }
 trap cleanup EXIT
 
+write_summary() {
+  local title="$1"
+  {
+    echo "${title}"
+    echo
+    cat "${review_file}"
+  } | tee /dev/stderr
+
+  if [[ -n "${GITHUB_STEP_SUMMARY:-}" ]]; then
+    {
+      echo "## ${title}"
+      echo
+      cat "${review_file}"
+    } >>"${GITHUB_STEP_SUMMARY}"
+  fi
+}
+
 if [[ "${#failures[@]}" -eq 0 ]]; then
   {
-    echo "Auto-review approved."
+    echo "Auto-review passed."
     echo
     echo "- Lane ownership respected."
     echo "- Required PR sections present."
@@ -119,14 +174,10 @@ if [[ "${#failures[@]}" -eq 0 ]]; then
     echo
     cat "${lane_summary_file}"
   } > "${review_file}"
-
-  gh pr review "${PR_NUMBER}" \
-    --repo "${GH_REPO}" \
-    --approve \
-    --body-file "${review_file}"
+  write_summary "Auto-review passed"
 else
   {
-    echo "Auto-review requested changes."
+    echo "Auto-review failed."
     echo
     for failure in "${failures[@]}"; do
       echo "- ${failure}"
@@ -134,10 +185,6 @@ else
     echo
     cat "${lane_summary_file}"
   } > "${review_file}"
-
-  gh pr review "${PR_NUMBER}" \
-    --repo "${GH_REPO}" \
-    --request-changes \
-    --body-file "${review_file}"
+  write_summary "Auto-review failed"
   exit 1
 fi
