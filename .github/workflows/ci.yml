@@ -14,7 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: scripts/validate_manifest.sh
+      - run: scripts/ci.sh manifest
+
+  repo-smoke:
+    name: repo-smoke
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: scripts/ci.sh repo-smoke
 
   shellcheck:
     name: shellcheck
@@ -22,18 +29,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: sudo apt-get update && sudo apt-get install -y shellcheck
-      - run: cd scripts && shellcheck -x ./*.sh
+      - run: scripts/ci.sh shellcheck
 
   bash:
     name: bash
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: for f in scripts/*.sh; do bash -n "$f"; done
-
-  repo-smoke:
-    name: repo-smoke
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: scripts/check_repo_structure.sh
+      - run: scripts/ci.sh bash
