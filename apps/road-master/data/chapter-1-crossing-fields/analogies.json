@@ -1,0 +1,112 @@
+[
+  {
+    "id": "chessboard-crossing",
+    "title": "Chessboard Crossing",
+    "summary": "Treat the intersection like a board where order matters more than force.",
+    "memoryHook": "First move the piece that has the rule, not the piece that looks strongest.",
+    "sourceConceptIds": [
+      "intersection",
+      "right-of-way",
+      "priority"
+    ]
+  },
+  {
+    "id": "gate-guard",
+    "title": "Gate Guard",
+    "summary": "A stop sign is a gate that only opens after a full pause and a fresh scan.",
+    "memoryHook": "Stop, look, then pass through the gate.",
+    "sourceConceptIds": [
+      "stop-sign",
+      "hazard-scan",
+      "intersection"
+    ]
+  },
+  {
+    "id": "river-confluence",
+    "title": "River Confluence",
+    "summary": "Yielding is like joining a river only when the current leaves room.",
+    "memoryHook": "You do not force the water; you wait for the flow.",
+    "sourceConceptIds": [
+      "yield-sign",
+      "merge-gap",
+      "roundabout-entry"
+    ]
+  },
+  {
+    "id": "watchtower-scan",
+    "title": "Watchtower Scan",
+    "summary": "Mirrors and blind spots are a lookout tower for hidden movement.",
+    "memoryHook": "A tower scan sees more than a glance.",
+    "sourceConceptIds": [
+      "mirror-check",
+      "hazard-scan",
+      "lane-position"
+    ]
+  },
+  {
+    "id": "torch-pass",
+    "title": "Torch Pass",
+    "summary": "A signal is a torch that tells others where you intend to go.",
+    "memoryHook": "Show the torch before you step.",
+    "sourceConceptIds": [
+      "turn-signal",
+      "turning-order",
+      "lane-position"
+    ]
+  },
+  {
+    "id": "lantern-walk",
+    "title": "Lantern Walk",
+    "summary": "Low visibility is a dark path where slower movement keeps the lantern useful.",
+    "memoryHook": "Move slow enough that the light still helps.",
+    "sourceConceptIds": [
+      "visibility",
+      "speed-control",
+      "approach-speed"
+    ]
+  },
+  {
+    "id": "circle-arch",
+    "title": "Circle Arch",
+    "summary": "A roundabout is an arch that only opens when the curve gives you a safe gap.",
+    "memoryHook": "Do not step under the arch before the opening is yours.",
+    "sourceConceptIds": [
+      "roundabout-entry",
+      "merge-gap",
+      "priority"
+    ]
+  },
+  {
+    "id": "shield-wall",
+    "title": "Shield Wall",
+    "summary": "Pedestrians and cyclists deserve a protective wall of caution from the driver.",
+    "memoryHook": "The wall goes up first; movement comes after.",
+    "sourceConceptIds": [
+      "pedestrian-crossing",
+      "bike-lane",
+      "shared-space"
+    ]
+  },
+  {
+    "id": "field-lantern",
+    "title": "Field Lantern",
+    "summary": "Speed control is the lantern that keeps the whole field legible.",
+    "memoryHook": "If the field blurs, slow the lantern down.",
+    "sourceConceptIds": [
+      "speed-control",
+      "visibility",
+      "hazard-scan"
+    ]
+  },
+  {
+    "id": "reclaim-path",
+    "title": "Reclaim Path",
+    "summary": "A missed answer is a trail you can walk again if you name the trap and restate the rule.",
+    "memoryHook": "Name it, rule it, retry it.",
+    "sourceConceptIds": [
+      "reclaim-loop",
+      "priority",
+      "hazard-scan"
+    ]
+  }
+]

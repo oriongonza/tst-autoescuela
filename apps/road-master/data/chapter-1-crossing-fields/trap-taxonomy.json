@@ -1,0 +1,122 @@
+[
+  {
+    "id": "priority-inversion",
+    "name": "Priority Inversion",
+    "summary": "A trap that tempts the player to let size, noise, or confidence override actual order.",
+    "tell": "The loudest or biggest mover looks important but is not automatically first.",
+    "countermeasure": "Restate the rule and compare arrival, position, and signal before moving.",
+    "conceptIds": [
+      "right-of-way",
+      "priority",
+      "turning-order"
+    ]
+  },
+  {
+    "id": "false-yield",
+    "name": "False Yield",
+    "summary": "A trap that makes the player wait when the rule already allows them to proceed.",
+    "tell": "The crossing is clear but hesitation keeps the vehicle frozen.",
+    "countermeasure": "Check the rule, confirm the gap, then go.",
+    "conceptIds": [
+      "yield-sign",
+      "priority",
+      "merge-gap"
+    ]
+  },
+  {
+    "id": "stop-sign-bait",
+    "name": "Stop-Sign Bait",
+    "summary": "A trap that turns a complete stop into a rolling guess.",
+    "tell": "The driver slows but never fully stops before moving on.",
+    "countermeasure": "Make the full stop explicit and then re-scan the crossing.",
+    "conceptIds": [
+      "stop-sign",
+      "intersection",
+      "hazard-scan"
+    ]
+  },
+  {
+    "id": "signal-without-check",
+    "name": "Signal Without Check",
+    "summary": "A trap that treats the signal as enough without confirming the lane is clear.",
+    "tell": "The turn indicator is on but mirrors and blind spot were skipped.",
+    "countermeasure": "Signal, then check mirrors and blind spot before moving.",
+    "conceptIds": [
+      "turn-signal",
+      "mirror-check",
+      "lane-position"
+    ]
+  },
+  {
+    "id": "mirror-lure",
+    "name": "Mirror Lure",
+    "summary": "A trap that hides an approaching vehicle beside or behind you.",
+    "tell": "The empty mirror look is misleading because the blind spot still matters.",
+    "countermeasure": "Use the mirror check as a cue, not a conclusion.",
+    "conceptIds": [
+      "mirror-check",
+      "lane-position",
+      "merge-gap"
+    ]
+  },
+  {
+    "id": "roundabout-confusion",
+    "name": "Roundabout Confusion",
+    "summary": "A trap that makes the player enter the circle before the gap is safe.",
+    "tell": "The circular flow feels urgent even when no clean opening exists.",
+    "countermeasure": "Wait for the gap and join only when flow is safe.",
+    "conceptIds": [
+      "roundabout-entry",
+      "merge-gap",
+      "priority"
+    ]
+  },
+  {
+    "id": "lane-shear",
+    "name": "Lane Shear",
+    "summary": "A trap that pushes the player across a lane boundary without stability.",
+    "tell": "The move starts before lane position is settled.",
+    "countermeasure": "Hold lane position, scan, and move only when the lane is truly clear.",
+    "conceptIds": [
+      "lane-position",
+      "road-markings",
+      "merge-gap"
+    ]
+  },
+  {
+    "id": "pedestrian-ghost",
+    "name": "Pedestrian Ghost",
+    "summary": "A trap that hides a walker or cyclist behind another vehicle or object.",
+    "tell": "The view looks open until a body steps into the crossing.",
+    "countermeasure": "Slow early and expect a hidden pedestrian or cyclist.",
+    "conceptIds": [
+      "pedestrian-crossing",
+      "bike-lane",
+      "hazard-scan"
+    ]
+  },
+  {
+    "id": "late-brake",
+    "name": "Late Brake",
+    "summary": "A trap that asks the player to keep speed too long when the road is narrowing or visibility drops.",
+    "tell": "The vehicle is committed before the driver has enough sight distance.",
+    "countermeasure": "Reduce speed before the hazard, not after it.",
+    "conceptIds": [
+      "speed-control",
+      "visibility",
+      "approach-speed"
+    ]
+  },
+  {
+    "id": "gap-hunger",
+    "name": "Gap Hunger",
+    "summary": "A trap that makes the player seize a merge opening that is not actually safe.",
+    "tell": "The merge feels available because it is available to someone reckless.",
+    "countermeasure": "Match speed, measure the gap, and wait for a real opening.",
+    "conceptIds": [
+      "merge-gap",
+      "following-distance",
+      "speed-control"
+    ]
+  }
+]

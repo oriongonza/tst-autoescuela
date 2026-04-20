@@ -1,0 +1,122 @@
+[
+  {
+    "id": "right-of-way",
+    "name": "Right of Way",
+    "summary": "The rule that decides who moves first when paths conflict."
+  },
+  {
+    "id": "priority",
+    "name": "Priority",
+    "summary": "The order that resolves a collision between possible moves."
+  },
+  {
+    "id": "intersection",
+    "name": "Intersection",
+    "summary": "A crossing where multiple paths meet and the order matters."
+  },
+  {
+    "id": "four-way-stop",
+    "name": "Four-Way Stop",
+    "summary": "A shared stop-controlled crossing where arrival order and caution matter."
+  },
+  {
+    "id": "stop-sign",
+    "name": "Stop Sign",
+    "summary": "A signal that requires a complete stop before proceeding."
+  },
+  {
+    "id": "yield-sign",
+    "name": "Yield Sign",
+    "summary": "A signal that requires slowing and giving way if needed."
+  },
+  {
+    "id": "pedestrian-crossing",
+    "name": "Pedestrian Crossing",
+    "summary": "A place where walkers get protective priority."
+  },
+  {
+    "id": "school-zone",
+    "name": "School Zone",
+    "summary": "A low-speed area that demands extra scanning and restraint."
+  },
+  {
+    "id": "turn-signal",
+    "name": "Turn Signal",
+    "summary": "The visible cue that announces your next move."
+  },
+  {
+    "id": "mirror-check",
+    "name": "Mirror Check",
+    "summary": "The habit of scanning behind and beside before moving."
+  },
+  {
+    "id": "lane-position",
+    "name": "Lane Position",
+    "summary": "Where your vehicle sits inside the lane before and during a move."
+  },
+  {
+    "id": "merge-gap",
+    "name": "Merge Gap",
+    "summary": "The safe opening that makes a merge possible."
+  },
+  {
+    "id": "following-distance",
+    "name": "Following Distance",
+    "summary": "The buffer that buys time when traffic changes suddenly."
+  },
+  {
+    "id": "roundabout-entry",
+    "name": "Roundabout Entry",
+    "summary": "The moment you join circular flow only after a safe gap opens."
+  },
+  {
+    "id": "speed-control",
+    "name": "Speed Control",
+    "summary": "The skill of matching pace to danger, visibility, and space."
+  },
+  {
+    "id": "visibility",
+    "name": "Visibility",
+    "summary": "How much of the road and hazard field you can actually see."
+  },
+  {
+    "id": "road-markings",
+    "name": "Road Markings",
+    "summary": "Painted cues that shape lane order and movement."
+  },
+  {
+    "id": "emergency-vehicle",
+    "name": "Emergency Vehicle",
+    "summary": "A priority mover that forces others to yield quickly and cleanly."
+  },
+  {
+    "id": "shared-space",
+    "name": "Shared Space",
+    "summary": "An area where everyone must negotiate movement carefully."
+  },
+  {
+    "id": "bike-lane",
+    "name": "Bike Lane",
+    "summary": "A protected channel that should not be treated like spare road."
+  },
+  {
+    "id": "approach-speed",
+    "name": "Approach Speed",
+    "summary": "The pace you bring into a crossing before you know the full picture."
+  },
+  {
+    "id": "hazard-scan",
+    "name": "Hazard Scan",
+    "summary": "The active search for hidden conflict before committing."
+  },
+  {
+    "id": "turning-order",
+    "name": "Turning Order",
+    "summary": "The logic that decides who turns and who waits."
+  },
+  {
+    "id": "reclaim-loop",
+    "name": "Reclaim Loop",
+    "summary": "The recovery sequence that turns a miss into a new attempt."
+  }
+]

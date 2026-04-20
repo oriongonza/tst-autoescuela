@@ -1,0 +1,13 @@
+{
+  "schemaId": "road-master.content-index.v1",
+  "primaryPackId": "chapter-1-crossing-fields",
+  "packs": [
+    {
+      "id": "chapter-1-crossing-fields",
+      "title": "Chapter I: Crossing Fields",
+      "version": "0.1.0",
+      "kind": "chapter",
+      "dataDir": "chapter-1-crossing-fields"
+    }
+  ]
+}
