@@ -1,3 +1,19 @@
+export {
+  AUDIO_CUE_PROFILES,
+  AUDIO_SCENE_PROFILES,
+  describeAudioCue,
+  listAudioCues,
+  listAudioScenes,
+  resolveAudioSceneProfile,
+} from "./profiles.mjs";
+
+import {
+  AUDIO_CUE_PROFILES,
+  AUDIO_SCENE_PROFILES,
+  describeAudioCue,
+  resolveAudioSceneProfile,
+} from "./profiles.mjs";
+
 const CUES = {
   title: [
     [247, 330, 392],
@@ -26,12 +42,23 @@ const CUES = {
   repair: [
     [220, 196, 174],
   ],
+  conquest: [
+    [330, 392, 523],
+    [349, 440, 587],
+  ],
+  defeat: [
+    [174, 146, 130],
+    [196, 164, 146],
+  ],
+  share: [
+    [262, 392, 523],
+    [294, 440, 587],
+  ],
 };
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
 }
-
 function createTone(ctx, destination, frequency, duration, wave = "sine", gainValue = 0.06) {
   const oscillator = ctx.createOscillator();
   const gain = ctx.createGain();
@@ -55,15 +82,18 @@ export function createAudioDirector(onStatus = () => {}) {
   let master = null;
   let muted = false;
   let scene = "title";
-  let intensity = 0.22;
+  let intensity = resolveAudioSceneProfile("title").intensity;
   let ready = false;
 
-  function emit() {
+  function emit(extra = {}) {
+    const sceneProfile = resolveAudioSceneProfile(scene);
     onStatus({
       ready,
       muted,
       scene,
       intensity,
+      sceneProfile,
+      ...extra,
     });
   }
 
@@ -95,17 +125,10 @@ export function createAudioDirector(onStatus = () => {}) {
   }
 
   function setScene(nextScene) {
-    scene = nextScene;
-    const sceneLevel = {
-      title: 0.15,
-      campaign: 0.18,
-      boss: 0.28,
-      victory: 0.14,
-      failure: 0.12,
-      flashback: 0.24,
-    }[nextScene] ?? 0.18;
-    setMasterLevel(sceneLevel);
-    emit();
+    const profile = resolveAudioSceneProfile(nextScene);
+    scene = profile.scene;
+    setMasterLevel(profile.intensity);
+    emit({ sceneProfile: profile });
   }
 
   function playPattern(name) {
@@ -113,13 +136,17 @@ export function createAudioDirector(onStatus = () => {}) {
     if (!ctx || muted) {
       return;
     }
-    const notes = CUES[name] ?? CUES.title;
-    const duration = name === "boss" ? 0.24 : 0.18;
-    const wave = name === "wrong" || name === "boss" ? "sawtooth" : "triangle";
+
+    const cue = describeAudioCue(name, { scene });
+    const notes = CUES[cue.name] ?? CUES[cue.scene] ?? CUES.title;
+    const wave = cue.wave === "sawtooth" ? "sawtooth" : cue.wave === "sine" ? "sine" : "triangle";
+
     notes.forEach((frequency, index) => {
-      createTone(ctx, master, frequency, duration + index * 0.05, wave, 0.05 + index * 0.01);
+      const duration = cue.duration + index * 0.05;
+      createTone(ctx, master, frequency, duration, wave, 0.05 + index * 0.01);
     });
-    emit();
+
+    emit({ cueProfile: cue });
   }
 
   function unlock() {
@@ -158,6 +185,19 @@ export function createAudioDirector(onStatus = () => {}) {
         muted,
         scene,
         intensity,
+        sceneProfile: resolveAudioSceneProfile(scene),
+      };
+    },
+    getSceneProfile() {
+      return resolveAudioSceneProfile(scene);
+    },
+    getCueProfile(name) {
+      return describeAudioCue(name, { scene });
+    },
+    getCatalog() {
+      return {
+        scenes: AUDIO_SCENE_PROFILES,
+        cues: AUDIO_CUE_PROFILES,
       };
     },
   };
