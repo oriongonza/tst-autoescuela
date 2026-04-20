@@ -8,6 +8,20 @@
       "version": "0.1.0",
       "kind": "chapter",
       "dataDir": "chapter-1-crossing-fields"
+    },
+    {
+      "id": "chapter-2-switchback-ridge",
+      "title": "Chapter II: Switchback Ridge",
+      "version": "0.1.0",
+      "kind": "chapter",
+      "dataDir": "chapter-2-switchback-ridge"
+    },
+    {
+      "id": "chapter-3-lantern-docks",
+      "title": "Chapter III: Lantern Docks",
+      "version": "0.1.0",
+      "kind": "chapter",
+      "dataDir": "chapter-3-lantern-docks"
     }
   ]
 }

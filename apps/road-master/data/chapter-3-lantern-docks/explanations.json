@@ -1,0 +1,138 @@
+[
+  {
+    "id": "harbor-why-low-beams-win-at-night",
+    "title": "Low beams win at night",
+    "summary": "The right headlight setting keeps the road readable without washing it out.",
+    "templateId": "harbor-question-explanation",
+    "trapId": "harbor-glare-trap",
+    "conceptIds": [
+      "harbor-low-beam",
+      "harbor-glare-control"
+    ],
+    "body": [
+      "Correct answer: use low beams when you need to cut glare and keep vision intact.",
+      "Why: high glare can erase the edge of the road and the shape of other vehicles.",
+      "Trap: glare trap makes the brightest light feel like the safest one.",
+      "Reclaim: lower the beam, look for edges, and keep the scan soft."
+    ]
+  },
+  {
+    "id": "harbor-why-wet-roads-need-more-space",
+    "title": "Wet roads need more space",
+    "summary": "Water changes braking and steering so following distance matters more.",
+    "templateId": "harbor-question-explanation",
+    "trapId": "harbor-wet-stop-overconfidence",
+    "conceptIds": [
+      "harbor-wet-surface",
+      "harbor-stopping-distance"
+    ],
+    "body": [
+      "Correct answer: increase distance and brake earlier on wet pavement.",
+      "Why: water stretches both reaction and stopping distance.",
+      "Trap: wet-stop overconfidence assumes friction stays the same.",
+      "Reclaim: leave more room and verify grip before asking for a stop."
+    ]
+  },
+  {
+    "id": "harbor-why-hydroplaning-is-loss-of-contact",
+    "title": "Hydroplaning is loss of contact",
+    "summary": "When water gets between tire and road, the car stops reading the surface.",
+    "templateId": "harbor-question-explanation",
+    "trapId": "harbor-wet-stop-overconfidence",
+    "conceptIds": [
+      "harbor-hydroplaning",
+      "harbor-wet-surface"
+    ],
+    "body": [
+      "Correct answer: hydroplaning is a loss of tire contact on water.",
+      "Why: if the tire cannot touch the road, it cannot steer or brake normally.",
+      "Trap: the road may look visible while the contact patch disappears.",
+      "Reclaim: slow down, reduce inputs, and give the tires time to recover."
+    ]
+  },
+  {
+    "id": "harbor-why-pedestrians-hide-in-shadow",
+    "title": "Pedestrians hide in shadow",
+    "summary": "Dark edges and bus stops can conceal movement that deserves caution.",
+    "templateId": "harbor-question-explanation",
+    "trapId": "harbor-shadow-misread",
+    "conceptIds": [
+      "harbor-pedestrian-shadow",
+      "harbor-bus-stop-caution"
+    ],
+    "body": [
+      "Correct answer: slow and scan for movement near the curb or bus stop.",
+      "Why: shadows hide people better than they hide danger.",
+      "Trap: shadow misread assumes an empty dark patch is truly empty.",
+      "Reclaim: widen the scan, expect movement, and keep speed low."
+    ]
+  },
+  {
+    "id": "harbor-why-bike-lanes-need-night-caution",
+    "title": "Bike lanes need night caution",
+    "summary": "A bike lane at night is still active space that can contain unseen riders.",
+    "templateId": "harbor-reclaim-note",
+    "trapId": "harbor-lane-drift-night",
+    "conceptIds": [
+      "harbor-bike-lane-night",
+      "harbor-night-visibility"
+    ],
+    "body": [
+      "Correct answer: keep scanning the lane edge and ride your lane cleanly.",
+      "Why: darkness makes a bike lane easy to misread.",
+      "Trap: lane drift at night comes from assuming the edge is empty.",
+      "Reclaim: anchor on markers and keep the wheel calm."
+    ]
+  },
+  {
+    "id": "harbor-why-fatigue-demands-slow-scan",
+    "title": "Fatigue demands a slower scan",
+    "summary": "Tired eyes and a tired brain need more structure, not more speed.",
+    "templateId": "harbor-reclaim-note",
+    "trapId": "harbor-fatigue-blur",
+    "conceptIds": [
+      "harbor-fatigue-scan",
+      "harbor-night-visibility"
+    ],
+    "body": [
+      "Correct answer: slow down, widen the scan, and stop if needed.",
+      "Why: fatigue narrows attention before you notice it has done so.",
+      "Trap: fatigue blur tells you everything is fine while the scan collapses.",
+      "Reclaim: reduce load and reset before the misses stack up."
+    ]
+  },
+  {
+    "id": "harbor-why-signals-must-announce-early",
+    "title": "Signals must announce early",
+    "summary": "A signal only works when other road users can react in time.",
+    "templateId": "harbor-question-explanation",
+    "trapId": "harbor-lane-drift-night",
+    "conceptIds": [
+      "harbor-signal-timing",
+      "harbor-glare-control"
+    ],
+    "body": [
+      "Correct answer: signal before the maneuver, not during it.",
+      "Why: a late signal is information after the decision is already made.",
+      "Trap: late signaling is the night version of asking for trust too late.",
+      "Reclaim: announce early, keep the car steady, then move."
+    ]
+  },
+  {
+    "id": "harbor-why-reflections-never-mean-free-space",
+    "title": "Reflections never mean free space",
+    "summary": "Shine on wet pavement must be verified before it is trusted.",
+    "templateId": "harbor-question-explanation",
+    "trapId": "harbor-reflection-mistake",
+    "conceptIds": [
+      "harbor-reflection-reading",
+      "harbor-wet-surface"
+    ],
+    "body": [
+      "Correct answer: read the reflection carefully and keep your speed low.",
+      "Why: wet shine can be water, light, or a trick of the angle.",
+      "Trap: reflection mistake turns a mirror into a promise.",
+      "Reclaim: slow down, verify the surface, and do not guess."
+    ]
+  }
+]

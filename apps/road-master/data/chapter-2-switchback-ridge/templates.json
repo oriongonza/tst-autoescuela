@@ -1,0 +1,34 @@
+[
+  {
+    "id": "ridge-question-explanation",
+    "name": "Ridge Question Explanation",
+    "purpose": "Explain why the correct mountain-pass answer is correct.",
+    "pattern": [
+      "Correct answer",
+      "Why",
+      "Trap",
+      "Reclaim"
+    ]
+  },
+  {
+    "id": "ridge-reclaim-note",
+    "name": "Ridge Reclaim Note",
+    "purpose": "Compress a slope or traction mistake into a fast recovery note.",
+    "pattern": [
+      "Correct answer",
+      "Why",
+      "Trap",
+      "Reclaim"
+    ]
+  },
+  {
+    "id": "ridge-boss-phase-note",
+    "name": "Ridge Boss Phase Note",
+    "purpose": "Describe how the Warden changes pressure from phase to phase.",
+    "pattern": [
+      "Phase",
+      "Pressure",
+      "Exit"
+    ]
+  }
+]

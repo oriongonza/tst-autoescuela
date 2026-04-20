@@ -1,0 +1,381 @@
+[
+  {
+    "id": "ld-q-001",
+    "prompt": "What should your headlights usually be at night to reduce glare?",
+    "choices": [
+      "Low beam.",
+      "High beam at all times.",
+      "Parking lights only.",
+      "No lights if the street is bright."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "harbor-low-beam",
+      "harbor-glare-control"
+    ],
+    "trapId": "harbor-reflection-mistake",
+    "analogyId": "harbor-lighthouse-drive",
+    "explanationId": "harbor-why-low-beams-win-at-night",
+    "regionId": "lantern-docks",
+    "submapId": "fog-quay",
+    "bossIds": [
+      "lantern-warden"
+    ],
+    "attackTier": 1,
+    "difficulty": "intro",
+    "arc": "gate",
+    "knownMistake": true
+  },
+  {
+    "id": "ld-q-002",
+    "prompt": "When roads are wet, your stopping distance should be...",
+    "choices": [
+      "Longer.",
+      "The same as dry pavement.",
+      "Shorter because the tires slide less.",
+      "Impossible to predict, so ignore it."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "harbor-wet-surface",
+      "harbor-stopping-distance"
+    ],
+    "trapId": "harbor-wet-stop-overconfidence",
+    "analogyId": "harbor-rain-on-glass",
+    "explanationId": "harbor-why-wet-roads-need-more-space",
+    "regionId": "lantern-docks",
+    "submapId": "fog-quay",
+    "bossIds": [
+      "lantern-warden"
+    ],
+    "attackTier": 1,
+    "difficulty": "intro",
+    "arc": "gate",
+    "knownMistake": true
+  },
+  {
+    "id": "ld-q-003",
+    "prompt": "Hydroplaning occurs when...",
+    "choices": [
+      "Tires lose contact on water.",
+      "The brakes get too hot on a hill.",
+      "The headlights are too dim.",
+      "A bike lane crosses the road."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "harbor-hydroplaning",
+      "harbor-wet-surface"
+    ],
+    "trapId": "harbor-wet-stop-overconfidence",
+    "analogyId": "harbor-moon-on-water",
+    "explanationId": "harbor-why-hydroplaning-is-loss-of-contact",
+    "regionId": "lantern-docks",
+    "submapId": "fog-quay",
+    "bossIds": [
+      "lantern-warden"
+    ],
+    "attackTier": 1,
+    "difficulty": "intro",
+    "arc": "gate",
+    "knownMistake": true
+  },
+  {
+    "id": "ld-q-004",
+    "prompt": "A pedestrian near a parked bus at night should make you...",
+    "choices": [
+      "Slow and scan for movement.",
+      "Trust the bus to block all surprises.",
+      "Speed past before anyone steps out.",
+      "Look only at the headlights."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "harbor-pedestrian-shadow",
+      "harbor-bus-stop-caution"
+    ],
+    "trapId": "harbor-shadow-misread",
+    "analogyId": "harbor-fog-bell",
+    "explanationId": "harbor-why-pedestrians-hide-in-shadow",
+    "regionId": "lantern-docks",
+    "submapId": "fog-quay",
+    "bossIds": [
+      "lantern-warden"
+    ],
+    "attackTier": 1,
+    "difficulty": "intro",
+    "arc": "gate",
+    "knownMistake": true
+  },
+  {
+    "id": "ld-q-005",
+    "prompt": "On a dark city street, the safest default is to...",
+    "choices": [
+      "Reduce speed and watch reflections.",
+      "Speed up so the darkness ends sooner.",
+      "Ignore the lane edge and trust the lights.",
+      "Focus only on the centerline."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "harbor-night-visibility",
+      "harbor-reflection-reading"
+    ],
+    "trapId": "harbor-fatigue-blur",
+    "analogyId": "harbor-night-watch",
+    "explanationId": "harbor-why-reflections-never-mean-free-space",
+    "regionId": "lantern-docks",
+    "submapId": "fog-quay",
+    "bossIds": [
+      "lantern-warden"
+    ],
+    "attackTier": 2,
+    "difficulty": "steady",
+    "arc": "labyrinth",
+    "knownMistake": false
+  },
+  {
+    "id": "ld-q-006",
+    "prompt": "Fatigue is dangerous because it can...",
+    "choices": [
+      "Slow reaction and narrow scan.",
+      "Make the road automatically safer.",
+      "Improve glare tolerance.",
+      "Replace the need for mirrors."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "harbor-fatigue-scan",
+      "harbor-night-visibility"
+    ],
+    "trapId": "harbor-fatigue-blur",
+    "analogyId": "harbor-night-watch",
+    "explanationId": "harbor-why-fatigue-demands-slow-scan",
+    "regionId": "lantern-docks",
+    "submapId": "fog-quay",
+    "bossIds": [
+      "lantern-warden"
+    ],
+    "attackTier": 2,
+    "difficulty": "steady",
+    "arc": "labyrinth",
+    "knownMistake": true
+  },
+  {
+    "id": "ld-q-007",
+    "prompt": "A signal should usually be used...",
+    "choices": [
+      "Before the maneuver, not during it.",
+      "Only after you have already moved.",
+      "Only if the street is empty.",
+      "Never at night because lights are distracting."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "harbor-signal-timing",
+      "harbor-glare-control"
+    ],
+    "trapId": "harbor-lane-drift-night",
+    "analogyId": "harbor-dockside-beacon",
+    "explanationId": "harbor-why-signals-must-announce-early",
+    "regionId": "lantern-docks",
+    "submapId": "fog-quay",
+    "bossIds": [
+      "lantern-warden"
+    ],
+    "attackTier": 1,
+    "difficulty": "steady",
+    "arc": "labyrinth",
+    "knownMistake": true
+  },
+  {
+    "id": "ld-q-008",
+    "prompt": "A bike lane at night deserves...",
+    "choices": [
+      "Extra caution and scanning.",
+      "No attention because bikes have their own space.",
+      "The same speed as a clear highway.",
+      "Only a quick glance at the curb."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "harbor-bike-lane-night",
+      "harbor-night-visibility"
+    ],
+    "trapId": "harbor-lane-drift-night",
+    "analogyId": "harbor-pier-line",
+    "explanationId": "harbor-why-bike-lanes-need-night-caution",
+    "regionId": "lantern-docks",
+    "submapId": "fog-quay",
+    "bossIds": [
+      "lantern-warden"
+    ],
+    "attackTier": 2,
+    "difficulty": "steady",
+    "arc": "labyrinth",
+    "knownMistake": false
+  },
+  {
+    "id": "ld-q-009",
+    "prompt": "When another driver's headlights glare at you, you should...",
+    "choices": [
+      "Keep your lane steady and focus on the road edge.",
+      "Stare into the lights until they pass.",
+      "Turn your high beams on immediately.",
+      "Close one eye and speed up."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "harbor-glare-control",
+      "harbor-night-visibility"
+    ],
+    "trapId": "harbor-glare-trap",
+    "analogyId": "harbor-lighthouse-drive",
+    "explanationId": "harbor-why-low-beams-win-at-night",
+    "regionId": "lantern-docks",
+    "submapId": "fog-quay",
+    "bossIds": [
+      "lantern-warden"
+    ],
+    "attackTier": 2,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": true
+  },
+  {
+    "id": "ld-q-010",
+    "prompt": "A wet reflection on the road means...",
+    "choices": [
+      "You must verify the surface before trusting it.",
+      "The road is automatically free of hazards.",
+      "It is always a dry lane because lights reflect.",
+      "You can brake later because shine means grip."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "harbor-reflection-reading",
+      "harbor-wet-surface"
+    ],
+    "trapId": "harbor-reflection-mistake",
+    "analogyId": "harbor-moon-on-water",
+    "explanationId": "harbor-why-reflections-never-mean-free-space",
+    "regionId": "lantern-docks",
+    "submapId": "fog-quay",
+    "bossIds": [
+      "lantern-warden"
+    ],
+    "attackTier": 2,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": true
+  },
+  {
+    "id": "ld-q-011",
+    "prompt": "Near a bus stop at night, you should...",
+    "choices": [
+      "Expect pedestrians crossing unexpectedly.",
+      "Assume the bus blocks all movement.",
+      "Speed through because the stop is obvious.",
+      "Ignore the curb and look only ahead."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "harbor-bus-stop-caution",
+      "harbor-pedestrian-shadow"
+    ],
+    "trapId": "harbor-shadow-misread",
+    "analogyId": "harbor-fog-bell",
+    "explanationId": "harbor-why-pedestrians-hide-in-shadow",
+    "regionId": "lantern-docks",
+    "submapId": "fog-quay",
+    "bossIds": [
+      "lantern-warden"
+    ],
+    "attackTier": 2,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": true
+  },
+  {
+    "id": "ld-q-012",
+    "prompt": "If you start to feel drowsy, the best response is to...",
+    "choices": [
+      "Stop or recover before you drift.",
+      "Turn the music up and keep going faster.",
+      "Look harder at the bright lights.",
+      "Ignore it until the road gets straighter."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "harbor-fatigue-scan",
+      "harbor-night-visibility"
+    ],
+    "trapId": "harbor-fatigue-blur",
+    "analogyId": "harbor-night-watch",
+    "explanationId": "harbor-why-fatigue-demands-slow-scan",
+    "regionId": "lantern-docks",
+    "submapId": "fog-quay",
+    "bossIds": [
+      "lantern-warden"
+    ],
+    "attackTier": 3,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": true
+  },
+  {
+    "id": "ld-q-013",
+    "prompt": "On wet pavement, hard braking can increase...",
+    "choices": [
+      "Loss of traction and stopping distance.",
+      "Night vision and lane width.",
+      "Signal timing and glare control.",
+      "The size of the bus stop."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "harbor-wet-surface",
+      "harbor-stopping-distance"
+    ],
+    "trapId": "harbor-wet-stop-overconfidence",
+    "analogyId": "harbor-rain-on-glass",
+    "explanationId": "harbor-why-wet-roads-need-more-space",
+    "regionId": "lantern-docks",
+    "submapId": "fog-quay",
+    "bossIds": [
+      "lantern-warden"
+    ],
+    "attackTier": 3,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": true
+  },
+  {
+    "id": "ld-q-014",
+    "prompt": "At night, the scan should include...",
+    "choices": [
+      "Mirrors, edges, and hidden movement in shadow.",
+      "Only the brightest light ahead.",
+      "The centerline and nothing else.",
+      "Your speedometer more than the road."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "harbor-night-visibility",
+      "harbor-fatigue-scan",
+      "harbor-pedestrian-shadow"
+    ],
+    "trapId": "harbor-glare-trap",
+    "analogyId": "harbor-curb-shadow",
+    "explanationId": "harbor-why-fatigue-demands-slow-scan",
+    "regionId": "lantern-docks",
+    "submapId": "fog-quay",
+    "bossIds": [
+      "lantern-warden"
+    ],
+    "attackTier": 2,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": false
+  }
+]

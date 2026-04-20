@@ -1,0 +1,70 @@
+[
+  {
+    "id": "ridge-brake-fade-bait",
+    "name": "Brake Fade Bait",
+    "summary": "The illusion that more brake pressure keeps adding control on a long descent.",
+    "tell": "The learner keeps asking for harder braking instead of earlier braking.",
+    "countermeasure": "Downshift early and use controlled braking before speed grows.",
+    "conceptIds": [
+      "ridge-descent-braking",
+      "ridge-engine-braking",
+      "ridge-grade-awareness"
+    ]
+  },
+  {
+    "id": "ridge-speed-on-descent",
+    "name": "Speed on Descent",
+    "summary": "Treating gravity like free acceleration instead of a control problem.",
+    "tell": "The learner thinks the car can be slowed later on the way down.",
+    "countermeasure": "Reduce speed before the slope compounds the risk.",
+    "conceptIds": [
+      "ridge-descent-braking",
+      "ridge-grade-awareness"
+    ]
+  },
+  {
+    "id": "ridge-late-turn-in",
+    "name": "Late Turn-In",
+    "summary": "Entering a hairpin too late and too fast to keep the line clean.",
+    "tell": "The learner steers after the bend already tightens.",
+    "countermeasure": "Enter earlier, slower, and with a stable wheel.",
+    "conceptIds": [
+      "ridge-hairpin-turn",
+      "ridge-apex-control"
+    ]
+  },
+  {
+    "id": "ridge-fog-overspeed",
+    "name": "Fog Overspeed",
+    "summary": "Driving faster than your sight line can safely support in haze.",
+    "tell": "The learner keeps the same speed even when the road disappears.",
+    "countermeasure": "Slow to the visible field and widen the following gap.",
+    "conceptIds": [
+      "ridge-fog-line",
+      "ridge-following-gap",
+      "ridge-grade-awareness"
+    ]
+  },
+  {
+    "id": "ridge-shoulder-panic",
+    "name": "Shoulder Panic",
+    "summary": "Jerking toward the shoulder as if any edge space is a safe answer.",
+    "tell": "The learner tries to use the shoulder without checking width or surface.",
+    "countermeasure": "Treat the shoulder as controlled recovery space, not an improvisation lane.",
+    "conceptIds": [
+      "ridge-shoulder-space",
+      "ridge-runoff-lane"
+    ]
+  },
+  {
+    "id": "ridge-gravel-commitment",
+    "name": "Gravel Commitment",
+    "summary": "Treating loose gravel like the same grip as clean asphalt.",
+    "tell": "The learner keeps steering and braking inputs too sharp on loose stone.",
+    "countermeasure": "Ease the inputs and restore traction before asking for more turn.",
+    "conceptIds": [
+      "ridge-gravel-traction",
+      "ridge-apex-control"
+    ]
+  }
+]

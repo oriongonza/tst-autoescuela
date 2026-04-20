@@ -1,0 +1,38 @@
+{
+  "schemaId": "road-master.content-pack.v1",
+  "packId": "chapter-2-switchback-ridge",
+  "title": "Chapter II: Switchback Ridge",
+  "region": {
+    "id": "switchback-ridge",
+    "name": "Switchback Ridge",
+    "summary": "A steep mountain region where downhill control, hairpins, and traction discipline dominate.",
+    "theme": "descent control, hairpins, and surface grip"
+  },
+  "submap": {
+    "id": "hairpin-shelf",
+    "name": "Hairpin Shelf",
+    "summary": "A narrow shelf road with switchbacks, fog pockets, and cliff-edge guardrails."
+  },
+  "bossId": "switchback-warden",
+  "source": "Expanded in Spark 2 from chatgpt_conv.md and the Road Master roadmap.",
+  "playableSlice": {
+    "questionCount": 14,
+    "conceptCount": 12,
+    "trapCount": 6,
+    "bossCount": 1
+  },
+  "files": {
+    "concepts": "concepts.json",
+    "traps": "trap-taxonomy.json",
+    "bosses": "bosses.json",
+    "analogies": "analogies.json",
+    "explanations": "explanations.json",
+    "templates": "templates.json",
+    "questions": "questions.json"
+  },
+  "authoringNotes": [
+    "Keep the ridge severe: slope, traction, and speed control should feel consequential.",
+    "Use the same trap names in questions, explanations, and boss lines.",
+    "Favor short, concrete recoveries over generic safety advice."
+  ]
+}

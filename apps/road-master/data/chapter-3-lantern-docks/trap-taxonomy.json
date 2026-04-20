@@ -1,0 +1,69 @@
+[
+  {
+    "id": "harbor-glare-trap",
+    "name": "Glare Trap",
+    "summary": "Looking straight at bright lights until the road disappears.",
+    "tell": "The learner focuses on the brightest thing instead of the useful edge.",
+    "countermeasure": "Use low beam, shift attention to lane edges, and keep scan discipline.",
+    "conceptIds": [
+      "harbor-glare-control",
+      "harbor-low-beam",
+      "harbor-night-visibility"
+    ]
+  },
+  {
+    "id": "harbor-wet-stop-overconfidence",
+    "name": "Wet Stop Overconfidence",
+    "summary": "Assuming a wet road stops like a dry one.",
+    "tell": "The learner treats moisture as cosmetic rather than physical.",
+    "countermeasure": "Increase following distance and brake earlier on wet pavement.",
+    "conceptIds": [
+      "harbor-wet-surface",
+      "harbor-stopping-distance"
+    ]
+  },
+  {
+    "id": "harbor-fatigue-blur",
+    "name": "Fatigue Blur",
+    "summary": "The attention collapse that makes shadows and edges melt together.",
+    "tell": "The learner reports feeling fine while the scan becomes lazy.",
+    "countermeasure": "Slow down, widen the scan, and stop if fatigue is taking over.",
+    "conceptIds": [
+      "harbor-fatigue-scan",
+      "harbor-night-visibility"
+    ]
+  },
+  {
+    "id": "harbor-shadow-misread",
+    "name": "Shadow Misread",
+    "summary": "Mistaking a dark pedestrian or curb edge for empty road.",
+    "tell": "The learner does not slow for motion hidden by darkness.",
+    "countermeasure": "Assume shadows can contain people and scan before committing.",
+    "conceptIds": [
+      "harbor-pedestrian-shadow",
+      "harbor-bus-stop-caution"
+    ]
+  },
+  {
+    "id": "harbor-lane-drift-night",
+    "name": "Lane Drift at Night",
+    "summary": "Letting darkness and glare pull the vehicle away from its lane.",
+    "tell": "The learner does not anchor on the lane edge or mirror checks.",
+    "countermeasure": "Use the lane edge, mirror rhythm, and calm steering inputs.",
+    "conceptIds": [
+      "harbor-bike-lane-night",
+      "harbor-night-visibility"
+    ]
+  },
+  {
+    "id": "harbor-reflection-mistake",
+    "name": "Reflection Mistake",
+    "summary": "Treating a bright reflection on wet pavement like a safe opening.",
+    "tell": "The learner reads shine as space instead of uncertainty.",
+    "countermeasure": "Read reflections carefully and slow enough to verify the road.",
+    "conceptIds": [
+      "harbor-reflection-reading",
+      "harbor-wet-surface"
+    ]
+  }
+]

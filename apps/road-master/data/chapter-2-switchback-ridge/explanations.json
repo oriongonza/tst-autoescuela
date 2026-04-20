@@ -1,0 +1,138 @@
+[
+  {
+    "id": "ridge-why-brake-before-drop",
+    "title": "Brake before the drop",
+    "summary": "Descending control starts before gravity wins the first meter.",
+    "templateId": "ridge-question-explanation",
+    "trapId": "ridge-speed-on-descent",
+    "conceptIds": [
+      "ridge-descent-braking",
+      "ridge-grade-awareness"
+    ],
+    "body": [
+      "Correct answer: reduce speed before the slope runs away with you.",
+      "Why: once the hill adds momentum, control gets harder and hotter.",
+      "Trap: speed on descent treats gravity like a harmless lane assist.",
+      "Reclaim: name the grade, slow early, and keep the car calm."
+    ]
+  },
+  {
+    "id": "ridge-why-engine-braking-helps",
+    "title": "Engine braking shares the load",
+    "summary": "A lower gear helps the brakes instead of forcing them to do everything.",
+    "templateId": "ridge-question-explanation",
+    "trapId": "ridge-brake-fade-bait",
+    "conceptIds": [
+      "ridge-engine-braking",
+      "ridge-descent-braking"
+    ],
+    "body": [
+      "Correct answer: use the drivetrain to help hold speed down.",
+      "Why: on long grades, brake heat is the hidden enemy.",
+      "Trap: brake fade bait makes more pedal sound like more control.",
+      "Reclaim: downshift early and let the gear carry some of the load."
+    ]
+  },
+  {
+    "id": "ridge-why-hairpins-demand-early-slowing",
+    "title": "Hairpins demand early slowing",
+    "summary": "A tight curve rewards patience long before the steering wheel turns hard.",
+    "templateId": "ridge-question-explanation",
+    "trapId": "ridge-late-turn-in",
+    "conceptIds": [
+      "ridge-hairpin-turn",
+      "ridge-apex-control"
+    ],
+    "body": [
+      "Correct answer: slow before the curve closes on you.",
+      "Why: a hairpin leaves little room for late corrections.",
+      "Trap: late turn-in asks the tires to save a line that is already gone.",
+      "Reclaim: brake early, steer smoothly, and choose the clean line."
+    ]
+  },
+  {
+    "id": "ridge-why-fog-demands-slower-approach",
+    "title": "Fog demands a slower approach",
+    "summary": "You cannot drive safely beyond what you can actually see.",
+    "templateId": "ridge-question-explanation",
+    "trapId": "ridge-fog-overspeed",
+    "conceptIds": [
+      "ridge-fog-line",
+      "ridge-following-gap"
+    ],
+    "body": [
+      "Correct answer: slow to the visible field and widen the gap.",
+      "Why: fog removes the preview that makes speed feel safe.",
+      "Trap: fog overspeed is the choice to trust a road you cannot read.",
+      "Reclaim: read the edge line, breathe, and move within sight."
+    ]
+  },
+  {
+    "id": "ridge-why-following-distance-buys-recovery",
+    "title": "Following distance buys recovery",
+    "summary": "Space is the only thing that makes a mountain surprise manageable.",
+    "templateId": "ridge-question-explanation",
+    "trapId": "ridge-brake-fade-bait",
+    "conceptIds": [
+      "ridge-following-gap",
+      "ridge-descent-braking"
+    ],
+    "body": [
+      "Correct answer: keep more room behind the vehicle ahead.",
+      "Why: a downhill stop grows more urgent and more expensive.",
+      "Trap: too little gap turns a normal brake into a chain reaction.",
+      "Reclaim: leave room, watch the brake lights, and buy time."
+    ]
+  },
+  {
+    "id": "ridge-why-shoulder-is-not-a-guess",
+    "title": "The shoulder is not a guess",
+    "summary": "Edge space must be evaluated, not assumed.",
+    "templateId": "ridge-question-explanation",
+    "trapId": "ridge-shoulder-panic",
+    "conceptIds": [
+      "ridge-shoulder-space",
+      "ridge-runoff-lane"
+    ],
+    "body": [
+      "Correct answer: treat the shoulder as controlled recovery space only.",
+      "Why: an edge can be narrow, loose, or unsafe under stress.",
+      "Trap: shoulder panic turns a recovery decision into a new mistake.",
+      "Reclaim: assess the surface, keep the wheel calm, and recover deliberately."
+    ]
+  },
+  {
+    "id": "ridge-why-gravel-reduces-grip",
+    "title": "Gravel reduces grip",
+    "summary": "Loose surface requires softer inputs and slower change.",
+    "templateId": "ridge-reclaim-note",
+    "trapId": "ridge-gravel-commitment",
+    "conceptIds": [
+      "ridge-gravel-traction",
+      "ridge-apex-control"
+    ],
+    "body": [
+      "Correct answer: ease the steering and braking so the tires can bite.",
+      "Why: loose stones move before the car does.",
+      "Trap: gravel commitment is the fantasy that grip stays the same.",
+      "Reclaim: reduce load, stabilize the wheel, then ask for more."
+    ]
+  },
+  {
+    "id": "ridge-why-apex-is-a-choice",
+    "title": "The apex is a choice",
+    "summary": "A curve is managed by choosing the point, not by attacking it.",
+    "templateId": "ridge-reclaim-note",
+    "trapId": "ridge-late-turn-in",
+    "conceptIds": [
+      "ridge-apex-control",
+      "ridge-hairpin-turn"
+    ],
+    "body": [
+      "Correct answer: pick the line that leaves the car stable at the bend.",
+      "Why: the best apex is the one that makes the exit safe.",
+      "Trap: treating the apex like a target encourages rushing.",
+      "Reclaim: slow first, then choose the point that preserves control."
+    ]
+  }
+]

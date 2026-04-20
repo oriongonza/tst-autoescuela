@@ -1,0 +1,38 @@
+{
+  "schemaId": "road-master.content-pack.v1",
+  "packId": "chapter-3-lantern-docks",
+  "title": "Chapter III: Lantern Docks",
+  "region": {
+    "id": "lantern-docks",
+    "name": "Lantern Docks",
+    "summary": "A harbor district where night visibility, wet pavement, and shadow reading dominate.",
+    "theme": "night driving, glare, and wet-surface caution"
+  },
+  "submap": {
+    "id": "fog-quay",
+    "name": "Fog Quay",
+    "summary": "A dockside street threaded with puddles, bus stops, bike lanes, and reflective lights."
+  },
+  "bossId": "lantern-warden",
+  "source": "Expanded in Spark 2 from chatgpt_conv.md and the Road Master roadmap.",
+  "playableSlice": {
+    "questionCount": 14,
+    "conceptCount": 12,
+    "trapCount": 6,
+    "bossCount": 1
+  },
+  "files": {
+    "concepts": "concepts.json",
+    "traps": "trap-taxonomy.json",
+    "bosses": "bosses.json",
+    "analogies": "analogies.json",
+    "explanations": "explanations.json",
+    "templates": "templates.json",
+    "questions": "questions.json"
+  },
+  "authoringNotes": [
+    "Make the harbor feel reflective, shadowed, and slightly unstable.",
+    "Treat glare and wetness as first-class hazards, not cosmetic details.",
+    "Keep the recovery notes short so fatigue mistakes can be corrected quickly."
+  ]
+}

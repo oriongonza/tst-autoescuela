@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ridge-ski-slope-lane",
+    "title": "Ski Slope Lane",
+    "summary": "A descent is like a ski run: control first, speed second.",
+    "memoryHook": "You do not race the hill; you steer down it.",
+    "sourceConceptIds": [
+      "ridge-descent-braking",
+      "ridge-grade-awareness"
+    ]
+  },
+  {
+    "id": "ridge-tight-spiral",
+    "title": "Tight Spiral",
+    "summary": "A hairpin turn is a spiral staircase that forces a patient step.",
+    "memoryHook": "You climb the curve one controlled step at a time.",
+    "sourceConceptIds": [
+      "ridge-hairpin-turn",
+      "ridge-apex-control"
+    ]
+  },
+  {
+    "id": "ridge-lantern-in-fog",
+    "title": "Lantern in Fog",
+    "summary": "Low visibility asks for slower movement so the light still works.",
+    "memoryHook": "If the lantern cannot reach, you are moving too fast.",
+    "sourceConceptIds": [
+      "ridge-fog-line",
+      "ridge-grade-awareness"
+    ]
+  },
+  {
+    "id": "ridge-rope-bridge-gap",
+    "title": "Rope Bridge Gap",
+    "summary": "Following distance is the rope bridge that keeps you from falling into another driver's braking.",
+    "memoryHook": "Leave the rope slack before the stop arrives.",
+    "sourceConceptIds": [
+      "ridge-following-gap",
+      "ridge-descent-braking"
+    ]
+  },
+  {
+    "id": "ridge-cliff-marker",
+    "title": "Cliff Marker",
+    "summary": "Guardrails and edge markings are the cliff markers that remind you where the world ends.",
+    "memoryHook": "Read the marker before you trust the edge.",
+    "sourceConceptIds": [
+      "ridge-guardrail-zone",
+      "ridge-fog-line"
+    ]
+  },
+  {
+    "id": "ridge-anchor-descent",
+    "title": "Anchor Descent",
+    "summary": "Braking on a slope should feel like anchoring before drift, not resisting after.",
+    "memoryHook": "Drop the anchor before the current picks up.",
+    "sourceConceptIds": [
+      "ridge-descent-braking",
+      "ridge-engine-braking"
+    ]
+  },
+  {
+    "id": "ridge-folded-map",
+    "title": "Folded Map",
+    "summary": "A switchback road unfolds like a folded map that reveals its next line one fold at a time.",
+    "memoryHook": "Read the fold, then move.",
+    "sourceConceptIds": [
+      "ridge-grade-awareness",
+      "ridge-hairpin-turn"
+    ]
+  },
+  {
+    "id": "ridge-stone-trail",
+    "title": "Stone Trail",
+    "summary": "Gravel is a trail of loose stones that punishes sharp steps.",
+    "memoryHook": "Step lighter when the stones shift.",
+    "sourceConceptIds": [
+      "ridge-gravel-traction",
+      "ridge-shoulder-space"
+    ]
+  }
+]

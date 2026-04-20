@@ -1,0 +1,34 @@
+[
+  {
+    "id": "harbor-question-explanation",
+    "name": "Harbor Question Explanation",
+    "purpose": "Explain the correct answer for a night-driving or wet-road question.",
+    "pattern": [
+      "Correct answer",
+      "Why",
+      "Trap",
+      "Reclaim"
+    ]
+  },
+  {
+    "id": "harbor-reclaim-note",
+    "name": "Harbor Reclaim Note",
+    "purpose": "Compress a fatigue or glare mistake into a quick repair step.",
+    "pattern": [
+      "Correct answer",
+      "Why",
+      "Trap",
+      "Reclaim"
+    ]
+  },
+  {
+    "id": "harbor-boss-phase-note",
+    "name": "Harbor Boss Phase Note",
+    "purpose": "Describe how the Lantern Warden shifts from glare to shadow pressure.",
+    "pattern": [
+      "Phase",
+      "Pressure",
+      "Exit"
+    ]
+  }
+]

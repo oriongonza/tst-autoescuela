@@ -1,0 +1,62 @@
+[
+  {
+    "id": "harbor-night-visibility",
+    "name": "Night Visibility",
+    "summary": "How much of the road you can actually read after dark."
+  },
+  {
+    "id": "harbor-low-beam",
+    "name": "Low Beam",
+    "summary": "Headlight setting that reduces glare and preserves night vision."
+  },
+  {
+    "id": "harbor-glare-control",
+    "name": "Glare Control",
+    "summary": "Managing bright lights so the road still stays readable."
+  },
+  {
+    "id": "harbor-wet-surface",
+    "name": "Wet Surface",
+    "summary": "Road moisture that changes grip, stopping, and steering."
+  },
+  {
+    "id": "harbor-hydroplaning",
+    "name": "Hydroplaning",
+    "summary": "A loss of tire contact when water blocks the road surface."
+  },
+  {
+    "id": "harbor-stopping-distance",
+    "name": "Stopping Distance",
+    "summary": "The full distance required to perceive, react, and stop."
+  },
+  {
+    "id": "harbor-pedestrian-shadow",
+    "name": "Pedestrian Shadow",
+    "summary": "A person that hides in the dark edge of the street or curb."
+  },
+  {
+    "id": "harbor-bike-lane-night",
+    "name": "Bike Lane at Night",
+    "summary": "A lane that must still be scanned for riders and surprise movement."
+  },
+  {
+    "id": "harbor-fatigue-scan",
+    "name": "Fatigue Scan",
+    "summary": "The disciplined scan used when tiredness starts to narrow attention."
+  },
+  {
+    "id": "harbor-signal-timing",
+    "name": "Signal Timing",
+    "summary": "Announcing your move early enough for others to react."
+  },
+  {
+    "id": "harbor-bus-stop-caution",
+    "name": "Bus Stop Caution",
+    "summary": "Expecting crossings, luggage, and occlusion near stopping buses."
+  },
+  {
+    "id": "harbor-reflection-reading",
+    "name": "Reflection Reading",
+    "summary": "Interpreting water and light on the road without assuming safety."
+  }
+]

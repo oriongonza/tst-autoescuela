@@ -1,0 +1,75 @@
+[
+  {
+    "id": "lantern-warden",
+    "name": "Lantern Warden",
+    "title": "The Keeper of the Wet Quay",
+    "arena": {
+      "regionId": "lantern-docks",
+      "submapId": "fog-quay",
+      "summary": "A dockside street of glare, puddles, bus stops, and shadow pockets."
+    },
+    "weaknessConceptIds": [
+      "harbor-night-visibility",
+      "harbor-low-beam",
+      "harbor-glare-control",
+      "harbor-wet-surface",
+      "harbor-hydroplaning",
+      "harbor-stopping-distance",
+      "harbor-fatigue-scan"
+    ],
+    "phases": [
+      {
+        "id": "approach",
+        "name": "First Beacon",
+        "summary": "A bright harbor light tempts the player to stare and miss the edge."
+      },
+      {
+        "id": "pressure",
+        "name": "Wet Boardwalk",
+        "summary": "The road gets slick and the Warden dares a late stop."
+      },
+      {
+        "id": "reveal",
+        "name": "Shadow Channel",
+        "summary": "Pedestrian shadows and bus stops become the real threat."
+      },
+      {
+        "id": "collapse",
+        "name": "Harbor Stillness",
+        "summary": "The Warden loses force when the player scans calmly and keeps space."
+      }
+    ],
+    "lines": {
+      "intro": [
+        "The quay is bright enough to blind the careless.",
+        "The wet stones will show you what you failed to read."
+      ],
+      "phaseShift": [
+        "You looked at the light, not the lane.",
+        "You trusted shine where you should have trusted space."
+      ],
+      "defeat": [
+        "You read the dark.",
+        "The harbor keeps its lanterns for those who can see."
+      ],
+      "victory": [
+        "The quay is quiet.",
+        "The Warden sinks back into the reflection."
+      ]
+    },
+    "attackLines": [
+      {
+        "id": "glare-sweep",
+        "summary": "The Warden throws bright light across the lane."
+      },
+      {
+        "id": "wet-glimmer",
+        "summary": "A puddle shine looks like safe road until the wheels touch it."
+      },
+      {
+        "id": "shadow-step",
+        "summary": "A dark shape near the curb becomes a moving hazard."
+      }
+    ]
+  }
+]
