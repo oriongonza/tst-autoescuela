@@ -24,6 +24,17 @@ for file in "${required_files[@]}"; do
   }
 done
 
+contains_literal() {
+  local needle="$1"
+  local file="$2"
+
+  if command -v rg >/dev/null 2>&1; then
+    rg -Fq "${needle}" "${file}"
+  else
+    grep -Fq "${needle}" "${file}"
+  fi
+}
+
 require_label() {
   local label="$1"
 
@@ -53,43 +64,43 @@ for lane_heading in \
   "### Spark 4 — Review and merge automation" \
   "### Spark 5 — Governance and templates"
 do
-  rg -Fq "${lane_heading}" "AGENTS.md" || {
+  contains_literal "${lane_heading}" "AGENTS.md" || {
     echo "Missing lane heading in AGENTS.md: ${lane_heading}" >&2
     exit 1
   }
 done
 
-rg -Fq "Each Spark agent works in an isolated worktree or branch." "AGENTS.md" || {
+contains_literal "Each Spark agent works in an isolated worktree or branch." "AGENTS.md" || {
   echo "AGENTS.md must describe isolated worktrees or branches" >&2
   exit 1
 }
 
-rg -Fq "Branch names use \`lane/spark-<N>-<slug>\`." "AGENTS.md" || {
+contains_literal "Branch names use \`lane/spark-<N>-<slug>\`." "AGENTS.md" || {
   echo "AGENTS.md must define lane branch naming" >&2
   exit 1
 }
 
-rg -Fq "scripts/ci.sh manifest" ".github/workflows/ci.yml" || {
+contains_literal "scripts/ci.sh manifest" ".github/workflows/ci.yml" || {
   echo ".github/workflows/ci.yml must invoke scripts/ci.sh manifest" >&2
   exit 1
 }
 
-rg -Fq "scripts/ci.sh repo-smoke" ".github/workflows/ci.yml" || {
+contains_literal "scripts/ci.sh repo-smoke" ".github/workflows/ci.yml" || {
   echo ".github/workflows/ci.yml must invoke scripts/ci.sh repo-smoke" >&2
   exit 1
 }
 
-rg -Fq "scripts/ci.sh shellcheck" ".github/workflows/ci.yml" || {
+contains_literal "scripts/ci.sh shellcheck" ".github/workflows/ci.yml" || {
   echo ".github/workflows/ci.yml must invoke scripts/ci.sh shellcheck" >&2
   exit 1
 }
 
-rg -Fq "scripts/ci.sh bash" ".github/workflows/ci.yml" || {
+contains_literal "scripts/ci.sh bash" ".github/workflows/ci.yml" || {
   echo ".github/workflows/ci.yml must invoke scripts/ci.sh bash" >&2
   exit 1
 }
 
-rg -Fq "scripts/auto_review.sh" ".github/workflows/auto-review.yml" || {
+contains_literal "scripts/auto_review.sh" ".github/workflows/auto-review.yml" || {
   echo ".github/workflows/auto-review.yml must invoke scripts/auto_review.sh" >&2
   exit 1
 }
@@ -108,7 +119,7 @@ if [[ -e "scripts/create_lane_worktrees.sh" ]]; then
     exit 1
   }
 
-  rg -Fq "git worktree" "scripts/create_lane_worktrees.sh" || {
+  contains_literal "git worktree" "scripts/create_lane_worktrees.sh" || {
     echo "scripts/create_lane_worktrees.sh should manage worktrees" >&2
     exit 1
   }
