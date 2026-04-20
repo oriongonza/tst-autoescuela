@@ -1,27 +1,35 @@
-## Lane
+## Lane / Worktree
 
 - [ ] `lane:spark-1`
 - [ ] `lane:spark-2`
 - [ ] `lane:spark-3`
 - [ ] `lane:spark-4`
 - [ ] `lane:spark-5`
+- Worktree:
+- Branch:
+- Base branch: `main`
+- Owned files:
 
 ## Summary
 
-Describe the narrow change this PR makes.
+Describe the narrow lane change this PR makes.
 
 ## Scope
 
 - Included:
 - Excluded:
 
-## Tests
+## Validation
 
 - [ ] `scripts/ci.sh`
+- [ ] `git diff --check`
 
-## Out Of Scope
+## Failure Loop
 
-- Follow-up work:
+- Issue:
+- Review or CI failure:
+- Retry count:
+- Follow-up lane, if any:
 
 ## Source
 
