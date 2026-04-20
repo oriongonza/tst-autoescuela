@@ -1,0 +1,182 @@
+[
+  {
+    "id": "why-priority-matters",
+    "title": "Priority beats confidence",
+    "summary": "The answer is the movement that obeys the rule, not the one that looks bold.",
+    "templateId": "question-explanation",
+    "trapId": "priority-inversion",
+    "conceptIds": [
+      "right-of-way",
+      "priority",
+      "intersection"
+    ],
+    "body": [
+      "Correct answer: follow the stated order, not the strongest-looking car.",
+      "Why: right-of-way resolves the crossing before size or noise can.",
+      "Trap: priority inversion makes the biggest mover seem first.",
+      "Reclaim: restate the rule, then compare arrival and position."
+    ]
+  },
+  {
+    "id": "why-yield-is-active",
+    "title": "Yielding is active, not timid",
+    "summary": "A yield sign asks for deliberate slowing and a safe gap, not frozen hesitation.",
+    "templateId": "question-explanation",
+    "trapId": "false-yield",
+    "conceptIds": [
+      "yield-sign",
+      "merge-gap",
+      "priority"
+    ],
+    "body": [
+      "Correct answer: slow and give way if the crossing needs it.",
+      "Why: yielding is an active decision to let safe flow happen.",
+      "Trap: false-yield makes you wait even when the rule allows you through.",
+      "Reclaim: check the gap, then move with purpose."
+    ]
+  },
+  {
+    "id": "why-stop-means-stop",
+    "title": "A stop sign means a full stop",
+    "summary": "The stop must be complete before you scan and proceed.",
+    "templateId": "question-explanation",
+    "trapId": "stop-sign-bait",
+    "conceptIds": [
+      "stop-sign",
+      "intersection",
+      "hazard-scan"
+    ],
+    "body": [
+      "Correct answer: make the stop complete before moving again.",
+      "Why: the pause resets your view of the crossing.",
+      "Trap: stop-sign bait turns a roll-through into a fake stop.",
+      "Reclaim: stop, scan, then re-enter the rule."
+    ]
+  },
+  {
+    "id": "why-signal-is-only-a-start",
+    "title": "Signaling is not enough by itself",
+    "summary": "The signal announces intent, but mirrors and blind-spot checks confirm safety.",
+    "templateId": "question-explanation",
+    "trapId": "signal-without-check",
+    "conceptIds": [
+      "turn-signal",
+      "mirror-check",
+      "lane-position"
+    ],
+    "body": [
+      "Correct answer: signal, then check mirrors and blind spot before moving.",
+      "Why: other drivers need the cue, but you still need the clearance.",
+      "Trap: signal without check ignores the hidden lane threat.",
+      "Reclaim: announce the move and verify the space."
+    ]
+  },
+  {
+    "id": "why-pedestrians-win",
+    "title": "Pedestrians own the crossing",
+    "summary": "Walkers and cyclists in the crossing force the driver to wait and protect the space.",
+    "templateId": "question-explanation",
+    "trapId": "pedestrian-ghost",
+    "conceptIds": [
+      "pedestrian-crossing",
+      "bike-lane",
+      "shared-space"
+    ],
+    "body": [
+      "Correct answer: stop and yield to the crossing person.",
+      "Why: the rule protects vulnerable road users first.",
+      "Trap: pedestrian ghost hides the person until it is too late.",
+      "Reclaim: slow early and scan the edges, not just the open lane."
+    ]
+  },
+  {
+    "id": "why-roundabout-gap-wins",
+    "title": "A roundabout needs a real opening",
+    "summary": "The vehicle should enter only when the circular flow leaves a safe gap.",
+    "templateId": "question-explanation",
+    "trapId": "roundabout-confusion",
+    "conceptIds": [
+      "roundabout-entry",
+      "merge-gap",
+      "priority"
+    ],
+    "body": [
+      "Correct answer: wait for a safe gap before entering.",
+      "Why: the roundabout is moving traffic, not a parking lot.",
+      "Trap: roundabout confusion treats a dangerous slot like a safe one.",
+      "Reclaim: measure the flow, then join it."
+    ]
+  },
+  {
+    "id": "why-size-does-not-mean-first",
+    "title": "Size is not priority",
+    "summary": "A truck or loud vehicle may be intimidating, but the rule still decides the order.",
+    "templateId": "question-explanation",
+    "trapId": "priority-inversion",
+    "conceptIds": [
+      "priority",
+      "right-of-way",
+      "shared-space"
+    ],
+    "body": [
+      "Correct answer: size alone does not grant priority.",
+      "Why: right-of-way is a rule, not a popularity contest.",
+      "Trap: priority inversion rewards the wrong signal.",
+      "Reclaim: ask who has the rule, not who looks powerful."
+    ]
+  },
+  {
+    "id": "why-speed-down-in-low-visibility",
+    "title": "Slow down when the field goes dark",
+    "summary": "Low visibility demands earlier braking and more cautious scanning.",
+    "templateId": "question-explanation",
+    "trapId": "late-brake",
+    "conceptIds": [
+      "speed-control",
+      "visibility",
+      "approach-speed"
+    ],
+    "body": [
+      "Correct answer: reduce speed and scan earlier.",
+      "Why: the safer pace keeps the road legible.",
+      "Trap: late brake keeps speed too long and shrinks the response window.",
+      "Reclaim: slow before the hazard arrives."
+    ]
+  },
+  {
+    "id": "why-gap-and-speed-matter",
+    "title": "A merge needs a gap and matched speed",
+    "summary": "The merge works when the opening and the speed both support the move.",
+    "templateId": "question-explanation",
+    "trapId": "gap-hunger",
+    "conceptIds": [
+      "merge-gap",
+      "following-distance",
+      "speed-control"
+    ],
+    "body": [
+      "Correct answer: find a real gap and match speed before entering.",
+      "Why: a merge is a timed fit, not a leap of faith.",
+      "Trap: gap hunger grabs openings that are not actually safe.",
+      "Reclaim: wait, match, then move."
+    ]
+  },
+  {
+    "id": "why-reclaim-after-a-miss",
+    "title": "A miss becomes a reclaim loop",
+    "summary": "The recovery path is to name the trap, restate the rule, and try again.",
+    "templateId": "reclaim-loop",
+    "trapId": "priority-inversion",
+    "conceptIds": [
+      "reclaim-loop",
+      "hazard-scan",
+      "priority"
+    ],
+    "body": [
+      "Correct answer: use the miss as a rule recall, not a dead end.",
+      "Why: the game should turn a mistake into a sharper memory.",
+      "Trap: the miss itself can become the next trap if you do not name it.",
+      "Reclaim: trap name, rule, retry."
+    ]
+  }
+]

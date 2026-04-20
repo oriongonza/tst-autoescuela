@@ -1,0 +1,55 @@
+[
+  {
+    "id": "question-explanation",
+    "name": "Question Explanation",
+    "purpose": "Standard explanation block for a single-choice question.",
+    "pattern": [
+      "Correct answer.",
+      "Why the rule says so.",
+      "Why the trap feels convincing.",
+      "How to reclaim the rule on the next attempt."
+    ]
+  },
+  {
+    "id": "analogy-card",
+    "name": "Analogy Card",
+    "purpose": "Short memory hook that turns a rule into a picture.",
+    "pattern": [
+      "Image title.",
+      "One-line hook.",
+      "Which rule it supports."
+    ]
+  },
+  {
+    "id": "boss-beat",
+    "name": "Boss Beat",
+    "purpose": "One attack beat or phase line for the Right-of-Way Beast.",
+    "pattern": [
+      "Phase name.",
+      "What the Beast tries.",
+      "What defeats it."
+    ]
+  },
+  {
+    "id": "reclaim-loop",
+    "name": "Reclaim Loop",
+    "purpose": "The short recovery script after a mistake.",
+    "pattern": [
+      "Name the trap.",
+      "Restate the rule.",
+      "Try the same pattern again."
+    ]
+  },
+  {
+    "id": "annotation-note",
+    "name": "Annotation Note",
+    "purpose": "Authoring note for annotators or maintainers.",
+    "pattern": [
+      "Question intent.",
+      "Primary concepts.",
+      "Trap pattern.",
+      "Boss compatibility.",
+      "Known-mistake flags."
+    ]
+  }
+]
