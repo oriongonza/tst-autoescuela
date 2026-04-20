@@ -1,0 +1,38 @@
+{
+  "schemaId": "road-master.content-pack.v1",
+  "packId": "chapter-1-crossing-fields",
+  "title": "Chapter I: Crossing Fields",
+  "region": {
+    "id": "crossing-fields",
+    "name": "Crossing Fields",
+    "summary": "A first region built around approach, priority, and the discipline of crossing safely.",
+    "theme": "right-of-way and intersection order"
+  },
+  "submap": {
+    "id": "four-way-labyrinth",
+    "name": "Four-Way Labyrinth",
+    "summary": "A dense crossing network that turns simple priority rules into a playable memory palace."
+  },
+  "bossId": "right-of-way-beast",
+  "source": "Derived from chatgpt_conv.md through the roadmap issue manifests in this checkout.",
+  "playableSlice": {
+    "questionCount": 24,
+    "conceptCount": 24,
+    "trapCount": 10,
+    "bossCount": 1
+  },
+  "files": {
+    "concepts": "concepts.json",
+    "traps": "trap-taxonomy.json",
+    "bosses": "bosses.json",
+    "analogies": "analogies.json",
+    "explanations": "explanations.json",
+    "templates": "templates.json",
+    "questions": "questions.json"
+  },
+  "authoringNotes": [
+    "Keep the chapter severe, sparse, and operational.",
+    "Use the same trap names in annotation, explanations, and boss phases.",
+    "Do not introduce new schema fields without updating the annotation schema first."
+  ]
+}

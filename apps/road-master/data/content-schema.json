@@ -1,0 +1,117 @@
+{
+  "schemaId": "road-master.annotation.v1",
+  "version": "1.0",
+  "description": "Annotation contract for Road Master content packs, trap taxonomy, boss data, analogies, explanations, and question banks.",
+  "enums": {
+    "difficulty": [
+      "intro",
+      "steady",
+      "pressure",
+      "boss",
+      "reclaim"
+    ],
+    "arc": [
+      "gate",
+      "labyrinth",
+      "boss",
+      "reclaim"
+    ],
+    "answerFormat": [
+      "single-choice"
+    ]
+  },
+  "entities": {
+    "question": {
+      "required": [
+        "id",
+        "prompt",
+        "choices",
+        "answerIndex",
+        "conceptIds",
+        "trapId",
+        "analogyId",
+        "explanationId",
+        "regionId",
+        "submapId",
+        "bossIds",
+        "attackTier",
+        "difficulty",
+        "arc",
+        "knownMistake"
+      ],
+      "fields": {
+        "id": "Stable slug for the question.",
+        "prompt": "The question stem shown to the player.",
+        "choices": "Array of exactly four answer options.",
+        "answerIndex": "Zero-based index of the correct choice.",
+        "conceptIds": "Primary and secondary concept references.",
+        "trapId": "Named trap pattern being exercised.",
+        "analogyId": "Analogy used to anchor the memory hook.",
+        "explanationId": "Reusable explanation block.",
+        "regionId": "Region identifier.",
+        "submapId": "Submap identifier.",
+        "bossIds": "Boss compatibility list.",
+        "attackTier": "Low integer tier for combat balancing.",
+        "difficulty": "Progression band for the question.",
+        "arc": "Chapter arc bucket.",
+        "knownMistake": "True if the item should reclaim a common slip."
+      }
+    },
+    "concept": {
+      "required": [
+        "id",
+        "name",
+        "summary"
+      ]
+    },
+    "trap": {
+      "required": [
+        "id",
+        "name",
+        "summary",
+        "tell",
+        "countermeasure",
+        "conceptIds"
+      ]
+    },
+    "boss": {
+      "required": [
+        "id",
+        "name",
+        "title",
+        "arena",
+        "weaknessConceptIds",
+        "phases",
+        "lines"
+      ]
+    },
+    "analogy": {
+      "required": [
+        "id",
+        "title",
+        "summary",
+        "memoryHook",
+        "sourceConceptIds"
+      ]
+    },
+    "explanation": {
+      "required": [
+        "id",
+        "title",
+        "summary",
+        "templateId",
+        "body",
+        "trapId",
+        "conceptIds"
+      ]
+    },
+    "template": {
+      "required": [
+        "id",
+        "name",
+        "purpose",
+        "pattern"
+      ]
+    }
+  }
+}
