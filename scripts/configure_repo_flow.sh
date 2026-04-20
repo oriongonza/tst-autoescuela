@@ -45,4 +45,7 @@ gh api "repos/${GH_REPO}/branches/main/protection" \
 }
 JSON
 
+echo "Lane readiness snapshot:"
+"${SCRIPT_DIR}/overseer_lane_status.sh" --repo "${GH_REPO}" --format text
+
 echo "Configured PR flow for ${GH_REPO}"

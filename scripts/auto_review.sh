@@ -50,7 +50,8 @@ lane_allowlist_ok() {
         [[ "${file}" == .github/workflows/auto-review.yml || \
            "${file}" == scripts/auto_review.sh || \
            "${file}" == scripts/open_agent_pr.sh || \
-           "${file}" == scripts/configure_repo_flow.sh ]] || return 1
+           "${file}" == scripts/configure_repo_flow.sh || \
+           "${file}" == scripts/overseer_lane_status.sh ]] || return 1
       done
       ;;
     lane:spark-5)
@@ -75,6 +76,8 @@ is_draft="$(jq -r '.isDraft' <<<"${pr_json}")"
 body="$(jq -r '.body // ""' <<<"${pr_json}")"
 mapfile -t lane_labels < <(jq -r '.labels[].name | select(startswith("lane:spark-"))' <<<"${pr_json}")
 
+lane_summary_file="$(mktemp)"
+
 [[ "${base_ref}" == "main" ]] || record_failure "Base branch must be main."
 [[ "${is_draft}" == "false" ]] || record_failure "Draft PRs are not auto-approved."
 [[ "${#lane_labels[@]}" -eq 1 ]] || record_failure "PR must have exactly one lane:spark-* label."
@@ -85,6 +88,10 @@ done
 
 mapfile -t changed_files < <(gh pr diff "${PR_NUMBER}" --repo "${GH_REPO}" --name-only)
 [[ "${#changed_files[@]}" -gt 0 ]] || record_failure "PR has no changed files."
+
+if ! "${SCRIPT_DIR}/overseer_lane_status.sh" --repo "${GH_REPO}" --pr-number "${PR_NUMBER}" --format markdown >"${lane_summary_file}"; then
+  record_failure "Unable to summarize lane readiness."
+fi
 
 if [[ "${#lane_labels[@]}" -eq 1 && "${#changed_files[@]}" -gt 0 ]]; then
   lane_allowlist_ok "${lane_labels[0]}" "${changed_files[@]}" || \
@@ -98,6 +105,7 @@ fi
 review_file="$(mktemp)"
 cleanup() {
   rm -f "${review_file}"
+  rm -f "${lane_summary_file}"
 }
 trap cleanup EXIT
 
@@ -108,6 +116,8 @@ if [[ "${#failures[@]}" -eq 0 ]]; then
     echo "- Lane ownership respected."
     echo "- Required PR sections present."
     echo "- Repo CI checks passed."
+    echo
+    cat "${lane_summary_file}"
   } > "${review_file}"
 
   gh pr review "${PR_NUMBER}" \
@@ -121,6 +131,8 @@ else
     for failure in "${failures[@]}"; do
       echo "- ${failure}"
     done
+    echo
+    cat "${lane_summary_file}"
   } > "${review_file}"
 
   gh pr review "${PR_NUMBER}" \
