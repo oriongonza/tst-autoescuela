@@ -109,9 +109,26 @@ cleanup() {
 }
 trap cleanup EXIT
 
+write_summary() {
+  local title="$1"
+  {
+    echo "${title}"
+    echo
+    cat "${review_file}"
+  } | tee /dev/stderr
+
+  if [[ -n "${GITHUB_STEP_SUMMARY:-}" ]]; then
+    {
+      echo "## ${title}"
+      echo
+      cat "${review_file}"
+    } >>"${GITHUB_STEP_SUMMARY}"
+  fi
+}
+
 if [[ "${#failures[@]}" -eq 0 ]]; then
   {
-    echo "Auto-review approved."
+    echo "Auto-review passed."
     echo
     echo "- Lane ownership respected."
     echo "- Required PR sections present."
@@ -119,14 +136,10 @@ if [[ "${#failures[@]}" -eq 0 ]]; then
     echo
     cat "${lane_summary_file}"
   } > "${review_file}"
-
-  gh pr review "${PR_NUMBER}" \
-    --repo "${GH_REPO}" \
-    --approve \
-    --body-file "${review_file}"
+  write_summary "Auto-review passed"
 else
   {
-    echo "Auto-review requested changes."
+    echo "Auto-review failed."
     echo
     for failure in "${failures[@]}"; do
       echo "- ${failure}"
@@ -134,10 +147,6 @@ else
     echo
     cat "${lane_summary_file}"
   } > "${review_file}"
-
-  gh pr review "${PR_NUMBER}" \
-    --repo "${GH_REPO}" \
-    --request-changes \
-    --body-file "${review_file}"
+  write_summary "Auto-review failed"
   exit 1
 fi
