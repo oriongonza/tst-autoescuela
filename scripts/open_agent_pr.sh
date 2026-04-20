@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 : "${GH_REPO:?Set GH_REPO to owner/repo.}"
 : "${HEAD_BRANCH:?Set HEAD_BRANCH to the current lane branch.}"
 : "${TITLE:?Set TITLE to the PR title.}"
