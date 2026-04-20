@@ -1,48 +1,66 @@
 # Agent Workflow
 
-This repo follows a seam-first, lane-based workflow modeled on `~/repos/muxon`.
+This repo follows a seam-first, five-lane workflow modeled on `~/repos/muxon`.
 
-One overseer agent owns planning, lane boundaries, PR orchestration, CI watching, and failure recovery. Five Spark agents execute disjoint lanes in parallel. No human review sits inside the loop.
+One overseer owns planning, lane boundaries, PR orchestration, CI watching, and failure recovery. Five Spark agents execute disjoint lanes in parallel. No human review sits inside the normal loop.
 
-## Roles
+## Lane Map
 
-### Overseer
+- Spark 1 - roadmap model: owns `roadmap/`
+- Spark 2 - bootstrap scripts: owns `scripts/common.sh`, `scripts/create_*.sh`, `scripts/validate_manifest.sh`, and `scripts/bootstrap_all.sh`
+- Spark 3 - CI lane: owns `.github/workflows/ci.yml`, `scripts/ci.sh`, and `scripts/check_repo_structure.sh`
+- Spark 4 - review and merge automation: owns `.github/workflows/auto-review.yml`, `scripts/auto_review.sh`, `scripts/open_agent_pr.sh`, and `scripts/configure_repo_flow.sh`
+- Spark 5 - governance and templates: owns `AGENTS.md`, `README.md`, `.github/pull_request_template.md`, and `.github/ISSUE_TEMPLATE/`
 
-- Owns the spec, lane split, and branch naming.
-- Ensures every lane has a narrow file ownership boundary before implementation starts.
-- Opens or updates tracking issues as needed before lane work begins.
-- Watches PR state with `gh pr view --json reviewDecision,statusCheckRollup`.
-- Requeues a Spark agent when CI fails or auto-review requests changes.
-- Enables auto-merge when opening the PR.
+## Overseer Runbook
 
-### Spark 1 — Roadmap model
+1. Lock the seam.
+   - Freeze the lane split before implementation starts.
+   - Verify every lane has one narrow file boundary.
+   - Keep branch names in the form `lane/spark-<N>-<slug>`.
 
-- Owns `roadmap/`.
-- May change labels, milestones, issue manifests, and roadmap invariants.
+2. Seed the five worktrees from `origin/main`.
 
-### Spark 2 — Bootstrap scripts
+   ```bash
+   ROOT=/home/ardi/repos/tst_autoescuela/app
+   git -C "$ROOT" fetch origin main
+   git -C "$ROOT" worktree add "$ROOT/.worktrees/spark-1" -b lane/spark-1-roadmap origin/main
+   git -C "$ROOT" worktree add "$ROOT/.worktrees/spark-2" -b lane/spark-2-bootstrap origin/main
+   git -C "$ROOT" worktree add "$ROOT/.worktrees/spark-3" -b lane/spark-3-ci origin/main
+   git -C "$ROOT" worktree add "$ROOT/.worktrees/spark-4" -b lane/spark-4-review origin/main
+   git -C "$ROOT" worktree add "$ROOT/.worktrees/spark-5" -b lane/spark-5-governance origin/main
+   ```
 
-- Owns `scripts/common.sh`, `scripts/create_*.sh`, `scripts/validate_manifest.sh`, and `scripts/bootstrap_all.sh`.
-- May change repo bootstrap behavior, manifest generation, and validation logic.
+   Pattern:
 
-### Spark 3 — CI lane
+   ```bash
+   git -C "$ROOT" worktree add "$ROOT/.worktrees/spark-<N>" -b lane/spark-<N>-<slug> origin/main
+   ```
 
-- Owns `.github/workflows/ci.yml`, `scripts/ci.sh`, and `scripts/check_repo_structure.sh`.
-- May change required checks and local CI parity.
+3. Hand each lane only its owned files and branch.
+   - Work inside the lane worktree.
+   - Do not edit files owned by other lanes.
+   - Keep all five lanes in flight until the queue is empty.
 
-### Spark 4 — Review and merge automation
+4. Run the lane PR flow.
+   - The lane commits locally on its branch.
+   - The lane opens the PR with `scripts/open_agent_pr.sh`.
+   - The PR carries exactly one `lane:spark-<N>` label.
+   - Auto-merge is enabled when the PR opens.
+   - Overseer watches `gh pr view --json reviewDecision,statusCheckRollup`.
 
-- Owns `.github/workflows/auto-review.yml`, `scripts/auto_review.sh`, `scripts/open_agent_pr.sh`, and `scripts/configure_repo_flow.sh`.
-- May change auto-review policy, PR bootstrap, and branch protection bootstrap.
+5. Recover from failure without leaving the loop.
+   - CI red or auto-review changes: reuse the same worktree and branch, fix the lane-owned issue, recommit, rerun checks, and update the PR.
+   - After 3 failed iterations, split the work into a smaller lane PR and continue. Do not stop for human review in the normal path.
 
-### Spark 5 — Governance and templates
-
-- Owns `AGENTS.md`, `README.md`, `.github/pull_request_template.md`, and `.github/ISSUE_TEMPLATE/`.
-- May change workflow docs, templates, and operator guidance.
+6. Clean up after merge.
+   - Remove the worktree.
+   - Delete the lane branch if it no longer has outstanding work.
+   - Start the next lane if one is queued.
 
 ## Lane Rules
 
-- Each Spark agent works in an isolated worktree or branch.
+- Each Spark agent works in an isolated worktree and branch.
 - Branch names use `lane/spark-<N>-<slug>`.
 - Each PR must carry exactly one `lane:spark-<N>` label.
 - A lane may only edit files it owns. Cross-lane edits are rejected by auto-review.
@@ -73,7 +91,7 @@ Auto-review is not a rubber stamp. It rejects PRs that:
 
 - CI red: overseer requeues the same Spark lane with the failing log excerpt.
 - Auto-review red: overseer requeues the same Spark lane with the review body.
-- After 5 failed loops, the overseer must split the lane into smaller PRs rather than keep retrying the same shape.
+- Retry budget: 3 loops per lane. After that, the overseer narrows the scope into smaller lane PRs and continues the flow.
 
 ## Repo Settings
 

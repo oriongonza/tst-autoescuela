@@ -42,3 +42,14 @@ body:
         - Blocks:
     validations:
       required: false
+  - type: textarea
+    id: lane_ownership
+    attributes:
+      label: Lane Ownership
+      description: Which Spark lane should execute this epic, if already assigned.
+      placeholder: |
+        - Lane:
+        - Branch:
+        - Worktree:
+    validations:
+      required: false
