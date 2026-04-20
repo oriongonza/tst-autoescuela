@@ -15,16 +15,14 @@ import {
   normalizeConceptProgress,
   createConceptProgress,
 } from "../systems/memory/index.mjs";
-import {
-  applyRecoveryToConceptProgress,
-  repairConceptProgress,
-} from "../systems/memory/state.mjs";
+import { repairConceptProgress } from "../systems/memory/state.mjs";
 import {
   createCombatEncounter,
   getCombatSnapshot,
   resolveCombatTurn,
 } from "../systems/combat/index.mjs";
 import { buildMapView, createMapState } from "../systems/map/index.mjs";
+import { TELEMETRY_EVENT_BY_NAME } from "../systems/telemetry/catalog.mjs";
 import { loadChapter1Runtime } from "./chapter1.js";
 import { renderRoadMasterApp } from "../ui/shell.js";
 
@@ -37,6 +35,9 @@ if (!root) {
 let runtime;
 let narrative;
 let state;
+
+const DEFAULT_PLAYER_ID = "guest-road-master";
+const MAX_TELEMETRY_EVENTS = 300;
 
 const audio = createAudioDirector(() => {
   if (!state) {
@@ -82,6 +83,221 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
+}
+
+function createSessionId() {
+  if (globalThis.crypto?.randomUUID) {
+    return globalThis.crypto.randomUUID();
+  }
+
+  return `session-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
+function createTelemetryState() {
+  return {
+    sessionId: createSessionId(),
+    playerId: DEFAULT_PLAYER_ID,
+    startedAtMs: Date.now(),
+    events: [],
+    mapOpened: false,
+    openedSubmapIds: [],
+    lastNodeId: null,
+    lastQuestionIdShown: null,
+    questionShownAtMs: null,
+    bossEntered: false,
+    bossAttemptNumber: 0,
+    sessionStarted: false,
+  };
+}
+
+function appendTelemetryEvent(name, payload = {}) {
+  if (!state?.telemetry) {
+    return null;
+  }
+
+  const definition = TELEMETRY_EVENT_BY_NAME[name];
+  const event = {
+    name,
+    group: definition?.group ?? "unknown",
+    ...payload,
+  };
+
+  state = {
+    ...state,
+    telemetry: {
+      ...state.telemetry,
+      events: [...state.telemetry.events, event].slice(-MAX_TELEMETRY_EVENTS),
+    },
+  };
+
+  return event;
+}
+
+function patchTelemetry(patch = {}) {
+  if (!state?.telemetry) {
+    return;
+  }
+
+  state = {
+    ...state,
+    telemetry: {
+      ...state.telemetry,
+      ...patch,
+    },
+  };
+}
+
+function recordSessionStarted() {
+  if (!state?.telemetry || state.telemetry.sessionStarted) {
+    return;
+  }
+
+  appendTelemetryEvent("session_started", {
+    sessionId: state.telemetry.sessionId,
+    playerId: state.telemetry.playerId,
+    startedAt: new Date(state.telemetry.startedAtMs).toISOString(),
+    entryPoint: "browser",
+    appVersion: runtime?.foundation?.product?.version ?? "0.1.0",
+  });
+  patchTelemetry({ sessionStarted: true });
+}
+
+function syncDerivedTelemetry(previousState = null) {
+  if (!state?.telemetry || state.phase !== "campaign") {
+    return;
+  }
+
+  const telemetry = state.telemetry;
+  const now = Date.now();
+  const currentNode = state.currentRouteNode ?? null;
+  const currentQuestion = state.currentQuestion ?? null;
+
+  if (!telemetry.mapOpened) {
+    appendTelemetryEvent("map_opened", {
+      sessionId: telemetry.sessionId,
+      regionId: runtime.mapDefinition.region.id,
+      openedAt: new Date(now).toISOString(),
+    });
+    patchTelemetry({ mapOpened: true });
+  }
+
+  if (currentNode?.id && telemetry.lastNodeId !== currentNode.id) {
+    appendTelemetryEvent("node_opened", {
+      sessionId: telemetry.sessionId,
+      nodeId: currentNode.id,
+      nodeType: currentNode.type,
+      openedAt: new Date(now).toISOString(),
+      regionId: currentNode.regionId ?? runtime.mapDefinition.region.id,
+      submapId: currentNode.submapId ?? null,
+    });
+    patchTelemetry({ lastNodeId: currentNode.id });
+  }
+
+  if (currentQuestion?.submapId && !telemetry.openedSubmapIds.includes(currentQuestion.submapId)) {
+    appendTelemetryEvent("submap_opened", {
+      sessionId: telemetry.sessionId,
+      submapId: currentQuestion.submapId,
+      regionId: currentQuestion.regionId ?? runtime.mapDefinition.region.id,
+      openedAt: new Date(now).toISOString(),
+      parentNodeId: currentNode?.id ?? null,
+    });
+    patchTelemetry({
+      openedSubmapIds: [...telemetry.openedSubmapIds, currentQuestion.submapId],
+    });
+  }
+
+  if (currentQuestion?.id && telemetry.lastQuestionIdShown !== currentQuestion.id) {
+    const shownAt = new Date(now).toISOString();
+    const trapIds = [currentQuestion.trapId].filter(Boolean);
+
+    appendTelemetryEvent("question_shown", {
+      sessionId: telemetry.sessionId,
+      questionId: currentQuestion.id,
+      conceptIds: currentQuestion.conceptIds ?? [],
+      trapIds,
+      attackTier: currentQuestion.attackTier ?? 1,
+      shownAt,
+      regionId: currentQuestion.regionId ?? runtime.mapDefinition.region.id,
+      submapId: currentQuestion.submapId ?? null,
+      bossId: currentQuestion.arc === "boss" ? runtime.boss?.id ?? null : null,
+      paceState: state.currentPaceState ?? "flow",
+    });
+    appendTelemetryEvent("attack_shown", {
+      sessionId: telemetry.sessionId,
+      attackId: `attack:${currentQuestion.id}`,
+      questionId: currentQuestion.id,
+      attackTier: currentQuestion.attackTier ?? 1,
+      attackType:
+        currentQuestion.arc === "reclaim"
+          ? "anti_trap"
+          : currentQuestion.arc === "boss"
+            ? "mixed"
+            : "knowledge",
+      shownAt,
+      bossId: currentQuestion.arc === "boss" ? runtime.boss?.id ?? null : null,
+      phase: state.currentPhaseName ?? currentQuestion.arc ?? "gate",
+    });
+    patchTelemetry({
+      lastQuestionIdShown: currentQuestion.id,
+      questionShownAtMs: now,
+    });
+  }
+
+  if (
+    previousState?.currentPaceState &&
+    previousState.currentPaceState !== state.currentPaceState
+  ) {
+    appendTelemetryEvent("pace_state_changed", {
+      sessionId: telemetry.sessionId,
+      previousState: previousState.currentPaceState,
+      nextState: state.currentPaceState,
+      changedAt: new Date(now).toISOString(),
+      reason: `phase:${state.currentPhaseName ?? "gate"}`,
+      questionsSinceRelief: state.streak ?? 0,
+    });
+  }
+
+  if (state.currentPhaseName === "boss" && !telemetry.bossEntered) {
+    const attemptNumber = telemetry.bossAttemptNumber + 1;
+
+    appendTelemetryEvent("boss_entered", {
+      sessionId: telemetry.sessionId,
+      bossId: runtime.boss?.id ?? runtime.encounterConfig?.bossId ?? "boss",
+      regionId: runtime.mapDefinition.region.id,
+      enteredAt: new Date(now).toISOString(),
+      attemptNumber,
+      hp: state.encounter.hp,
+    });
+    appendTelemetryEvent("boss_attempted", {
+      sessionId: telemetry.sessionId,
+      bossId: runtime.boss?.id ?? runtime.encounterConfig?.bossId ?? "boss",
+      regionId: runtime.mapDefinition.region.id,
+      attemptNumber,
+      attemptedAt: new Date(now).toISOString(),
+      hp: state.encounter.hp,
+      bossPhase: state.bossPhaseLabel ?? "False lead",
+    });
+    patchTelemetry({
+      bossEntered: true,
+      bossAttemptNumber: attemptNumber,
+    });
+  }
+
+  if (
+    state.currentPhaseName === "boss" &&
+    previousState?.bossPhaseLabel &&
+    previousState.bossPhaseLabel !== state.bossPhaseLabel
+  ) {
+    appendTelemetryEvent("boss_phase_changed", {
+      sessionId: telemetry.sessionId,
+      bossId: runtime.boss?.id ?? runtime.encounterConfig?.bossId ?? "boss",
+      previousPhase: previousState.bossPhaseLabel,
+      nextPhase: state.bossPhaseLabel,
+      changedAt: new Date(now).toISOString(),
+      hp: state.encounter.hp,
+      reason: "phase_transition",
+    });
+  }
 }
 
 function createStoryNode(chapter, question, routeNode) {
@@ -201,6 +417,7 @@ function createInitialState(chapter) {
     combatSnapshot: getCombatSnapshot(encounter),
     currentPhaseIndex: 0,
     currentPhaseName: "gate",
+    telemetry: createTelemetryState(),
   };
 }
 
@@ -245,6 +462,8 @@ function refreshDerivedState() {
   if (!runtime || !state) {
     return;
   }
+
+  const previousState = state;
 
   const questionIndex = Math.min(
     runtime.questions.length - 1,
@@ -337,6 +556,8 @@ function refreshDerivedState() {
     currentPhaseIndex,
     currentPhaseName,
   };
+
+  syncDerivedTelemetry(previousState);
 }
 
 function promoteQuestionConcepts(question, now) {
@@ -435,6 +656,8 @@ function enterChapter() {
 }
 
 function finishChapter() {
+  const defeatedAt = new Date().toISOString();
+
   state = {
     ...state,
     phase: "victory",
@@ -454,11 +677,30 @@ function finishChapter() {
   appendCue("victory", "Chapter clear");
   updateSceneAudio("victory");
   playCue("victory");
+  appendTelemetryEvent("boss_defeated", {
+    sessionId: state.telemetry.sessionId,
+    bossId: runtime.boss?.id ?? runtime.encounterConfig?.bossId ?? "boss",
+    regionId: runtime.mapDefinition.region.id,
+    defeatedAt,
+    attemptNumber: state.telemetry.bossAttemptNumber || 1,
+    hpRemaining: state.encounter.hp,
+    clearTimeSeconds: Math.round((Date.now() - state.telemetry.startedAtMs) / 1000),
+  });
+  appendTelemetryEvent("region_conquered", {
+    sessionId: state.telemetry.sessionId,
+    regionId: runtime.mapDefinition.region.id,
+    conqueredAt: defeatedAt,
+    bossId: runtime.boss?.id ?? runtime.encounterConfig?.bossId ?? "boss",
+    attemptNumber: state.telemetry.bossAttemptNumber || 1,
+    clearTimeSeconds: Math.round((Date.now() - state.telemetry.startedAtMs) / 1000),
+  });
   refreshDerivedState();
   sync();
 }
 
 function markFailure(reason) {
+  const failedAt = new Date().toISOString();
+
   state = {
     ...state,
     phase: "failure",
@@ -477,6 +719,26 @@ function markFailure(reason) {
   appendCue("repair", "Repair path");
   updateSceneAudio("failure");
   playCue("repair");
+  appendTelemetryEvent("run_failed", {
+    sessionId: state.telemetry.sessionId,
+    regionId: runtime.mapDefinition.region.id,
+    failedAt,
+    reason,
+    bossId: runtime.boss?.id ?? runtime.encounterConfig?.bossId ?? "boss",
+    hp: state.encounter.hp,
+    phase: state.currentPhaseName ?? "gate",
+  });
+  if (state.currentPhaseName === "boss" || state.telemetry.bossEntered) {
+    appendTelemetryEvent("boss_failed", {
+      sessionId: state.telemetry.sessionId,
+      bossId: runtime.boss?.id ?? runtime.encounterConfig?.bossId ?? "boss",
+      regionId: runtime.mapDefinition.region.id,
+      failedAt,
+      attemptNumber: state.telemetry.bossAttemptNumber || 1,
+      reason,
+      hp: state.encounter.hp,
+    });
+  }
   refreshDerivedState();
   sync();
 }
@@ -499,6 +761,10 @@ function replayFromCheckpoint() {
       tone: "repair",
       title: "Checkpoint restored",
       detail: `Returned to ${runtime.mapIndex.main.nodesById.get(state.checkpointNodeId)?.title ?? runtime.region}.`,
+    },
+    telemetry: {
+      ...state.telemetry,
+      bossEntered: false,
     },
   };
   appendCue("repair", "Checkpoint restore");
@@ -545,6 +811,14 @@ function focusNode(nodeId) {
       detail: node.flavor || node.summary || node.type,
     },
   };
+  appendTelemetryEvent("node_opened", {
+    sessionId: state.telemetry.sessionId,
+    nodeId: node.id,
+    nodeType: node.type,
+    openedAt: new Date().toISOString(),
+    regionId: node.regionId ?? runtime.mapDefinition.region.id,
+    submapId: node.submapId ?? null,
+  });
   refreshDerivedState();
   sync();
 }
@@ -573,6 +847,8 @@ function advanceAfterAnswer({ reclaimed = false } = {}) {
   let nextProgress = state.conceptProgressById;
 
   if (reclaimed && state.pendingKnownGroundTrigger) {
+    const succeededAt = new Date().toISOString();
+
     nextProgress = applyKnownGroundRecoveryToProgress(nextProgress, state.pendingKnownGroundTrigger, {
       clock: Date.now(),
     });
@@ -589,6 +865,16 @@ function advanceAfterAnswer({ reclaimed = false } = {}) {
     ]);
     appendCue("flashback", "Reclaim");
     playCue("flashback");
+    for (const conceptId of state.pendingKnownGroundTrigger.affectedConceptIds ?? []) {
+      appendTelemetryEvent("reclaim_succeeded", {
+        sessionId: state.telemetry.sessionId,
+        conceptId,
+        succeededAt,
+        regionId: state.pendingKnownGroundTrigger.flashback?.regionId ?? runtime.mapDefinition.region.id,
+        submapId: state.pendingKnownGroundTrigger.flashback?.submapId ?? null,
+        questionId: state.pendingKnownGroundTrigger.questionId,
+      });
+    }
   }
 
   if (state.encounter.status === "cleared" || nextQuestionIndex >= runtime.questions.length) {
@@ -653,6 +939,7 @@ function answerChoice(choiceIndex) {
   }
 
   const now = Date.now();
+  const questionShownAtMs = state.telemetry?.questionShownAtMs ?? now;
   const before = getCombatSnapshot(state.encounter);
   const pacingDecision = decidePacing(before, state.pacing);
   const telegraph = buildTelegraph(question, pacingDecision);
@@ -688,6 +975,44 @@ function answerChoice(choiceIndex) {
 
   if (trigger) {
     nextProgress = applyKnownGroundSlipToProgress(nextProgress, trigger, { clock: now });
+  }
+
+  appendTelemetryEvent("answer_submitted", {
+    sessionId: state.telemetry.sessionId,
+    questionId: question.id,
+    selectedIndex: choiceIndex,
+    submittedAt: new Date(now).toISOString(),
+    timeToAnswerMs: Math.max(0, now - questionShownAtMs),
+    inputMode: "mouse",
+  });
+  appendTelemetryEvent("answer_evaluated", {
+    sessionId: state.telemetry.sessionId,
+    questionId: question.id,
+    correct: isCorrect,
+    selectedIndex: choiceIndex,
+    correctIndex: question.answerIndex,
+    conceptIds: question.conceptIds ?? [],
+    trapIds: [question.trapId].filter(Boolean),
+    explanationId: question.explanationId ?? null,
+  });
+  appendTelemetryEvent("attack_resolved", {
+    sessionId: state.telemetry.sessionId,
+    questionId: question.id,
+    damageTaken: resolved.outcome.damage,
+    hpBefore: before.hp,
+    hpAfter: after.hp,
+    attackTier: question.attackTier ?? 1,
+    paceState: pacingDecision.paceState,
+    wasCritical: telegraph === "critical",
+  });
+  if (before.hp !== after.hp) {
+    appendTelemetryEvent("hp_changed", {
+      sessionId: state.telemetry.sessionId,
+      hpBefore: before.hp,
+      hpAfter: after.hp,
+      changedAt: new Date(now).toISOString(),
+      sourceEvent: "attack_resolved",
+    });
   }
 
   state = {
@@ -739,6 +1064,26 @@ function answerChoice(choiceIndex) {
   playCue(isCorrect ? "correct" : "wrong");
 
   if (trigger) {
+    appendTelemetryEvent("flashback_triggered", {
+      sessionId: state.telemetry.sessionId,
+      conceptIds: trigger.affectedConceptIds,
+      regionId: trigger.flashback?.regionId ?? runtime.mapDefinition.region.id,
+      triggeredAt: new Date(now).toISOString(),
+      reason: "known_ground_slip",
+      submapId: trigger.flashback?.submapId ?? null,
+      trapIds: [question.trapId].filter(Boolean),
+      reclaimQuestionId: trigger.reclaim?.questionId ?? trigger.questionId,
+    });
+    for (const conceptId of trigger.affectedConceptIds ?? []) {
+      appendTelemetryEvent("reclaim_scheduled", {
+        sessionId: state.telemetry.sessionId,
+        conceptId,
+        scheduledAt: new Date(now).toISOString(),
+        regionId: trigger.flashback?.regionId ?? runtime.mapDefinition.region.id,
+        submapId: trigger.flashback?.submapId ?? null,
+        questionId: trigger.questionId,
+      });
+    }
     appendFeed(narrative.flashback(createStoryNode(runtime, question, state.currentRouteNode)));
     appendCue("flashback", "Known ground");
     playCue("flashback");
@@ -773,6 +1118,7 @@ function restartChapter() {
   state.audioStatus = audio.getStatus();
   updateSceneAudio("title");
   appendCue("title", "Restart chapter");
+  recordSessionStarted();
   sync();
 }
 
@@ -871,6 +1217,7 @@ async function boot() {
     runtime = await loadChapter1Runtime();
     narrative = createNarrativeOracle(runtime);
     state = createInitialState(runtime);
+    recordSessionStarted();
     refreshDerivedState();
     sync();
   } catch (error) {

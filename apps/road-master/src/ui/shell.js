@@ -448,6 +448,69 @@ function renderAudio(state) {
   `;
 }
 
+function renderTelemetry(state) {
+  const events = state.telemetry?.events ?? [];
+  const groupCounts = events.reduce((acc, event) => {
+    const group = event.group ?? "unknown";
+    acc[group] = (acc[group] ?? 0) + 1;
+    return acc;
+  }, {});
+  const recent = events.slice(-6).reverse();
+  const clears = events.filter((event) => event.name === "region_conquered").length;
+  const failures = events.filter((event) => event.name === "run_failed").length;
+  const reclaims = events.filter((event) => event.name === "reclaim_succeeded").length;
+  const bossAttempts = events.filter((event) => event.name === "boss_attempted").length;
+
+  return `
+    <article class="card telemetry-card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Telemetry surface</p>
+          <h2>Live balancing signals</h2>
+        </div>
+        <span class="pill">${escapeHtml(String(events.length))} events</span>
+      </div>
+
+      <div class="battle-stats">
+        ${metric("Clears", String(clears), "mint")}
+        ${metric("Failures", String(failures), "danger")}
+        ${metric("Reclaims", String(reclaims), "teal")}
+        ${metric("Boss tries", String(bossAttempts), "amber")}
+      </div>
+
+      <div class="cue-log">
+        <h3>Event groups</h3>
+        <div class="cue-list">
+          ${Object.entries(groupCounts)
+            .map(
+              ([group, count]) => `
+                <span class="cue-pill cue-pill--${escapeHtml(group)}">${escapeHtml(group)} · ${escapeHtml(String(count))}</span>
+              `,
+            )
+            .join("") || `<span class="cue-pill">session · 0</span>`}
+        </div>
+      </div>
+
+      <div class="feed-list">
+        ${
+          recent.length
+            ? recent
+                .map(
+                  (event) => `
+                    <article class="feed-entry feed-entry--${escapeHtml(event.group ?? "neutral")}">
+                      <div class="feed-entry__speaker">${escapeHtml(event.name)}</div>
+                      <p>${escapeHtml(event.questionId ?? event.regionId ?? event.nodeId ?? event.bossId ?? "runtime event")}</p>
+                    </article>
+                  `,
+                )
+                .join("")
+            : `<article class="feed-entry feed-entry--neutral"><div class="feed-entry__speaker">session_started</div><p>The slice is armed and waiting for Chapter I.</p></article>`
+        }
+      </div>
+    </article>
+  `;
+}
+
 function renderHero(state, chapter) {
   const statusLabel =
     state.phase === "victory"
@@ -600,7 +663,7 @@ export function renderRoadMasterApp(state, chapter) {
           <span class="pill">HP ${clamp(state.combatSnapshot?.hp ?? 0, 0, state.combatSnapshot?.maxHp ?? 100)}/${state.combatSnapshot?.maxHp ?? 100}</span>
           <span class="pill">Route ${escapeHtml(routeLabel)}</span>
           <span class="pill">Risk ${clamp(state.pressure ?? 0, 0, 100)}%</span>
-          <span class="pill">Events ${state.feed?.length ?? 0}</span>
+          <span class="pill">Events ${state.telemetry?.events?.length ?? 0}</span>
           <button class="pill pill--toggle" data-action="toggle-audio" type="button">
             ${state.audioEnabled ? "Mute audio" : "Enable audio"}
           </button>
@@ -642,6 +705,7 @@ export function renderRoadMasterApp(state, chapter) {
           }
           ${renderNarrative(state, chapter)}
           ${renderAudio(state)}
+          ${renderTelemetry(state)}
         </section>
       </main>
 
