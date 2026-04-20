@@ -2,8 +2,11 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# shellcheck disable=SC2034
 LABELS_FILE="${ROOT_DIR}/roadmap/labels.json"
+# shellcheck disable=SC2034
 MILESTONES_FILE="${ROOT_DIR}/roadmap/milestones.json"
+# shellcheck disable=SC2034
 ISSUES_FILE="${ROOT_DIR}/roadmap/issues.json"
 
 require_cmd() {

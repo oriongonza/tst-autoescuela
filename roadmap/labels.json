@@ -83,5 +83,40 @@
     "name": "priority: p2",
     "color": "FCBF49",
     "description": "Later roadmap work or supporting structure."
+  },
+  {
+    "name": "lane:spark-1",
+    "color": "0B6E4F",
+    "description": "Spark lane 1: roadmap model ownership."
+  },
+  {
+    "name": "lane:spark-2",
+    "color": "14746F",
+    "description": "Spark lane 2: bootstrap script ownership."
+  },
+  {
+    "name": "lane:spark-3",
+    "color": "1D4E89",
+    "description": "Spark lane 3: CI ownership."
+  },
+  {
+    "name": "lane:spark-4",
+    "color": "7B2CBF",
+    "description": "Spark lane 4: review and merge automation ownership."
+  },
+  {
+    "name": "lane:spark-5",
+    "color": "A4133C",
+    "description": "Spark lane 5: governance and template ownership."
+  },
+  {
+    "name": "bot:overseer",
+    "color": "6C757D",
+    "description": "Applied to overseer-owned coordination work."
+  },
+  {
+    "name": "bot:auto-review",
+    "color": "495057",
+    "description": "Applied when auto-review is the active gate."
   }
 ]
