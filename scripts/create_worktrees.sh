@@ -10,26 +10,20 @@ require_cmd git
 BASE_BRANCH="${BASE_BRANCH:-main}"
 MAIN_REPO_ROOT="$(main_repo_root)"
 WORKTREE_ROOT="${WORKTREE_ROOT:-${MAIN_REPO_ROOT}/.worktrees}"
+LAUNCH_ID="$(spark_launch_id)"
 
 if ! git -C "${MAIN_REPO_ROOT}" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   echo "Not inside a git repository: ${MAIN_REPO_ROOT}" >&2
   exit 1
 fi
 
-if ! git -C "${MAIN_REPO_ROOT}" rev-parse --verify --quiet "${BASE_BRANCH}" >/dev/null; then
-  if git -C "${MAIN_REPO_ROOT}" rev-parse --verify --quiet "origin/${BASE_BRANCH}" >/dev/null; then
-    BASE_BRANCH="origin/${BASE_BRANCH}"
-  else
-    echo "Unable to resolve base branch: ${BASE_BRANCH}" >&2
-    exit 1
-  fi
-fi
+BASE_BRANCH="$(spark_resolve_worktree_base_branch "${MAIN_REPO_ROOT}" "${BASE_BRANCH}")"
 
 mkdir -p "${WORKTREE_ROOT}"
 
 for lane_number in 1 2 3 4 5; do
-  branch="$(spark_lane_branch "${lane_number}")"
-  path="$(spark_lane_worktree_path "${WORKTREE_ROOT}" "${lane_number}")"
+  branch="$(spark_lane_branch "${lane_number}" "${LAUNCH_ID}")"
+  path="$(spark_lane_worktree_path "${WORKTREE_ROOT}" "${lane_number}" "${LAUNCH_ID}")"
   existing_path="$(worktree_path_for_branch "${MAIN_REPO_ROOT}" "${branch}")"
 
   if [[ -n "${existing_path}" ]]; then
