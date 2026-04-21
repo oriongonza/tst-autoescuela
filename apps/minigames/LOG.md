@@ -18,12 +18,15 @@ Legend: 🔜 queued · 🛠️ in progress · 🧪 implemented, awaiting smoke t
 | 7 | Brake or Floor It | `brake-or-floor-it` | `minigame/brake-or-floor-it` | #87 | ✅ merged |
 | 8 | Plinko Test | `plinko-test` | `minigame/plinko-test` | #89 | ✅ merged |
 | 9 | Traffic Tinder | `traffic-tinder` | `minigame/traffic-tinder` | #88 | ✅ merged |
-| 10 | Crossing Guard | `crossing-guard` | `minigame/crossing-guard` | — | 🛠️ Haiku |
-| 11 | Rhythm Road | `rhythm-road` | `minigame/rhythm-road` | — | 🛠️ Haiku |
-| 12 | Tetris-Quiz | `tetris-quiz` | `minigame/tetris-quiz` | — | 🛠️ Haiku |
-| 13 | Parking Lot | `parking-lot` | `minigame/parking-lot` | — | 🔜 Wave 5 |
-| 14 | Pong with Prompts | `pong-prompts` | `minigame/pong-prompts` | — | 🔜 Wave 5 |
-| 15 | Piano Tiles | `piano-tiles` | `minigame/piano-tiles` | — | 🔜 Wave 5 |
+| 10 | Crossing Guard | `crossing-guard` | `minigame/crossing-guard` | #91 | ✅ merged |
+| 11 | Rhythm Road | `rhythm-road` | `minigame/rhythm-road` | #92 | ✅ merged |
+| 12 | Tetris-Quiz | `tetris-quiz` | `minigame/tetris-quiz` | #90 | ✅ merged |
+| 13 | Parking Lot | `parking-lot` | `minigame/parking-lot` | — | 🛠️ Haiku |
+| 14 | Pong with Prompts | `pong-prompts` | `minigame/pong-prompts` | — | 🛠️ Haiku |
+| 15 | Piano Tiles | `piano-tiles` | `minigame/piano-tiles` | — | 🛠️ Haiku |
+| 16 | Frogger Crossing | `frogger-crossing` | `minigame/frogger-crossing` | — | 🔜 Wave 6 |
+| 17 | Archery | `archery` | `minigame/archery` | — | 🔜 Wave 6 |
+| 18 | Answer Boxing | `answer-boxing` | `minigame/answer-boxing` | — | 🔜 Wave 6 |
 
 ## Waves
 
@@ -53,18 +56,24 @@ Legend: 🔜 queued · 🛠️ in progress · 🧪 implemented, awaiting smoke t
 - #89 Plinko Test — 484 LOC, 6 peg rows, 5-nudge budget per drop
 - #88 Traffic Tinder — 483 LOC, 3-cards-per-question, 4s auto-advance
 
-### Wave 4 — 🛠️ in flight
+### Wave 4 — ✅ shipped
+3 Haikus in parallel → all merged (conflict dance x2 on hub tiles):
+- #91 Crossing Guard — 585 LOC, 4 cars queue, baton rotation, 3-6s shrinking timeout
+- #90 Tetris-Quiz — 555 LOC total, 8×14 grid, drop correct-labeled block into A/B/C/D zone
+- #92 Rhythm Road — 958 LOC total, 120 BPM chiptune with bass kick+melody+cymbal, ±30px hit window
+
+### Wave 5 — 🛠️ in flight
 3 Haikus in parallel:
-- `minigame/crossing-guard` — traffic-cop baton, 4 queued cars
-- `minigame/rhythm-road` — 4-lane DDR with synthesized chiptune
-- `minigame/tetris-quiz` — labeled blocks fall, drop into matching A/B/C/D zone
+- `minigame/parking-lot` — top-down arcade parking, 4 bays, 20s timer
+- `minigame/pong-prompts` — paddle at top, 4 labeled walls at bottom, block wrong ones
+- `minigame/piano-tiles` — 4-lane cascading tiles, gold tile in correct lane advances quiz
 
-### Wave 5 — queued (prompts prepping in /tmp/ms-wave5-prompts.md)
-- `parking-lot` — top-down parking into correctly-numbered bay
-- `pong-prompts` — paddle-top, 4 walls A/B/C/D labeled, block the wrong ones
-- `piano-tiles` — 4 vertical lanes, cascading tiles, press correct-lane only
+### Wave 6 — queued (prompts in /tmp/ms-wave6-prompts.md)
+- `frogger-crossing` — hop lanes of traffic to the correct-answer lane
+- `archery` — 4 targets at different heights; aim + shoot the correct one
+- `answer-boxing` — rhythm punch-out: 4 arrow-key directions = 4 choices
 
-### Waves 6+ — see IDEAS.md (25+ enriched candidates still open: Simon Says DGT, Answer Boxing, Autoescuela Survivor, Typography Fall, Neon Bowl, Connect-4 Quiz, Frogger Crossing, Tower of Yield, Archery, Scratch-off, Spin the Wheel…).
+### Waves 7+ — see IDEAS.md (still ≥15 candidates: Simon Says DGT, Autoescuela Survivor, Typography Fall, Neon Bowl, Connect-4 Quiz, Tower of Yield, Scratch-off, Spin the Wheel, 2048-Quiz, Minesweeper of Answers, Bullet Hell Dodge, Escape the Car, …).
 
 ## Notes for future me
 - Don't rewrite `quiz-core.mjs` — every minigame depends on it. Fix bugs in place only; never change the public signature.
