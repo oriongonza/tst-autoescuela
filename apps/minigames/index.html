@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Autoescuela Arcade — Hub</title>
+<link rel="stylesheet" href="./core/shared.css">
+<style>
+  .wrap    { max-width: 1200px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+  header   { text-align: center; margin-bottom: 2.5rem; }
+  header p { color: var(--fg-dim); margin-top: 0.4rem; font-size: 1rem; letter-spacing: 0.15em; text-transform: uppercase; }
+  .grid    { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+  .tile    {
+    display: block; text-decoration: none; color: inherit;
+    border: 2px solid var(--neon-cyan);
+    padding: 1.25rem 1.25rem 1.5rem;
+    background: linear-gradient(160deg, rgba(0,234,255,0.08), rgba(255,0,170,0.04));
+    position: relative; overflow: hidden;
+    transition: transform 160ms ease-out, box-shadow 160ms ease-out;
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+  .tile:hover { transform: translateY(-4px); box-shadow: 0 10px 40px rgba(0,234,255,0.35); }
+  .tile .emoji { font-size: 3rem; line-height: 1; filter: drop-shadow(0 0 8px var(--neon-cyan)); }
+  .tile h3 {
+    margin: 0.5rem 0 0.35rem;
+    font-size: 1.2rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px currentColor;
+  }
+  .tile p { margin: 0; color: var(--fg-dim); font-size: 0.9rem; line-height: 1.4; }
+  .tile.wip { opacity: 0.55; border-style: dashed; animation: none; }
+  .tile.wip::after {
+    content: 'COMING SOON';
+    position: absolute; top: 10px; right: 10px;
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    color: var(--neon-yellow);
+    background: rgba(0,0,0,0.7);
+    padding: 4px 8px;
+    border: 1px solid var(--neon-yellow);
+  }
+  .tile.ready { border-color: var(--neon-green); }
+  .tile.ready h3 { color: var(--neon-green); }
+  .tile.ready::after {
+    content: 'READY';
+    position: absolute; top: 10px; right: 10px;
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    color: var(--neon-green);
+    background: rgba(0,0,0,0.7);
+    padding: 4px 8px;
+    border: 1px solid var(--neon-green);
+  }
+  footer { text-align: center; margin-top: 3rem; color: var(--fg-dim); font-size: 0.75rem; letter-spacing: 0.2em; }
+  footer a { color: var(--neon-cyan); }
+</style>
+</head>
+<body class="scanlines">
+<div class="wrap">
+  <header>
+    <h1 class="arcade-title">Autoescuela Arcade</h1>
+    <p>One quiz &nbsp;·&nbsp; many ways to play</p>
+  </header>
+
+  <div class="grid">
+    <a class="tile wip" data-slug="lane-runner" href="./lane-runner/">
+      <div class="emoji">🚗</div>
+      <h3>Lane Runner</h3>
+      <p>Four lanes, one right answer. Swerve to the correct lane before the gate slams.</p>
+    </a>
+    <a class="tile wip" data-slug="sign-smash" href="./sign-smash/">
+      <div class="emoji">🔨</div>
+      <h3>Sign Smash</h3>
+      <p>Whack-a-sign. Four holes, one right sign. Be faster. Stay alive.</p>
+    </a>
+    <a class="tile wip" data-slug="lightning-strike" href="./lightning-strike/">
+      <div class="emoji">⚡</div>
+      <h3>Lightning Strike</h3>
+      <p>60 seconds. Max juice. Combo into <b>FEVER</b> for triple points.</p>
+    </a>
+    <a class="tile wip" data-slug="asteroid-answer" href="./asteroid-answer/">
+      <div class="emoji">🛸</div>
+      <h3>Asteroid Answer</h3>
+      <p>Shoot the correct asteroid. Miss &mdash; and it lands on your ship.</p>
+    </a>
+    <a class="tile wip" data-slug="flappy-signal" href="./flappy-signal/">
+      <div class="emoji">🪂</div>
+      <h3>Flappy Signal</h3>
+      <p>Flap through the <em>right</em> gate. Wrong gate = pipe = game over.</p>
+    </a>
+    <a class="tile wip" data-slug="sign-slicer" href="./sign-slicer/">
+      <div class="emoji">🥷</div>
+      <h3>Sign Slicer</h3>
+      <p>Answers fly up from below. Slice the right one. Avoid the bombs.</p>
+    </a>
+  </div>
+
+  <footer>
+    Keyboard + mouse · best on desktop ·
+    <a href="./core/quiz-core.test.html">run core smoke test</a>
+  </footer>
+</div>
+</body>
+</html>

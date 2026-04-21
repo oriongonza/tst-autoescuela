@@ -1,0 +1,674 @@
+[
+  {
+    "id": "cf-q-001",
+    "prompt": "At a four-way stop, two vehicles arrive together. Who goes first?",
+    "choices": [
+      "The vehicle on the right.",
+      "The vehicle on the left.",
+      "The larger vehicle.",
+      "The vehicle that honks first."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "right-of-way",
+      "four-way-stop",
+      "priority"
+    ],
+    "trapId": "priority-inversion",
+    "analogyId": "chessboard-crossing",
+    "explanationId": "why-priority-matters",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 1,
+    "difficulty": "intro",
+    "arc": "gate",
+    "knownMistake": true
+  },
+  {
+    "id": "cf-q-002",
+    "prompt": "If you arrive first at a stop sign and no one else is moving, what should you do?",
+    "choices": [
+      "Roll through and keep moving.",
+      "Stop fully, then proceed.",
+      "Wait for the biggest vehicle.",
+      "Signal and skip the stop."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "stop-sign",
+      "intersection",
+      "hazard-scan"
+    ],
+    "trapId": "stop-sign-bait",
+    "analogyId": "gate-guard",
+    "explanationId": "why-stop-means-stop",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 1,
+    "difficulty": "intro",
+    "arc": "gate",
+    "knownMistake": true
+  },
+  {
+    "id": "cf-q-003",
+    "prompt": "A yield sign tells you to...",
+    "choices": [
+      "Stop only if the road feels busy.",
+      "Slow down and give way if needed.",
+      "Speed up to clear the crossing.",
+      "Ignore other traffic if you are early."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "yield-sign",
+      "priority",
+      "merge-gap"
+    ],
+    "trapId": "false-yield",
+    "analogyId": "river-confluence",
+    "explanationId": "why-yield-is-active",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 1,
+    "difficulty": "intro",
+    "arc": "gate",
+    "knownMistake": true
+  },
+  {
+    "id": "cf-q-004",
+    "prompt": "Before changing lanes, the safest check order is...",
+    "choices": [
+      "Accelerate, then signal, then look.",
+      "Signal, then check mirrors and blind spot.",
+      "Honk, then move quickly.",
+      "Look only at the road ahead."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "turn-signal",
+      "mirror-check",
+      "lane-position"
+    ],
+    "trapId": "signal-without-check",
+    "analogyId": "torch-pass",
+    "explanationId": "why-signal-is-only-a-start",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 1,
+    "difficulty": "steady",
+    "arc": "gate",
+    "knownMistake": true
+  },
+  {
+    "id": "cf-q-005",
+    "prompt": "A pedestrian is already in the crosswalk. You should...",
+    "choices": [
+      "Keep going because you entered first.",
+      "Stop and yield.",
+      "Hurry around them.",
+      "Sound the horn and inch forward."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "pedestrian-crossing",
+      "shared-space",
+      "hazard-scan"
+    ],
+    "trapId": "pedestrian-ghost",
+    "analogyId": "shield-wall",
+    "explanationId": "why-pedestrians-win",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 1,
+    "difficulty": "steady",
+    "arc": "gate",
+    "knownMistake": true
+  },
+  {
+    "id": "cf-q-006",
+    "prompt": "In a school zone, the best default is to...",
+    "choices": [
+      "Keep normal speed if traffic is light.",
+      "Reduce speed and scan early.",
+      "Follow the fastest car.",
+      "Wait for a school bus before slowing."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "school-zone",
+      "speed-control",
+      "visibility"
+    ],
+    "trapId": "late-brake",
+    "analogyId": "lantern-walk",
+    "explanationId": "why-speed-down-in-low-visibility",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 1,
+    "difficulty": "steady",
+    "arc": "gate",
+    "knownMistake": false
+  },
+  {
+    "id": "cf-q-007",
+    "prompt": "At a roundabout, you should enter...",
+    "choices": [
+      "As soon as you see the circle.",
+      "Only when the gap is safe.",
+      "Only after a full stop on the ring.",
+      "When the largest vehicle enters first."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "roundabout-entry",
+      "merge-gap",
+      "priority"
+    ],
+    "trapId": "roundabout-confusion",
+    "analogyId": "circle-arch",
+    "explanationId": "why-roundabout-gap-wins",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 2,
+    "difficulty": "steady",
+    "arc": "labyrinth",
+    "knownMistake": true
+  },
+  {
+    "id": "cf-q-008",
+    "prompt": "What helps other drivers predict you?",
+    "choices": [
+      "Signal before moving.",
+      "Move first, signal later.",
+      "Wait until halfway through the turn.",
+      "Change lanes without warning."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "turn-signal",
+      "turning-order",
+      "lane-position"
+    ],
+    "trapId": "signal-without-check",
+    "analogyId": "torch-pass",
+    "explanationId": "why-signal-is-only-a-start",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 2,
+    "difficulty": "steady",
+    "arc": "labyrinth",
+    "knownMistake": false
+  },
+  {
+    "id": "cf-q-009",
+    "prompt": "An emergency vehicle with a siren approaches from behind. You should...",
+    "choices": [
+      "Keep speed so you stay in front.",
+      "Pull over and give way.",
+      "Block the lane until the light changes.",
+      "Follow it closely."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "emergency-vehicle",
+      "priority",
+      "shared-space"
+    ],
+    "trapId": "priority-inversion",
+    "analogyId": "gate-guard",
+    "explanationId": "why-priority-matters",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 2,
+    "difficulty": "pressure",
+    "arc": "labyrinth",
+    "knownMistake": false
+  },
+  {
+    "id": "cf-q-010",
+    "prompt": "A large truck at an intersection...",
+    "choices": [
+      "Automatically goes first.",
+      "Has priority because it is bigger.",
+      "Does not gain priority just by size.",
+      "May ignore the stop sign."
+    ],
+    "answerIndex": 2,
+    "conceptIds": [
+      "priority",
+      "right-of-way",
+      "shared-space"
+    ],
+    "trapId": "priority-inversion",
+    "analogyId": "chessboard-crossing",
+    "explanationId": "why-size-does-not-mean-first",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 2,
+    "difficulty": "pressure",
+    "arc": "labyrinth",
+    "knownMistake": true
+  },
+  {
+    "id": "cf-q-011",
+    "prompt": "If lane markings are unclear, your safest move is to...",
+    "choices": [
+      "Guess quickly and keep rolling.",
+      "Slow down and re-evaluate.",
+      "Take the shoulder without looking.",
+      "Speed up so others can react."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "road-markings",
+      "lane-position",
+      "hazard-scan"
+    ],
+    "trapId": "lane-shear",
+    "analogyId": "watchtower-scan",
+    "explanationId": "why-speed-down-in-low-visibility",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 2,
+    "difficulty": "pressure",
+    "arc": "labyrinth",
+    "knownMistake": true
+  },
+  {
+    "id": "cf-q-012",
+    "prompt": "When merging, the key is to find...",
+    "choices": [
+      "The loudest horn.",
+      "A safe gap and matched speed.",
+      "The shortest car.",
+      "A lane with no markings."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "merge-gap",
+      "following-distance",
+      "speed-control"
+    ],
+    "trapId": "gap-hunger",
+    "analogyId": "river-confluence",
+    "explanationId": "why-gap-and-speed-matter",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 2,
+    "difficulty": "pressure",
+    "arc": "labyrinth",
+    "knownMistake": false
+  },
+  {
+    "id": "cf-q-013",
+    "prompt": "Following distance mainly buys you...",
+    "choices": [
+      "A louder engine note.",
+      "Time to react.",
+      "Better radio reception.",
+      "Permission to tailgate."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "following-distance",
+      "speed-control",
+      "hazard-scan"
+    ],
+    "trapId": "gap-hunger",
+    "analogyId": "field-lantern",
+    "explanationId": "why-gap-and-speed-matter",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 3,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": false
+  },
+  {
+    "id": "cf-q-014",
+    "prompt": "In low visibility, you should...",
+    "choices": [
+      "Speed up to finish sooner.",
+      "Reduce speed and scan.",
+      "Shut off headlights.",
+      "Follow tail lights closely."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "visibility",
+      "speed-control",
+      "approach-speed"
+    ],
+    "trapId": "late-brake",
+    "analogyId": "lantern-walk",
+    "explanationId": "why-speed-down-in-low-visibility",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 3,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": true
+  },
+  {
+    "id": "cf-q-015",
+    "prompt": "A bike lane should be treated as...",
+    "choices": [
+      "A parking shortcut.",
+      "Protected space to respect.",
+      "The fastest passing lane.",
+      "A place to wait for turns."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "bike-lane",
+      "shared-space",
+      "hazard-scan"
+    ],
+    "trapId": "pedestrian-ghost",
+    "analogyId": "shield-wall",
+    "explanationId": "why-pedestrians-win",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 3,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": false
+  },
+  {
+    "id": "cf-q-016",
+    "prompt": "Near a busy crosswalk, the best approach is to...",
+    "choices": [
+      "Expect pedestrians and slow early.",
+      "Speed up to clear the area.",
+      "Honk first and continue.",
+      "Wait only if someone waves."
+    ],
+    "answerIndex": 0,
+    "conceptIds": [
+      "pedestrian-crossing",
+      "hazard-scan",
+      "approach-speed"
+    ],
+    "trapId": "pedestrian-ghost",
+    "analogyId": "watchtower-scan",
+    "explanationId": "why-pedestrians-win",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 3,
+    "difficulty": "pressure",
+    "arc": "boss",
+    "knownMistake": true
+  },
+  {
+    "id": "cf-q-017",
+    "prompt": "When cues conflict, what wins?",
+    "choices": [
+      "The biggest vehicle.",
+      "The rule-based priority.",
+      "The first horn.",
+      "The nearest lane line."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "priority",
+      "right-of-way",
+      "turning-order"
+    ],
+    "trapId": "priority-inversion",
+    "analogyId": "chessboard-crossing",
+    "explanationId": "why-priority-matters",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 3,
+    "difficulty": "boss",
+    "arc": "boss",
+    "knownMistake": false
+  },
+  {
+    "id": "cf-q-018",
+    "prompt": "At a stop sign with no one else around, you still should...",
+    "choices": [
+      "Roll through if you can see.",
+      "Come to a full stop.",
+      "Slow without stopping.",
+      "Signal and skip the stop."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "stop-sign",
+      "intersection",
+      "hazard-scan"
+    ],
+    "trapId": "stop-sign-bait",
+    "analogyId": "gate-guard",
+    "explanationId": "why-stop-means-stop",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 3,
+    "difficulty": "boss",
+    "arc": "boss",
+    "knownMistake": true
+  },
+  {
+    "id": "cf-q-019",
+    "prompt": "If you signal but do not check mirrors and blind spot, you risk...",
+    "choices": [
+      "Saving time safely.",
+      "Missing a hidden vehicle.",
+      "Getting extra priority.",
+      "Improving road visibility."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "turn-signal",
+      "mirror-check",
+      "lane-position"
+    ],
+    "trapId": "mirror-lure",
+    "analogyId": "watchtower-scan",
+    "explanationId": "why-signal-is-only-a-start",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 4,
+    "difficulty": "reclaim",
+    "arc": "reclaim",
+    "knownMistake": true
+  },
+  {
+    "id": "cf-q-020",
+    "prompt": "If you are unsure at a crossroad, the right move is to...",
+    "choices": [
+      "Force the turn.",
+      "Slow, scan, and yield.",
+      "Accelerate to exit the doubt.",
+      "Follow the truck blindly."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "intersection",
+      "hazard-scan",
+      "priority"
+    ],
+    "trapId": "false-yield",
+    "analogyId": "field-lantern",
+    "explanationId": "why-yield-is-active",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 4,
+    "difficulty": "reclaim",
+    "arc": "reclaim",
+    "knownMistake": false
+  },
+  {
+    "id": "cf-q-021",
+    "prompt": "The Beast's false lead is beaten by...",
+    "choices": [
+      "Checking size before rule.",
+      "Checking order and rule.",
+      "Closing your eyes and going.",
+      "Following the loudest engine."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "right-of-way",
+      "priority",
+      "turning-order"
+    ],
+    "trapId": "priority-inversion",
+    "analogyId": "chessboard-crossing",
+    "explanationId": "why-priority-matters",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 4,
+    "difficulty": "reclaim",
+    "arc": "reclaim",
+    "knownMistake": true
+  },
+  {
+    "id": "cf-q-022",
+    "prompt": "What breaks the Beast's pressure phase?",
+    "choices": [
+      "A faster horn.",
+      "A clean yield at the right time.",
+      "A longer beep.",
+      "A sudden sprint through the gap."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "yield-sign",
+      "priority",
+      "merge-gap"
+    ],
+    "trapId": "gap-hunger",
+    "analogyId": "river-confluence",
+    "explanationId": "why-yield-is-active",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 4,
+    "difficulty": "reclaim",
+    "arc": "reclaim",
+    "knownMistake": false
+  },
+  {
+    "id": "cf-q-023",
+    "prompt": "To reclaim a wrong answer, first you should...",
+    "choices": [
+      "Invent a new rule.",
+      "Name the trap and restate the rule.",
+      "Skip the explanation.",
+      "Change the question."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "reclaim-loop",
+      "hazard-scan",
+      "priority"
+    ],
+    "trapId": "false-yield",
+    "analogyId": "reclaim-path",
+    "explanationId": "why-reclaim-after-a-miss",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 4,
+    "difficulty": "reclaim",
+    "arc": "reclaim",
+    "knownMistake": true
+  },
+  {
+    "id": "cf-q-024",
+    "prompt": "If you lose a right-of-way question, the best recovery is to...",
+    "choices": [
+      "Blame the map.",
+      "Review the rule, trap, and analogy.",
+      "Memorize the biggest vehicle.",
+      "Ignore the miss and move on."
+    ],
+    "answerIndex": 1,
+    "conceptIds": [
+      "reclaim-loop",
+      "right-of-way",
+      "priority"
+    ],
+    "trapId": "priority-inversion",
+    "analogyId": "reclaim-path",
+    "explanationId": "why-reclaim-after-a-miss",
+    "regionId": "crossing-fields",
+    "submapId": "four-way-labyrinth",
+    "bossIds": [
+      "right-of-way-beast"
+    ],
+    "attackTier": 4,
+    "difficulty": "reclaim",
+    "arc": "reclaim",
+    "knownMistake": true
+  }
+]

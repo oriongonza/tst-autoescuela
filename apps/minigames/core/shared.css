@@ -1,0 +1,122 @@
+/* apps/minigames/core/shared.css
+ * Shared palette, typography, and animation keyframes for the minigame arcade.
+ * Each minigame may override variables but should start here for a consistent feel.
+ */
+
+:root {
+  --neon-cyan:    #00eaff;
+  --neon-magenta: #ff00aa;
+  --neon-yellow:  #fff200;
+  --neon-green:   #00ffa2;
+  --neon-red:     #ff3060;
+  --bg-deep:      #080014;
+  --bg-mid:       #140024;
+  --fg:           #eaf0ff;
+  --fg-dim:       #8c94b5;
+  --juice-good:   var(--neon-green);
+  --juice-bad:    var(--neon-red);
+  --ink:          #0a0014;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: radial-gradient(ellipse at 50% 40%, var(--bg-mid), var(--bg-deep));
+  color: var(--fg);
+  font-family: 'Courier New', 'Consolas', ui-monospace, monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.arcade-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 12px var(--neon-cyan), 0 0 24px var(--neon-cyan);
+  margin: 0;
+}
+
+.arcade-btn {
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.8em 1.4em;
+  border: 2px solid var(--neon-cyan);
+  background: transparent;
+  color: var(--neon-cyan);
+  cursor: pointer;
+  transition: all 120ms ease-out;
+  text-shadow: 0 0 6px currentColor;
+}
+.arcade-btn:hover {
+  background: var(--neon-cyan);
+  color: var(--ink);
+  box-shadow: 0 0 20px var(--neon-cyan);
+}
+.arcade-btn:active { transform: translateY(1px); }
+
+.hud {
+  position: fixed;
+  top: 12px; left: 12px; right: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  z-index: 100;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.hud .hud-item {
+  padding: 6px 12px;
+  border: 1px solid var(--neon-cyan);
+  background: rgba(8,0,20,0.6);
+  color: var(--neon-cyan);
+}
+.hud .hud-good { color: var(--neon-green); border-color: var(--neon-green); }
+.hud .hud-bad  { color: var(--neon-red);   border-color: var(--neon-red); }
+.hud .hud-warn { color: var(--neon-yellow); border-color: var(--neon-yellow); }
+
+.scanlines::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255,255,255,0.03) 0,
+    rgba(255,255,255,0.03) 1px,
+    transparent 1px, transparent 3px
+  );
+  pointer-events: none;
+  z-index: 200;
+  mix-blend-mode: overlay;
+}
+
+@keyframes pop {
+  0%   { transform: scale(0.6); opacity: 0; }
+  60%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes flash {
+  0%   { background-color: var(--juice-good); }
+  100% { background-color: transparent; }
+}
+@keyframes shake {
+  0%, 100% { transform: translate(0,0); }
+  20% { transform: translate(-6px, 2px); }
+  40% { transform: translate(6px, -2px); }
+  60% { transform: translate(-4px, 3px); }
+  80% { transform: translate(4px, -3px); }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px currentColor; }
+  50%     { box-shadow: 0 0 24px currentColor, 0 0 48px currentColor; }
+}
+@keyframes drift-down {
+  from { transform: translateY(-100vh); }
+  to   { transform: translateY(100vh); }
+}
