@@ -48,6 +48,8 @@ elif [[ "${LANE_LABEL}" != "${expected_lane_label}" ]]; then
   exit 1
 fi
 
+git push --set-upstream origin "${HEAD_BRANCH}"
+
 summary_file="$(mktemp)"
 trap 'rm -f "${summary_file}"' EXIT
 "${SCRIPT_DIR}/overseer_lane_status.sh" --repo "${GH_REPO}" --branch "${HEAD_BRANCH}" --format text >"${summary_file}"

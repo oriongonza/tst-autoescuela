@@ -2,6 +2,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 run_manifest() {
   "${SCRIPT_DIR}/validate_manifest.sh"
@@ -9,6 +10,25 @@ run_manifest() {
 
 run_repo_smoke() {
   "${SCRIPT_DIR}/check_repo_structure.sh"
+}
+
+run_road_master_tests() {
+  (
+    cd "${ROOT_DIR}"
+    node --test \
+      apps/road-master/tests/combat_pacing/*.test.mjs \
+      apps/road-master/tests/map_memory/*.test.mjs \
+      apps/road-master/tests/analytics/*.test.mjs \
+      apps/road-master/tests/social_or_narrative/*.test.mjs \
+      apps/road-master/tests/app/*.test.mjs
+  )
+}
+
+run_content_inspector() {
+  (
+    cd "${ROOT_DIR}"
+    node apps/road-master/tools/content-inspector.mjs validate
+  )
 }
 
 run_bash() {
@@ -38,6 +58,12 @@ run_stage() {
     repo-smoke)
       run_repo_smoke
       ;;
+    road-master-tests)
+      run_road_master_tests
+      ;;
+    content-inspector)
+      run_content_inspector
+      ;;
     bash)
       run_bash
       ;;
@@ -47,12 +73,14 @@ run_stage() {
     all)
       run_manifest
       run_repo_smoke
+      run_road_master_tests
+      run_content_inspector
       run_bash
       run_shellcheck
       ;;
     *)
       echo "Unknown CI stage: ${1}" >&2
-      echo "Usage: scripts/ci.sh [manifest|repo-smoke|bash|shellcheck|all ...]" >&2
+      echo "Usage: scripts/ci.sh [manifest|repo-smoke|road-master-tests|content-inspector|bash|shellcheck|all ...]" >&2
       exit 1
       ;;
   esac

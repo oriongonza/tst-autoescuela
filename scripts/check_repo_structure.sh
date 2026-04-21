@@ -98,6 +98,16 @@ contains_literal "scripts/ci.sh repo-smoke" ".github/workflows/ci.yml" || {
   exit 1
 }
 
+contains_literal "scripts/ci.sh road-master-tests" ".github/workflows/ci.yml" || {
+  echo ".github/workflows/ci.yml must invoke scripts/ci.sh road-master-tests" >&2
+  exit 1
+}
+
+contains_literal "scripts/ci.sh content-inspector" ".github/workflows/ci.yml" || {
+  echo ".github/workflows/ci.yml must invoke scripts/ci.sh content-inspector" >&2
+  exit 1
+}
+
 contains_literal "scripts/ci.sh shellcheck" ".github/workflows/ci.yml" || {
   echo ".github/workflows/ci.yml must invoke scripts/ci.sh shellcheck" >&2
   exit 1

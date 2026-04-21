@@ -134,6 +134,39 @@
     ]
   },
   {
+    "title": "Harden lane launch for collision-safe worktrees and stale-main/PR bootstrap",
+    "milestone": "0.0.0 Foundations",
+    "type": "task",
+    "area": "release",
+    "priority": "p0",
+    "extra_labels": [
+      "lane:spark-1",
+      "workflow: worktree",
+      "workflow: pr-flow",
+      "workflow: gatekeeping"
+    ],
+    "body_lines": [
+      "## Summary",
+      "Make the launch flow resilient to stale worktree directories and branch drift so new lane worktrees cannot collide or consume stale main state.",
+      "",
+      "## Deliverables",
+      "- Collision-safe worktree bootstrap checks that fail fast on conflicting paths, owners, or lanes.",
+      "- Stale-main/PR bootstrap validation before starting a lane run.",
+      "- Guardrails for recovering from mixed-state local branches during `bootstrap_all` and lane handoff.",
+      "",
+      "## Acceptance Criteria",
+      "- A lane launch can never reuse a worktree directory that belongs to another active branch.",
+      "- Launch aborts with a clear error when stale-main assumptions are detected.",
+      "- Re-running launch after recovery preserves lane isolation and PR-bootstrap integrity.",
+      "",
+      "## Dependencies",
+      "- Depends on: Standardize worktree setup, branch naming, and lane isolation",
+      "",
+      "## Source",
+      "- `AGENTS.md`: lane ownership, worktree isolation, and launch flow requirements."
+    ]
+  },
+  {
     "title": "Codify PR flow from lane worktree to mainline",
     "milestone": "0.0.0 Foundations",
     "type": "task",
