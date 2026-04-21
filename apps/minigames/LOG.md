@@ -8,13 +8,16 @@ Legend: 🔜 queued · 🛠️ in progress · 🧪 implemented, awaiting smoke t
 
 | # | Game | Slug | Branch | PR | Status |
 |---|------|------|--------|----|--------|
-| 0 | Foundation (core + hub + data) | `—` | `minigames/foundation` | — | 🛠️ scaffolded |
-| 1 | Lane Runner | `lane-runner` | `minigame/lane-runner` | — | 🛠️ Haiku |
-| 2 | Sign Smash | `sign-smash` | `minigame/sign-smash` | — | 🛠️ Haiku |
-| 3 | Lightning Strike | `lightning-strike` | `minigame/lightning-strike` | — | 🛠️ Haiku |
-| 4 | Asteroid Answer | `asteroid-answer` | `minigame/asteroid-answer` | — | 🔜 queued |
-| 5 | Flappy Signal | `flappy-signal` | `minigame/flappy-signal` | — | 🔜 queued |
-| 6 | Sign Slicer | `sign-slicer` | `minigame/sign-slicer` | — | 🔜 queued |
+| 0 | Foundation (core + hub + data) | `—` | `minigames/foundation` | #80 | 🛠️ open |
+| 1 | Lane Runner | `lane-runner` | `minigame/lane-runner` | #82 | ✅ merged |
+| 2 | Sign Smash | `sign-smash` | `minigame/sign-smash` | #81 | ✅ merged |
+| 3 | Lightning Strike | `lightning-strike` | `minigame/lightning-strike` | #83 | ✅ merged |
+| 4 | Asteroid Answer | `asteroid-answer` | `minigame/asteroid-answer` | — | 🛠️ Haiku |
+| 5 | Flappy Signal | `flappy-signal` | `minigame/flappy-signal` | — | 🛠️ Haiku |
+| 6 | Sign Slicer | `sign-slicer` | `minigame/sign-slicer` | — | 🛠️ Haiku |
+| 7 | Brake or Floor It | `brake-or-floor-it` | `minigame/brake-or-floor-it` | — | 🔜 Wave 3 |
+| 8 | Plinko Test | `plinko-test` | `minigame/plinko-test` | — | 🔜 Wave 3 |
+| 9 | Traffic Tinder | `traffic-tinder` | `minigame/traffic-tinder` | — | 🔜 Wave 3 |
 
 ## Waves
 
@@ -26,18 +29,24 @@ Legend: 🔜 queued · 🛠️ in progress · 🧪 implemented, awaiting smoke t
 - Hub `index.html` with 6 placeholder tiles (all `.wip`).
 - Smoke test `core/quiz-core.test.html`.
 
-### Wave 1 — 🛠️ in flight
-3 Haikus spawned in parallel (background):
-- `minigame/lane-runner` — Lane Runner
-- `minigame/sign-smash` — Sign Smash
-- `minigame/lightning-strike` — Lightning Strike
+### Wave 1 — ✅ shipped
+3 Haikus in parallel → all 3 PRs squash-merged into `minigames/foundation`:
+- #82 Lane Runner — 4-lane dodger, gate collision, 3 lives, 60s timer
+- #81 Sign Smash — whack-a-mole 2×2, FRENZY mode @ 10x, keyboard 1234 accessibility
+- #83 Lightning Strike — juiced baseline, FEVER @ 10x (3x pts, time 0.5x), localStorage HS
 
-Each targets PR → `minigames/foundation`. Will be merged as they come in.
+### Wave 2 — 🛠️ in flight
+3 Haikus spawned in parallel:
+- `minigame/asteroid-answer` — Canvas Asteroids clone
+- `minigame/flappy-signal` — Flappy Bird clone with labeled gaps
+- `minigame/sign-slicer` — Fruit Ninja with answer placards
 
-### Wave 2 — queued
-Then: `asteroid-answer`, `flappy-signal`, `sign-slicer`.
+### Wave 3 — queued (prompts prepped in /tmp/ms-wave3-prompts.md)
+- `brake-or-floor-it` — top-down 1s-reflex driving: BRAKE/SWERVE/HORN/ACCELERATE mapped to choices[0..3]
+- `plinko-test` — ball drops through pegs into 1 of 4 slots; nudge left/right
+- `traffic-tinder` — 2-choice swipe cards: "Is this driver doing the right thing?"
 
-### Wave 3+ — see IDEAS.md for rank-ordered backlog.
+### Waves 4+ — see IDEAS.md for rank-ordered backlog.
 
 ## Notes for future me
 - Don't rewrite `quiz-core.mjs` — every minigame depends on it. Fix bugs in place only; never change the public signature.
