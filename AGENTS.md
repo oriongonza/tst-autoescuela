@@ -32,6 +32,12 @@ The overseer owns planning, lane boundaries, PR orchestration, CI watching, and 
    git -C "$ROOT" worktree add "$ROOT/.worktrees/spark-<N>" -b lane/spark-<N>-<slug> origin/main
    ```
 
+   Launch note:
+
+   - Fetch `origin/main` before every launch seed and do not assume the local `main` branch is current.
+   - If a canonical `.worktrees/spark-<N>` path is already occupied, use a launch-scoped worktree path that includes the launch ID, then seed it from the refreshed `origin/main`.
+   - Launch IDs may also be folded into the lane slug for collision-free branch names, as long as Spark branches still match `lane/spark-<N>-<slug>` and overseer branches still match `lane/overseer-<slug>`.
+
 3. Hand each lane only its owned files and branch.
    - Work inside the lane worktree.
    - Do not edit files owned by other lanes.
