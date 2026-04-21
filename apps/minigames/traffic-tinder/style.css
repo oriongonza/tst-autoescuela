@@ -1,0 +1,293 @@
+/* Traffic Tinder — swipe cards UI and animations */
+
+#app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.tt-screen {
+  display: none;
+  width: 100%;
+  max-width: 900px;
+}
+
+.tt-screen.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Title screen */
+.tt-title-screen {
+  text-align: center;
+}
+
+.tt-title-screen h1 {
+  margin-bottom: 1rem;
+}
+
+.tt-title-screen p {
+  color: var(--fg-dim);
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+}
+
+.tt-title-screen .emoji-large {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 12px var(--neon-cyan));
+}
+
+.tt-title-screen .arcade-btn {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  padding: 1em 2em;
+}
+
+.tt-title-screen .info-block {
+  margin-top: 2.5rem;
+  font-size: 0.9rem;
+  color: var(--fg-dim);
+  line-height: 1.6;
+}
+
+/* Game screen */
+.tt-game-screen {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+.tt-hud {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.tt-hud-item {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--neon-cyan);
+  background: rgba(8, 0, 20, 0.6);
+  color: var(--neon-cyan);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.tt-hud-item.lives {
+  border-color: var(--neon-red);
+  color: var(--neon-red);
+}
+
+.tt-hud-item.good {
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+}
+
+/* Card stack container */
+.tt-card-stack {
+  position: relative;
+  width: 320px;
+  height: 420px;
+  margin: 0 auto 2rem;
+  perspective: 1000px;
+}
+
+.tt-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--neon-cyan);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(0, 234, 255, 0.1), rgba(255, 0, 170, 0.05));
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  transition: box-shadow 160ms ease-out;
+  box-shadow: 0 4px 20px rgba(0, 234, 255, 0.2);
+  top: 0;
+  left: 0;
+}
+
+.tt-card.active {
+  z-index: 30;
+  cursor: grabbing;
+}
+
+.tt-card:nth-child(2) {
+  z-index: 20;
+  transform: translateY(8px) scale(0.97);
+  opacity: 0.9;
+}
+
+.tt-card:nth-child(3) {
+  z-index: 10;
+  transform: translateY(16px) scale(0.94);
+  opacity: 0.8;
+}
+
+.tt-card-prompt {
+  font-size: 0.9rem;
+  color: var(--fg-dim);
+  text-align: center;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.tt-card-scenario {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--fg);
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+.tt-card-ask {
+  font-size: 1.1rem;
+  color: var(--neon-cyan);
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-shadow: 0 0 8px var(--neon-cyan);
+}
+
+/* Drag overlays: green ✓ and red ✗ badges */
+.tt-card-overlay-right {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border: 3px solid var(--neon-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--neon-green);
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 0 12px var(--neon-green);
+}
+
+.tt-card-overlay-left {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  border: 3px solid var(--neon-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--neon-red);
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 0 12px var(--neon-red);
+}
+
+/* Game over screen */
+.tt-gameover-screen {
+  text-align: center;
+}
+
+.tt-gameover-screen h2 {
+  font-size: 2.5rem;
+  color: var(--neon-cyan);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 12px var(--neon-cyan);
+}
+
+.tt-final-score {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--neon-green);
+  margin: 1.5rem 0;
+  text-shadow: 0 0 16px var(--neon-green);
+}
+
+.tt-score-breakdown {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+  max-width: 400px;
+}
+
+.tt-score-item {
+  padding: 1rem;
+  border: 1px solid var(--neon-cyan);
+  background: rgba(8, 0, 20, 0.6);
+  border-radius: 8px;
+}
+
+.tt-score-item .label {
+  display: block;
+  color: var(--fg-dim);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.tt-score-item .value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--neon-cyan);
+}
+
+.tt-gameover-screen .arcade-btn {
+  margin-top: 2rem;
+}
+
+/* Auto-advance timer bar */
+.tt-timer-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: var(--neon-yellow);
+  border-radius: 0 0 14px 0;
+  transition: width linear;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .tt-card-stack {
+    width: 280px;
+    height: 380px;
+  }
+
+  .tt-card {
+    padding: 1.5rem;
+  }
+
+  .tt-score-breakdown {
+    grid-template-columns: 1fr;
+  }
+}
