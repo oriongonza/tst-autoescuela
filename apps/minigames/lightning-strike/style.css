@@ -1,0 +1,344 @@
+/* Lightning Strike minigame styles */
+
+#app {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.ls-screen {
+  width: 100%;
+  max-width: 900px;
+  display: none;
+}
+
+.ls-screen.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Title Screen */
+.ls-title-screen {
+  text-align: center;
+}
+
+.ls-title-screen h1 {
+  font-size: 3.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.ls-title-screen .highscore-display {
+  color: var(--neon-yellow);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 12px var(--neon-yellow);
+}
+
+.ls-start-btn {
+  margin-top: 2rem;
+  padding: 1.2em 3em;
+  font-size: 1.2rem;
+}
+
+/* Game Screen */
+.ls-game-screen {
+  position: relative;
+  width: 100%;
+}
+
+.ls-hud {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
+}
+
+.ls-hud-left,
+.ls-hud-right {
+  display: flex;
+  gap: 12px;
+}
+
+.ls-hud-item {
+  padding: 8px 16px;
+  border: 1px solid var(--neon-cyan);
+  background: rgba(8, 0, 20, 0.7);
+  color: var(--neon-cyan);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.ls-timer {
+  transition: color 200ms ease;
+}
+
+.ls-timer.warn {
+  color: var(--neon-yellow);
+  border-color: var(--neon-yellow);
+  animation: glow-pulse 0.6s ease-in-out infinite;
+}
+
+.ls-timer.danger {
+  color: var(--neon-red);
+  border-color: var(--neon-red);
+  animation: glow-pulse 0.4s ease-in-out infinite;
+}
+
+.ls-fever-badge {
+  background: rgba(255, 0, 170, 0.2);
+  border-color: var(--neon-magenta);
+  color: var(--neon-magenta);
+  animation: glow-pulse 0.5s ease-in-out infinite;
+}
+
+.ls-combo-meter {
+  width: 100%;
+  height: 8px;
+  background: rgba(8, 0, 20, 0.5);
+  border: 1px solid var(--neon-cyan);
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.ls-combo-meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
+  width: 0%;
+  transition: width 200ms ease-out;
+  box-shadow: 0 0 12px var(--neon-green);
+}
+
+.ls-combo-meter.fever .ls-combo-meter-fill {
+  background: linear-gradient(90deg, var(--neon-magenta), var(--neon-yellow));
+  box-shadow: 0 0 12px var(--neon-magenta);
+}
+
+/* Question Card */
+.ls-question-card {
+  background: linear-gradient(160deg, rgba(0, 234, 255, 0.06), rgba(255, 0, 170, 0.04));
+  border: 2px solid var(--neon-cyan);
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.ls-question-card.correct {
+  border-color: var(--neon-green);
+  box-shadow: 0 0 24px var(--neon-green);
+}
+
+.ls-question-card.wrong {
+  border-color: var(--neon-red);
+  box-shadow: 0 0 24px var(--neon-red);
+}
+
+.ls-question {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px currentColor;
+}
+
+/* Answer Grid */
+.ls-answer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  max-width: 600px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 640px) {
+  .ls-answer-grid {
+    gap: 0.75rem;
+  }
+}
+
+.ls-answer-btn {
+  position: relative;
+  padding: 1.5em;
+  min-width: 240px;
+  min-height: 120px;
+  font-size: 1rem;
+  border: 2px solid var(--neon-cyan);
+  background: transparent;
+  color: var(--neon-cyan);
+  cursor: pointer;
+  transition: all 120ms ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-shadow: 0 0 6px currentColor;
+  overflow: hidden;
+}
+
+.ls-answer-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border: 2px solid var(--neon-cyan);
+  border-radius: 4px;
+  animation: glow-pulse 2s ease-in-out infinite;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.ls-answer-btn:hover {
+  background: var(--neon-cyan);
+  color: var(--ink);
+  box-shadow: 0 0 30px var(--neon-cyan);
+  transform: scale(1.05);
+}
+
+.ls-answer-btn:active {
+  transform: scale(0.98);
+}
+
+.ls-answer-btn.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ls-answer-btn .label {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 0.3rem;
+}
+
+.ls-answer-btn .choice-text {
+  font-size: 0.95rem;
+}
+
+/* FEVER mode */
+body.fever-mode {
+  background: linear-gradient(-45deg, rgba(255, 0, 170, 0.15), rgba(0, 234, 255, 0.15), rgba(255, 0, 170, 0.15));
+  background-size: 400% 400%;
+  animation: fever-gradient 2s ease infinite;
+}
+
+@keyframes fever-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.ls-fever-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 500;
+  animation: fever-flash 0.3s ease-out;
+}
+
+.ls-fever-overlay.active {
+  display: flex;
+}
+
+@keyframes fever-flash {
+  0% {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    background: rgba(255, 255, 255, 0);
+  }
+}
+
+/* Game Over Screen */
+.ls-gameover-screen {
+  text-align: center;
+}
+
+.ls-gameover-screen h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--neon-yellow);
+  text-shadow: 0 0 12px var(--neon-yellow);
+}
+
+.ls-score-display {
+  background: linear-gradient(160deg, rgba(0, 234, 255, 0.08), rgba(255, 0, 170, 0.04));
+  border: 2px solid var(--neon-cyan);
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  max-width: 400px;
+}
+
+.ls-score-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.ls-score-row:last-child {
+  margin-bottom: 0;
+}
+
+.ls-score-label {
+  color: var(--fg-dim);
+}
+
+.ls-score-value {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px currentColor;
+}
+
+.ls-highscore-row .ls-score-value {
+  color: var(--neon-yellow);
+}
+
+.ls-gameover-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ls-play-again-btn,
+.ls-hub-btn {
+  padding: 1em 2em;
+  font-size: 1rem;
+}
+
+.ls-hub-btn {
+  border-color: var(--neon-magenta);
+  color: var(--neon-magenta);
+}
+
+.ls-hub-btn:hover {
+  background: var(--neon-magenta);
+}
