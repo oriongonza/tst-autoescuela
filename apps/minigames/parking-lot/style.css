@@ -1,0 +1,107 @@
+#game-canvas-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 100px);
+  background: linear-gradient(180deg, rgba(8, 0, 20, 0.8), rgba(20, 0, 40, 0.9));
+}
+
+#game-canvas {
+  border: 3px solid var(--neon-cyan);
+  background: radial-gradient(ellipse at center, rgba(8, 0, 30, 0.95), rgba(0, 0, 20, 1));
+  box-shadow: 0 0 40px rgba(0, 234, 255, 0.3), inset 0 0 40px rgba(0, 234, 255, 0.1);
+  image-rendering: pixelated;
+}
+
+.timer-ring {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border: 3px solid var(--neon-yellow);
+  border-radius: 50%;
+  top: 20px;
+  right: 20px;
+  background: radial-gradient(circle, rgba(255, 242, 0, 0.1), transparent);
+  box-shadow: 0 0 16px var(--neon-yellow);
+}
+
+.game-over-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.game-over-screen.hidden {
+  display: none;
+}
+
+.game-over-content {
+  text-align: center;
+  padding: 2rem;
+  border: 2px solid var(--neon-cyan);
+  background: linear-gradient(160deg, rgba(0,234,255,0.1), rgba(255,0,170,0.05));
+  box-shadow: 0 0 60px rgba(0, 234, 255, 0.4);
+}
+
+.game-over-content h1 {
+  font-size: 3rem;
+  margin: 0 0 1.5rem;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 20px currentColor;
+  letter-spacing: 0.15em;
+}
+
+.game-over-content #final-stats {
+  margin: 2rem 0;
+  font-size: 1.2rem;
+}
+
+.game-over-content #final-stats p {
+  margin: 0.5rem 0;
+  color: var(--fg-dim);
+}
+
+.game-over-content #final-stats span {
+  color: var(--neon-yellow);
+  font-weight: bold;
+}
+
+.game-over-content .arcade-btn {
+  margin: 0.75rem;
+}
+
+.hud {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(8, 0, 20, 0.9);
+  border-bottom: 2px solid var(--neon-cyan);
+  align-items: center;
+}
+
+.hud-item {
+  padding: 0.5rem 1rem;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.hud-good {
+  color: var(--neon-green);
+  background: rgba(0, 255, 162, 0.05);
+}
+
+.hud-bad {
+  color: var(--neon-red);
+  background: rgba(255, 0, 0, 0.05);
+}
