@@ -57,3 +57,5 @@ The repo still uses the overseer-plus-five-lane model described in `AGENTS.md`:
 - five Spark lanes work in isolated git worktrees
 - CI and auto-review enforce the lane contract
 - public GitHub actions still require explicit confirmation per the standing repo rule
+
+Launch-time operators should fetch `origin/main` before seeding a lane and should not assume the local `main` branch is current. If a canonical `.worktrees/spark-<N>` path is already occupied, use a launch-scoped worktree path and fold the launch ID into the lane slug only as needed for uniqueness; the branch forms remain `lane/spark-<N>-<slug>` for Spark work and `lane/overseer-<slug>` for overseer integration.
