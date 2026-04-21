@@ -1,0 +1,149 @@
+/* Brake or Floor It Game Styles */
+
+#game-canvas-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #0a0020 0%, #140024 40%, #1a0030 100%);
+}
+
+#game-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.action-buttons {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 100;
+  pointer-events: all;
+}
+
+.action-btn {
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 12px 18px;
+  border: 2px solid var(--neon-cyan);
+  background: rgba(8, 0, 20, 0.7);
+  color: var(--neon-cyan);
+  cursor: pointer;
+  transition: all 120ms ease-out;
+  text-shadow: 0 0 6px currentColor;
+  line-height: 1.2;
+}
+
+.action-btn:hover {
+  background: var(--neon-cyan);
+  color: var(--ink);
+  box-shadow: 0 0 20px var(--neon-cyan);
+}
+
+.action-btn:active {
+  transform: translateY(1px);
+}
+
+.action-btn span {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: normal;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+  opacity: 0.85;
+}
+
+.action-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.game-over-screen {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 0, 20, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.game-over-screen.hidden {
+  display: none;
+}
+
+.game-over-content {
+  text-align: center;
+  animation: pop 400ms ease-out;
+}
+
+.game-over-content h1 {
+  font-size: 3rem;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 20px var(--neon-cyan);
+  margin: 0 0 2rem;
+  letter-spacing: 0.15em;
+}
+
+#final-stats {
+  margin: 2rem 0;
+  font-size: 1.3rem;
+  color: var(--fg);
+}
+
+#final-stats p {
+  margin: 0.8rem 0;
+  letter-spacing: 0.05em;
+}
+
+#final-stats span {
+  color: var(--neon-yellow);
+  font-weight: bold;
+  text-shadow: 0 0 8px var(--neon-yellow);
+}
+
+.game-over-content .arcade-btn {
+  margin: 1rem 0.5rem;
+  min-width: 180px;
+}
+
+/* Screen flash for crash/correct */
+@keyframes crash-flash {
+  0% { background: rgba(255, 48, 96, 0.3); }
+  100% { background: transparent; }
+}
+
+#game-canvas-container.crash {
+  animation: crash-flash 200ms ease-out;
+}
+
+@keyframes correct-flash {
+  0% { background: rgba(0, 255, 162, 0.2); }
+  100% { background: transparent; }
+}
+
+#game-canvas-container.correct {
+  animation: correct-flash 200ms ease-out;
+}
+
+/* Car crash animation */
+@keyframes car-crash {
+  0%, 100% { transform: translateX(0) rotateZ(0deg); }
+  25% { transform: translateX(-8px) rotateZ(-2deg); }
+  75% { transform: translateX(8px) rotateZ(2deg); }
+}
+
+/* Reaction timer visual (via canvas circles) */
+@keyframes timer-pulse {
+  0% { box-shadow: 0 0 20px var(--neon-yellow); }
+  100% { box-shadow: 0 0 4px var(--neon-yellow); }
+}
