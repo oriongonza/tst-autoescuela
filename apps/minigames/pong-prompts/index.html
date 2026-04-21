@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pong with Prompts — Autoescuela Arcade</title>
+  <link rel="stylesheet" href="../core/shared.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="scanlines">
+  <div id="hud" class="hud">
+    <div id="hud-question" class="hud-item">Loading...</div>
+    <div id="hud-right" style="display: flex; gap: 8px; margin-left: auto;">
+      <div id="hud-lives" class="hud-item hud-bad">❤️ 3</div>
+      <div id="hud-score" class="hud-item hud-good">Score 0</div>
+      <div id="hud-streak" class="hud-item hud-warn">Streak 0</div>
+    </div>
+  </div>
+
+  <canvas id="game-canvas"></canvas>
+
+  <div id="game-over" class="game-over-screen hidden">
+    <div class="game-over-content">
+      <h1>Game Over</h1>
+      <div id="final-stats">
+        <p>Final Score: <span id="final-score">0</span></p>
+        <p>Correct: <span id="final-correct">0</span> / <span id="final-total">0</span></p>
+        <p>Best Streak: <span id="final-streak">0</span></p>
+      </div>
+      <button class="arcade-btn" id="play-again-btn">Play Again</button>
+      <button class="arcade-btn" id="quit-btn">Back to Hub</button>
+    </div>
+  </div>
+
+  <script type="module" src="./game.mjs"></script>
+</body>
+</html>
