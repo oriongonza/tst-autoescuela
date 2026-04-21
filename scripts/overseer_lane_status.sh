@@ -79,12 +79,26 @@ lane_from_branch() {
   esac
 }
 
+resolve_base_ref() {
+  if [[ "${BASE_BRANCH}" == "main" ]]; then
+    if git rev-parse --verify "origin/main" >/dev/null 2>&1; then
+      echo "origin/main"
+      return 0
+    fi
+  fi
+
+  echo "${BASE_BRANCH}"
+}
+
 branch_state() {
   local branch="$1"
   local worktree="${2:-}"
+  local base_ref
   local status="clean"
   local ahead="n/a"
   local behind="n/a"
+
+  base_ref="$(resolve_base_ref)"
 
   if [[ -n "${worktree}" && -d "${worktree}" ]]; then
     if [[ -n "$(git -C "${worktree}" status --porcelain)" ]]; then
@@ -94,9 +108,9 @@ branch_state() {
     status="no-worktree"
   fi
 
-  if git rev-parse --verify "${BASE_BRANCH}" >/dev/null 2>&1 && \
+  if git rev-parse --verify "${base_ref}" >/dev/null 2>&1 && \
      git rev-parse --verify "${branch}" >/dev/null 2>&1; then
-    read -r behind ahead < <(git rev-list --left-right --count "${BASE_BRANCH}...${branch}")
+    read -r behind ahead < <(git rev-list --left-right --count "${base_ref}...${branch}")
   fi
 
   local pr_json pr_number pr_url pr_draft pr_state pr_title
