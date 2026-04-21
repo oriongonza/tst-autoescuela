@@ -52,15 +52,68 @@ spark_lane_slug() {
   esac
 }
 
+spark_launch_id() {
+  local launch_id="${SPARK_LAUNCH_ID:-}"
+
+  if [[ -z "${launch_id}" ]]; then
+    return 0
+  fi
+
+  if ! [[ "${launch_id}" =~ ^[a-z0-9][a-z0-9.-]*$ ]]; then
+    echo "Invalid SPARK_LAUNCH_ID: ${launch_id}" >&2
+    echo "Expected a lowercase alphanumeric prefix followed by lowercase letters, digits, dots, or dashes." >&2
+    exit 1
+  fi
+
+  printf '%s\n' "${launch_id}"
+}
+
 spark_lane_branch() {
   local lane_number="$1"
+  local launch_id="${2:-}"
+
+  if [[ -n "${launch_id}" ]]; then
+    printf 'lane/spark-%s-%s-%s\n' "${lane_number}" "$(spark_lane_slug "${lane_number}")" "${launch_id}"
+    return 0
+  fi
+
   printf 'lane/spark-%s-%s\n' "${lane_number}" "$(spark_lane_slug "${lane_number}")"
 }
 
 spark_lane_worktree_path() {
   local worktree_root="$1"
   local lane_number="$2"
+  local launch_id="${3:-}"
+
+  if [[ -n "${launch_id}" ]]; then
+    printf '%s/%s-spark-%s\n' "${worktree_root}" "${launch_id}" "${lane_number}"
+    return 0
+  fi
+
   printf '%s/spark-%s\n' "${worktree_root}" "${lane_number}"
+}
+
+spark_resolve_worktree_base_branch() {
+  local repo_root="$1"
+  local base_branch="$2"
+
+  if [[ "${base_branch}" == "main" ]] && git -C "${repo_root}" rev-parse --verify --quiet "origin/main" >/dev/null; then
+    printf '%s\n' 'origin/main'
+    return 0
+  fi
+
+  if git -C "${repo_root}" rev-parse --verify --quiet -- "${base_branch}" >/dev/null; then
+    printf '%s\n' "${base_branch}"
+    return 0
+  fi
+
+  if [[ "${base_branch}" != origin/* ]] && git -C "${repo_root}" rev-parse --verify --quiet -- "origin/${base_branch}" >/dev/null; then
+    printf '%s\n' "origin/${base_branch}"
+    return 0
+  fi
+
+  echo "Unable to resolve base branch: ${base_branch}" >&2
+  exit 1
 }
 
 worktree_path_for_branch() {
