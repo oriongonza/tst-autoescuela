@@ -1,0 +1,115 @@
+/* Flappy Signal styles */
+
+#game-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #1a0a2e 0%, #080014 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+#game-canvas {
+  flex: 1;
+  display: block;
+  background: linear-gradient(180deg, #2a1a4e 0%, #140024 100%);
+  cursor: grab;
+}
+#game-canvas:active { cursor: grabbing; }
+
+.hud {
+  position: fixed;
+  top: 12px; left: 12px; right: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  z-index: 100;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.hud .hud-item {
+  padding: 6px 12px;
+  border: 1px solid var(--neon-cyan);
+  background: rgba(8,0,20,0.6);
+  color: var(--neon-cyan);
+}
+.hud .hud-prompt {
+  flex: 1;
+  max-width: 60%;
+}
+
+#game-over-screen {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 0, 20, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+#game-over-screen.game-over-hidden {
+  display: none;
+}
+
+.game-over-content {
+  background: linear-gradient(160deg, rgba(0,234,255,0.08), rgba(255,0,170,0.04));
+  border: 2px solid var(--neon-cyan);
+  padding: 2rem 2.5rem;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  animation: pop 300ms ease-out;
+}
+.game-over-content h2 {
+  color: var(--neon-cyan);
+  font-size: 2.2rem;
+  margin: 0 0 1.5rem;
+  text-shadow: 0 0 12px var(--neon-cyan);
+  letter-spacing: 0.15em;
+}
+
+.score-display {
+  margin-bottom: 1.8rem;
+  border: 1px dashed var(--neon-cyan);
+  padding: 1rem;
+  border-radius: 4px;
+}
+.score-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.6rem 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+}
+.score-line .label { color: var(--fg-dim); }
+.score-line .value {
+  color: var(--neon-cyan);
+  font-weight: 900;
+  text-shadow: 0 0 8px currentColor;
+}
+.score-line.score-total {
+  border-top: 1px dashed var(--neon-cyan);
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+.score-line.score-total .value {
+  color: var(--neon-green);
+  font-size: 1.3rem;
+}
+
+.game-over-content .arcade-btn {
+  margin: 0.6rem 0.4rem;
+}
+.btn-secondary {
+  border-color: var(--neon-yellow);
+  color: var(--neon-yellow);
+}
+.btn-secondary:hover {
+  background: var(--neon-yellow);
+  color: var(--ink);
+  box-shadow: 0 0 20px var(--neon-yellow);
+}

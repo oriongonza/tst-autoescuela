@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign Slicer — Autoescuela Arcade</title>
+<link rel="stylesheet" href="../core/shared.css">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body class="scanlines">
+
+<div id="game-container">
+  <div class="hud">
+    <div class="hud-item hud-prompt" id="prompt">Loading...</div>
+    <div style="display: flex; gap: 12px; margin-left: auto;">
+      <div class="hud-item hud-good" id="combo">COMBO: 0</div>
+      <div class="hud-item hud-warn" id="lives">LIVES: 3</div>
+      <div class="hud-item" id="score">SCORE: 0</div>
+    </div>
+  </div>
+
+  <canvas id="game-canvas"></canvas>
+
+  <div id="game-over-screen" class="game-over-hidden">
+    <div class="game-over-content">
+      <h2>GAME OVER</h2>
+      <div class="score-display">
+        <div class="score-line">
+          <span class="label">CORRECT:</span>
+          <span class="value" id="final-correct">0</span>
+        </div>
+        <div class="score-line">
+          <span class="label">WRONG:</span>
+          <span class="value" id="final-wrong">0</span>
+        </div>
+        <div class="score-line">
+          <span class="label">BEST STREAK:</span>
+          <span class="value" id="final-streak">0</span>
+        </div>
+        <div class="score-line score-total">
+          <span class="label">TOTAL SCORE:</span>
+          <span class="value" id="final-score">0</span>
+        </div>
+      </div>
+      <button class="arcade-btn" id="play-again-btn">Play Again</button>
+      <button class="arcade-btn btn-secondary" id="quit-btn">Quit to Hub</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="./game.mjs"></script>
+</body>
+</html>
