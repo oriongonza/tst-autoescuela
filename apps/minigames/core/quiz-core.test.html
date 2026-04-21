@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>quiz-core smoke test</title>
+<link rel="stylesheet" href="./shared.css">
+<style>
+  body { padding: 2rem; font-family: monospace; }
+  .pass { color: var(--neon-green); }
+  .fail { color: var(--neon-red); font-weight: bold; }
+  .test { margin: 0.25rem 0; }
+  h2   { color: var(--neon-cyan); border-bottom: 2px solid; padding-bottom: 0.3rem; }
+  pre  { background: rgba(0,0,0,0.4); padding: 1rem; border: 1px solid var(--neon-cyan); white-space: pre-wrap; }
+  a    { color: var(--neon-cyan); }
+</style>
+</head>
+<body class="scanlines">
+<h1 class="arcade-title">quiz-core smoke</h1>
+<p><a href="../">← back to hub</a></p>
+<div id="out"></div>
+<script type="module">
+  import { loadQuestionBank, loadExplanations, createQuiz } from './quiz-core.mjs';
+
+  const out = document.getElementById('out');
+  const results = [];
+  function t(name, fn) {
+    try {
+      fn();
+      out.insertAdjacentHTML('beforeend', `<div class="test pass">&check; ${name}</div>`);
+      results.push(true);
+    } catch (e) {
+      out.insertAdjacentHTML('beforeend', `<div class="test fail">&cross; ${name}: ${e.message}</div>`);
+      results.push(false);
+      console.error(e);
+    }
+  }
+
+  try {
+    const bank = await loadQuestionBank('../data/questions.json');
+    const explanations = await loadExplanations('../data/explanations.json');
+
+    t('bank loads 24 questions', () => {
+      if (bank.length !== 24) throw new Error(`got ${bank.length}`);
+    });
+    t('normalized question has required fields', () => {
+      const q = bank[0];
+      for (const k of ['id','prompt','choices','correctIndex']) if (!(k in q)) throw new Error(`missing ${k}`);
+      if (q.choices.length !== 4) throw new Error(`bad choices length ${q.choices.length}`);
+    });
+    t('correctIndex is 0..3', () => {
+      for (const q of bank) {
+        if (!(q.correctIndex >= 0 && q.correctIndex <= 3)) throw new Error(`${q.id} has correctIndex ${q.correctIndex}`);
+      }
+    });
+    t('explanations load as map', () => {
+      if (typeof explanations !== 'object') throw new Error('not an object');
+      if (Object.keys(explanations).length === 0) throw new Error('empty');
+    });
+
+    const quiz = createQuiz(bank, { seed: 42, explanations });
+    t('current() returns a question', () => {
+      const q = quiz.current(); if (!q || !q.id) throw new Error('bad current');
+    });
+    t('submit wrong resets streak', () => {
+      const q = quiz.current();
+      const wrongIdx = (q.correctIndex + 1) % 4;
+      const r = quiz.submit(wrongIdx);
+      if (r.correct !== false) throw new Error('should be wrong');
+      if (r.streak !== 0) throw new Error(`streak should reset, got ${r.streak}`);
+    });
+    quiz.next();
+    t('submit correct increments streak', () => {
+      const q = quiz.current();
+      const r = quiz.submit(q.correctIndex);
+      if (!r.correct) throw new Error('should be correct');
+      if (r.streak !== 1) throw new Error(`streak 1 got ${r.streak}`);
+    });
+    t('score reflects results', () => {
+      const s = quiz.score();
+      if (s.correct !== 1 || s.wrong !== 1 || s.answered !== 2) throw new Error(JSON.stringify(s));
+    });
+    t('seeded shuffle is deterministic', () => {
+      const a = createQuiz(bank, { seed: 7 }).current().id;
+      const b = createQuiz(bank, { seed: 7 }).current().id;
+      if (a !== b) throw new Error('same seed should match');
+    });
+    t('explanation attached when available', () => {
+      const q = createQuiz(bank, { seed: 1, explanations }).current();
+      if (!q.explanation) {
+        // some questions may lack explanation — try a few
+        let found = false;
+        for (let i = 0; i < 10; i++) {
+          const q2 = createQuiz(bank, { seed: i, explanations }).current();
+          if (q2.explanation) { found = true; break; }
+        }
+        if (!found) throw new Error('no explanations found across 10 seeds');
+      }
+    });
+  } catch (e) {
+    out.insertAdjacentHTML('beforeend', `<div class="test fail">FATAL: ${e.message}</div>`);
+    console.error(e);
+    results.push(false);
+  }
+
+  const passed = results.filter(x=>x).length;
+  out.insertAdjacentHTML('beforeend', `<h2>${passed}/${results.length} passed</h2>`);
+  out.insertAdjacentHTML('beforeend',
+    passed === results.length
+      ? `<pre class="pass">ALL GREEN — foundation is good. Spawn the Haikus.</pre>`
+      : `<pre class="fail">RED — fix core before spawning games.</pre>`);
+</script>
+</body>
+</html>

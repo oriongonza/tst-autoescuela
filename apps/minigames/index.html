@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Autoescuela Arcade — Hub</title>
+<link rel="stylesheet" href="./core/shared.css">
+<style>
+  .wrap    { max-width: 1200px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+  header   { text-align: center; margin-bottom: 2.5rem; }
+  header p { color: var(--fg-dim); margin-top: 0.4rem; font-size: 1rem; letter-spacing: 0.15em; text-transform: uppercase; }
+  .grid    { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+  .tile    {
+    display: block; text-decoration: none; color: inherit;
+    border: 2px solid var(--neon-cyan);
+    padding: 1.25rem 1.25rem 1.5rem;
+    background: linear-gradient(160deg, rgba(0,234,255,0.08), rgba(255,0,170,0.04));
+    position: relative; overflow: hidden;
+    transition: transform 160ms ease-out, box-shadow 160ms ease-out;
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+  .tile:hover { transform: translateY(-4px); box-shadow: 0 10px 40px rgba(0,234,255,0.35); }
+  .tile .emoji { font-size: 3rem; line-height: 1; filter: drop-shadow(0 0 8px var(--neon-cyan)); }
+  .tile h3 {
+    margin: 0.5rem 0 0.35rem;
+    font-size: 1.2rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px currentColor;
+  }
+  .tile p { margin: 0; color: var(--fg-dim); font-size: 0.9rem; line-height: 1.4; }
+  .tile.wip { opacity: 0.55; border-style: dashed; animation: none; }
+  .tile.wip::after {
+    content: 'COMING SOON';
+    position: absolute; top: 10px; right: 10px;
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    color: var(--neon-yellow);
+    background: rgba(0,0,0,0.7);
+    padding: 4px 8px;
+    border: 1px solid var(--neon-yellow);
+  }
+  .tile.ready { border-color: var(--neon-green); }
+  .tile.ready h3 { color: var(--neon-green); }
+  .tile.ready::after {
+    content: 'READY';
+    position: absolute; top: 10px; right: 10px;
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    color: var(--neon-green);
+    background: rgba(0,0,0,0.7);
+    padding: 4px 8px;
+    border: 1px solid var(--neon-green);
+  }
+  footer { text-align: center; margin-top: 3rem; color: var(--fg-dim); font-size: 0.75rem; letter-spacing: 0.2em; }
+  footer a { color: var(--neon-cyan); }
+
+  .picker-row { display: flex; justify-content: center; gap: 0.75rem; margin: 0 0 2rem; flex-wrap: wrap; }
+  .picker-btn {
+    font-family: inherit; font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--bg-deep); background: var(--neon-yellow);
+    border: 2px solid var(--neon-yellow); padding: 0.85rem 1.6rem; cursor: pointer;
+    text-shadow: none; box-shadow: 0 0 24px rgba(255,234,0,0.55);
+    transition: transform 120ms ease, filter 120ms ease;
+  }
+  .picker-btn:hover { transform: translateY(-2px); filter: brightness(1.15); }
+  .picker-btn:active { transform: translateY(0); }
+  .picker-btn.magenta { background: var(--neon-magenta); color: #fff; border-color: var(--neon-magenta); box-shadow: 0 0 24px rgba(255,0,170,0.55); }
+  .tile.spinning { transform: scale(1.04); box-shadow: 0 0 40px var(--neon-yellow), 0 0 80px var(--neon-magenta); border-color: var(--neon-yellow); }
+  .tile.spinning h3 { color: var(--neon-yellow); }
+  .tile.picked { transform: scale(1.08); border-color: var(--neon-green); box-shadow: 0 0 60px var(--neon-green); animation: pop 320ms ease-out; }
+</style>
+</head>
+<body class="scanlines">
+<div class="wrap">
+  <header>
+    <h1 class="arcade-title">Autoescuela Arcade</h1>
+    <p>One quiz &nbsp;·&nbsp; many ways to play</p>
+  </header>
+
+  <div class="picker-row">
+    <button id="surprise-me" class="picker-btn" type="button">🎲 Surprise Me</button>
+    <button id="play-all" class="picker-btn magenta" type="button">🏆 Play All (Random Order)</button>
+  </div>
+
+  <div class="grid">
+    <a class="tile ready" data-slug="lane-runner" href="./lane-runner/">
+      <div class="emoji">🚗</div>
+      <h3>Lane Runner</h3>
+      <p>Four lanes, one right answer. Swerve to the correct lane before the gate slams.</p>
+    </a>
+    <a class="tile ready" data-slug="sign-smash" href="./sign-smash/">
+      <div class="emoji">🔨</div>
+      <h3>Sign Smash</h3>
+      <p>Whack-a-sign. Four holes, one right sign. Be faster. Stay alive.</p>
+    </a>
+    <a class="tile ready" data-slug="lightning-strike" href="./lightning-strike/">
+      <div class="emoji">⚡</div>
+      <h3>Lightning Strike</h3>
+      <p>60 seconds. Max juice. Combo into <b>FEVER</b> for triple points.</p>
+    </a>
+    <a class="tile ready" data-slug="asteroid-answer" href="./asteroid-answer/">
+      <div class="emoji">🛸</div>
+      <h3>Asteroid Answer</h3>
+      <p>Shoot the correct asteroid. Miss &mdash; and it lands on your ship.</p>
+    </a>
+    <a class="tile ready" data-slug="flappy-signal" href="./flappy-signal/">
+      <div class="emoji">🪂</div>
+      <h3>Flappy Signal</h3>
+      <p>Flap through the <em>right</em> gate. Wrong gate = pipe = game over.</p>
+    </a>
+    <a class="tile ready" data-slug="sign-slicer" href="./sign-slicer/">
+      <div class="emoji">🥷</div>
+      <h3>Sign Slicer</h3>
+      <p>Answers fly up from below. Slice the right one. Avoid the bombs.</p>
+    </a>
+    <a class="tile ready" data-slug="brake-or-floor-it" href="./brake-or-floor-it/">
+      <div class="emoji">🛑</div>
+      <h3>Brake or Floor It</h3>
+      <p>Top-down driving. Obstacles approach. One second to choose BRAKE, SWERVE, HORN, or ACCELERATE.</p>
+    </a>
+    <a class="tile ready" data-slug="plinko-test" href="./plinko-test/">
+      <div class="emoji">🎰</div>
+      <h3>Plinko Test</h3>
+      <p>Drop the ball through a peg field. Nudge left/right to land on the right slot.</p>
+    </a>
+    <a class="tile ready" data-slug="traffic-tinder" href="./traffic-tinder/">
+      <div class="emoji">💳</div>
+      <h3>Traffic Tinder</h3>
+      <p>Swipe right or left. Is the driver doing the right thing? Reduce MCQs to rapid yes/no.</p>
+    </a>
+    <a class="tile ready" data-slug="crossing-guard" href="./crossing-guard/">
+      <div class="emoji">🚦</div>
+      <h3>Crossing Guard</h3>
+      <p>You're the traffic cop. Point the baton at the correct-labeled car. Wave it through before the others riot.</p>
+    </a>
+    <a class="tile ready" data-slug="tetris-quiz" href="./tetris-quiz/">
+      <div class="emoji">🧩</div>
+      <h3>Tetris-Quiz</h3>
+      <p>Labeled blocks fall. Drop the correct one into the matching zone. Wrong blocks stack — don't let them reach the top.</p>
+    </a>
+    <a class="tile ready" data-slug="rhythm-road" href="./rhythm-road/">
+      <div class="emoji">🎵</div>
+      <h3>Rhythm Road</h3>
+      <p>Four lanes. One beat. Hit the note in the correct-answer lane in time with the chiptune.</p>
+    </a>
+    <a class="tile ready" data-slug="pong-prompts" href="./pong-prompts/">
+      <div class="emoji">🏓</div>
+      <h3>Pong with Prompts</h3>
+      <p>Block wrong answers with your paddle. Let the ball hit the correct-answer wall.</p>
+    </a>
+    <a class="tile ready" data-slug="parking-lot" href="./parking-lot/">
+      <div class="emoji">🅿️</div>
+      <h3>Parking Lot</h3>
+      <p>Top-down arcade parking. Steer into the correctly-labeled bay before the timer runs out.</p>
+    </a>
+    <a class="tile ready" data-slug="piano-tiles" href="./piano-tiles/">
+      <div class="emoji">🎹</div>
+      <h3>Piano Tiles</h3>
+      <p>Cascading tiles on 4 lanes. Tap the gold question-tile in the correct-answer lane in time.</p>
+    </a>
+    <a class="tile ready" data-slug="archery" href="./archery/">
+      <div class="emoji">🏹</div>
+      <h3>Archery</h3>
+      <p>Adjust angle and draw power. Shoot the correctly-labeled target. Gravity arcs your arrow, wind pushes it.</p>
+    </a>
+    <a class="tile ready" data-slug="answer-boxing" href="./answer-boxing/">
+      <div class="emoji">🥊</div>
+      <h3>Answer Boxing</h3>
+      <p>Punch-Out rhythm boxing. Opponent telegraphs. Throw ↑/→/↓/← punch within the window.</p>
+    </a>
+    <a class="tile ready" data-slug="frogger-crossing" href="./frogger-crossing/">
+      <div class="emoji">🐸</div>
+      <h3>Frogger Crossing</h3>
+      <p>Hop through lanes of traffic to reach the correctly-labeled goal zone. Dodge cars, beat the timer.</p>
+    </a>
+  </div>
+
+  <footer>
+    Keyboard + mouse · best on desktop ·
+    <a href="./core/quiz-core.test.html">run core smoke test</a>
+  </footer>
+</div>
+<script type="module" src="./picker.mjs"></script>
+</body>
+</html>

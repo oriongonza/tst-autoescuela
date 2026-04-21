@@ -1,0 +1,63 @@
+/* Asteroid Answer minigame styles */
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#game-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at 50% 40%, var(--bg-mid), var(--bg-deep));
+}
+
+.game-over-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(8, 0, 20, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  opacity: 1;
+  transition: opacity 300ms ease-out;
+}
+
+.game-over-screen.hidden {
+  display: none;
+}
+
+.game-over-content {
+  text-align: center;
+  padding: 2rem;
+  border: 2px solid var(--neon-cyan);
+  background: linear-gradient(160deg, rgba(0, 234, 255, 0.1), rgba(255, 0, 170, 0.05));
+  box-shadow: 0 0 40px var(--neon-cyan);
+  animation: pop 400ms ease-out;
+}
+
+.game-over-content h1 {
+  font-size: 3rem;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 12px var(--neon-cyan);
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.game-over-content p {
+  font-size: 1.1rem;
+  color: var(--fg);
+  margin: 0.5rem 0;
+}
+
+.game-over-content .arcade-btn {
+  margin: 1rem 0.5rem 0;
+}

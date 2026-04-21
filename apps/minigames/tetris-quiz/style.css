@@ -1,0 +1,77 @@
+/* Tetris-Quiz minigame styling */
+
+#playfield-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 70px;
+  margin-top: -70px;
+}
+
+#game-canvas {
+  display: block;
+  background: linear-gradient(135deg, #0a001a, #160028);
+  border: 3px solid var(--neon-cyan);
+  box-shadow: 0 0 40px var(--neon-cyan), inset 0 0 40px rgba(0, 234, 255, 0.1);
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.game-over-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(8, 0, 20, 0.95);
+  z-index: 500;
+  backdrop-filter: blur(4px);
+}
+
+.game-over-screen.hidden {
+  display: none;
+}
+
+.game-over-content {
+  text-align: center;
+  padding: 2rem;
+  border: 3px solid var(--neon-cyan);
+  background: linear-gradient(135deg, rgba(0, 234, 255, 0.1), rgba(255, 0, 170, 0.05));
+  box-shadow: 0 0 40px var(--neon-cyan);
+}
+
+.game-over-content h1 {
+  font-size: 3.5rem;
+  margin: 0 0 1.5rem;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 20px var(--neon-cyan);
+  letter-spacing: 0.2em;
+}
+
+.game-over-content p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  color: var(--fg);
+}
+
+.game-over-content span {
+  color: var(--neon-green);
+  font-weight: bold;
+}
+
+#final-stats {
+  margin: 1.5rem 0;
+  color: var(--fg-dim);
+}
+
+.game-over-content button {
+  margin-top: 1.5rem;
+  margin-right: 1rem;
+}
+
+.game-over-content button:last-of-type {
+  margin-right: 0;
+}
