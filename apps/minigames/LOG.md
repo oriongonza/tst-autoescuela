@@ -24,9 +24,10 @@ Legend: 🔜 queued · 🛠️ in progress · 🧪 implemented, awaiting smoke t
 | 13 | Parking Lot | `parking-lot` | `minigame/parking-lot` | #94 | ✅ merged |
 | 14 | Pong with Prompts | `pong-prompts` | `minigame/pong-prompts` | #93 | ✅ merged |
 | 15 | Piano Tiles | `piano-tiles` | `minigame/piano-tiles` | #95 | ✅ merged |
-| 16 | Frogger Crossing | `frogger-crossing` | `minigame/frogger-crossing` | — | 🛠️ Haiku |
-| 17 | Archery | `archery` | `minigame/archery` | — | 🛠️ Haiku |
-| 18 | Answer Boxing | `answer-boxing` | `minigame/answer-boxing` | — | 🛠️ Haiku |
+| 16 | Frogger Crossing | `frogger-crossing` | `minigame/frogger-crossing` | #96 | ✅ merged |
+| 17 | Archery | `archery` | `minigame/archery` | #98 closed (direct push 8d480f5) | ✅ merged |
+| 18 | Answer Boxing | `answer-boxing` | `minigame/answer-boxing` | #97 | ✅ merged |
+| 🎲 | Hub picker + tournament | `—` | `minigames/foundation` | — | ✅ on foundation |
 
 ## Waves
 
@@ -68,11 +69,16 @@ Legend: 🔜 queued · 🛠️ in progress · 🧪 implemented, awaiting smoke t
 - #94 Parking Lot — 602 LOC, 4 bays, 20s timer, 0.4s parking-lock window, synthesized engine hum
 - #95 Piano Tiles — ~540 LOC, 4-lane cascading tiles, gold tile in correct-answer lane, piano tones
 
-### Wave 6 — 🛠️ in flight
+### Wave 6 — ✅ shipped
 3 Haikus in parallel:
-- `minigame/frogger-crossing` — hop lanes of traffic to the correct-answer zone
-- `minigame/archery` — 4 targets at different heights; aim + shoot the correct one
-- `minigame/answer-boxing` — rhythm punch-out: 4 arrow-key directions = 4 choices
+- #96 Frogger Crossing — 658 LOC, 4 lanes of cars, 15s timer, visual hop animation
+- #97 Answer Boxing — 538 LOC, directional punch-out, wind-up shrinks with streak
+- #98 (closed) Archery — Haiku bypassed PR flow and pushed directly to `minigames/foundation` (commit 8d480f5); 581-line projectile/wind aim; PR closed as duplicate
+
+### Consolidation — ✅ shipped
+- Added `picker.mjs` + two hub buttons: 🎲 Surprise Me (animated spin → random game) and 🏆 Play All (shuffled tournament playlist in sessionStorage).
+- Added `scripts/smoke.sh`: HTTP-level smoke test (hub + core + 18 games + picker) — all pass.
+- Added `REPORT.md` summarizing the full arcade.
 
 ### Waves 7+ — see IDEAS.md (still ≥15 candidates: Simon Says DGT, Autoescuela Survivor, Typography Fall, Neon Bowl, Connect-4 Quiz, Tower of Yield, Scratch-off, Spin the Wheel, 2048-Quiz, Minesweeper of Answers, Bullet Hell Dodge, Escape the Car, …).
 
