@@ -1,0 +1,75 @@
+/* Crossing Guard minigame styles */
+
+#game-canvas-container {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-deep);
+}
+
+#game-canvas {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.game-over-screen {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 0, 20, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 300ms ease-out;
+}
+
+.game-over-screen.hidden {
+  display: none;
+}
+
+.game-over-content {
+  background: linear-gradient(160deg, rgba(0, 234, 255, 0.08), rgba(255, 0, 170, 0.04));
+  border: 2px solid var(--neon-cyan);
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 500px;
+  box-shadow: 0 0 40px rgba(0, 234, 255, 0.3);
+  animation: pop 400ms ease-out;
+}
+
+.game-over-content h1 {
+  margin: 0 0 1.5rem 0;
+  font-size: 2.5rem;
+  letter-spacing: 0.1em;
+  color: var(--neon-yellow);
+  text-shadow: 0 0 12px var(--neon-yellow);
+}
+
+#final-stats {
+  margin-bottom: 2rem;
+}
+
+#final-stats p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--fg);
+}
+
+.game-over-content button {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
