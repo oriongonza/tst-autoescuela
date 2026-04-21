@@ -1,0 +1,117 @@
+/* Plinko Test Game Styles */
+
+#game-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #0a0020 0%, #140024 40%, #1a0030 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#plinko-canvas {
+  display: block;
+  background: rgba(8, 0, 20, 0.4);
+  border: 2px solid var(--neon-cyan);
+  box-shadow: 0 0 40px rgba(0, 234, 255, 0.3);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#slots-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  height: 80px;
+  width: 100%;
+}
+
+.slot {
+  flex: 1;
+  border: 2px solid var(--neon-cyan);
+  border-top: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  text-align: center;
+  word-wrap: break-word;
+  color: var(--fg);
+  text-shadow: 0 0 8px currentColor;
+  background: rgba(0, 234, 255, 0.05);
+  transition: all 200ms ease-out;
+  overflow: hidden;
+}
+
+.slot:hover {
+  background: rgba(0, 234, 255, 0.15);
+}
+
+.slot.correct {
+  color: var(--neon-green);
+  background: rgba(0, 255, 162, 0.2);
+  box-shadow: inset 0 0 20px rgba(0, 255, 162, 0.5), 0 0 20px rgba(0, 255, 162, 0.3);
+}
+
+.slot.wrong {
+  color: var(--neon-red);
+  background: rgba(255, 48, 96, 0.2);
+  box-shadow: inset 0 0 20px rgba(255, 48, 96, 0.5), 0 0 20px rgba(255, 48, 96, 0.3);
+}
+
+/* Game over screen */
+.game-over-screen {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 0, 20, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.game-over-screen.hidden {
+  display: none;
+}
+
+.game-over-content {
+  text-align: center;
+  animation: pop 400ms ease-out;
+}
+
+.game-over-content h1 {
+  font-size: 3rem;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 20px var(--neon-cyan);
+  margin: 0 0 2rem;
+  letter-spacing: 0.15em;
+}
+
+#final-stats {
+  margin: 2rem 0;
+  font-size: 1.3rem;
+  color: var(--fg);
+}
+
+#final-stats p {
+  margin: 0.8rem 0;
+  letter-spacing: 0.05em;
+}
+
+#final-stats span {
+  color: var(--neon-yellow);
+  font-weight: bold;
+  text-shadow: 0 0 8px var(--neon-yellow);
+}
+
+.game-over-content .arcade-btn {
+  margin: 1rem 0.5rem;
+  min-width: 180px;
+}
