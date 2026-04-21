@@ -205,6 +205,7 @@ class TetrisQuizGame {
       // Block lands on another block
       const current = this.quiz.current();
       const zone = Math.floor(block.x / 2);
+      const correctZone = block.choice;
 
       if (block.choice === current.correctIndex && zone === correctZone && y + 1 === ROWS - 1) {
         this.handleCorrectDrop(block.x, y);
