@@ -15,12 +15,15 @@ Legend: 🔜 queued · 🛠️ in progress · 🧪 implemented, awaiting smoke t
 | 4 | Asteroid Answer | `asteroid-answer` | `minigame/asteroid-answer` | #85 | ✅ merged |
 | 5 | Flappy Signal | `flappy-signal` | `minigame/flappy-signal` | #86 | ✅ merged |
 | 6 | Sign Slicer | `sign-slicer` | `minigame/sign-slicer` | #84 | ✅ merged |
-| 7 | Brake or Floor It | `brake-or-floor-it` | `minigame/brake-or-floor-it` | — | 🛠️ Haiku |
-| 8 | Plinko Test | `plinko-test` | `minigame/plinko-test` | — | 🛠️ Haiku |
-| 9 | Traffic Tinder | `traffic-tinder` | `minigame/traffic-tinder` | — | 🛠️ Haiku |
-| 10 | Crossing Guard | `crossing-guard` | `minigame/crossing-guard` | — | 🔜 Wave 4 |
-| 11 | Rhythm Road | `rhythm-road` | `minigame/rhythm-road` | — | 🔜 Wave 4 |
-| 12 | Tetris-Quiz | `tetris-quiz` | `minigame/tetris-quiz` | — | 🔜 Wave 4 |
+| 7 | Brake or Floor It | `brake-or-floor-it` | `minigame/brake-or-floor-it` | #87 | ✅ merged |
+| 8 | Plinko Test | `plinko-test` | `minigame/plinko-test` | #89 | ✅ merged |
+| 9 | Traffic Tinder | `traffic-tinder` | `minigame/traffic-tinder` | #88 | ✅ merged |
+| 10 | Crossing Guard | `crossing-guard` | `minigame/crossing-guard` | — | 🛠️ Haiku |
+| 11 | Rhythm Road | `rhythm-road` | `minigame/rhythm-road` | — | 🛠️ Haiku |
+| 12 | Tetris-Quiz | `tetris-quiz` | `minigame/tetris-quiz` | — | 🛠️ Haiku |
+| 13 | Parking Lot | `parking-lot` | `minigame/parking-lot` | — | 🔜 Wave 5 |
+| 14 | Pong with Prompts | `pong-prompts` | `minigame/pong-prompts` | — | 🔜 Wave 5 |
+| 15 | Piano Tiles | `piano-tiles` | `minigame/piano-tiles` | — | 🔜 Wave 5 |
 
 ## Waves
 
@@ -44,18 +47,24 @@ Legend: 🔜 queued · 🛠️ in progress · 🧪 implemented, awaiting smoke t
 - #86 Flappy Signal — 599 LOC, Flappy Bird clone, 4-gap labeled segments every 3 pipes, parallax bg, localStorage HS
 - #84 Sign Slicer — 647 LOC, Fruit Ninja, arc-trajectory placards, slice trail, bomb decoys at 35%
 
-### Wave 3 — 🛠️ in flight
-3 Haikus spawned in parallel:
-- `minigame/brake-or-floor-it` — 1s-reflex driving, 4 intents mapped to choices
-- `minigame/plinko-test` — physics ball through pegs, 4 labeled slots, nudge budget
-- `minigame/traffic-tinder` — swipe-card yes/no rapid fire
+### Wave 3 — ✅ shipped (with conflict dance)
+3 Haikus in parallel → all merged. ALL 3 added tiles to hub simultaneously so each needed a `git merge foundation` + manual resolution before merge. Lesson learned: switched Wave 4 prompt to say "ADD a tile" clearly instead of "flip a class".
+- #87 Brake or Floor It — 393 LOC, 1.5s reaction ring, shrinking window with streak
+- #89 Plinko Test — 484 LOC, 6 peg rows, 5-nudge budget per drop
+- #88 Traffic Tinder — 483 LOC, 3-cards-per-question, 4s auto-advance
 
-### Wave 4 — queued
-- `crossing-guard` — 4 queued cars at intersection; wave through the correct one (traffic-cop baton)
-- `rhythm-road` — 4 lanes A/B/C/D; chiptune beat, notes fall, hit correct-lane note on beat
-- `tetris-quiz` — labeled blocks fall; drop correct block into slot; wrong blocks stack & kill you
+### Wave 4 — 🛠️ in flight
+3 Haikus in parallel:
+- `minigame/crossing-guard` — traffic-cop baton, 4 queued cars
+- `minigame/rhythm-road` — 4-lane DDR with synthesized chiptune
+- `minigame/tetris-quiz` — labeled blocks fall, drop into matching A/B/C/D zone
 
-### Waves 5+ — see IDEAS.md (25+ enriched candidates: Parking Lot, Pong, Simon Says DGT, Answer Boxing, Autoescuela Survivor, Typography Fall, Neon Bowl, Connect-4 Quiz, Frogger Crossing, Tower of Yield, Archery, Scratch-off, Piano Tiles, Spin the Wheel…).
+### Wave 5 — queued (prompts prepping in /tmp/ms-wave5-prompts.md)
+- `parking-lot` — top-down parking into correctly-numbered bay
+- `pong-prompts` — paddle-top, 4 walls A/B/C/D labeled, block the wrong ones
+- `piano-tiles` — 4 vertical lanes, cascading tiles, press correct-lane only
+
+### Waves 6+ — see IDEAS.md (25+ enriched candidates still open: Simon Says DGT, Answer Boxing, Autoescuela Survivor, Typography Fall, Neon Bowl, Connect-4 Quiz, Frogger Crossing, Tower of Yield, Archery, Scratch-off, Spin the Wheel…).
 
 ## Notes for future me
 - Don't rewrite `quiz-core.mjs` — every minigame depends on it. Fix bugs in place only; never change the public signature.
